@@ -1,0 +1,26 @@
+{
+  "name": "proto",
+  "version": "0.1.0",
+  "description": "Learn any language",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "./scripts/test.sh",
+    "build": "./scripts/build.sh",
+    "start": "./scripts/start.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantum9Innovation/proto.git"
+  },
+  "keywords": [
+    "language",
+    "language-learning",
+    "linguistics"
+  ],
+  "author": "quantum9innovation (q9i)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/quantum9Innovation/proto/issues"
+  },
+  "homepage": "https://github.com/quantum9Innovation/proto#readme"
+}
