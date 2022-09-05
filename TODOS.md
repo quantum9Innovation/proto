@@ -4,7 +4,9 @@
 
 User interface and experience design/testing on the actual website as it is displayed to the end user
 
-- [ ] Choose frontend framework
+- [x] Choose frontend framework
+  - [x] Pick framework: Svelte
+  - [x] Setup framework boilerplate
 - [ ] Choose design language
 - [ ] Create color scheme
 - [ ] Prepare for internationalization

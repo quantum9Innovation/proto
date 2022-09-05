@@ -1,26 +1,47 @@
 {
-  "name": "proto",
-  "version": "0.1.0",
-  "description": "Learn any language",
-  "main": "server/index.js",
-  "scripts": {
-    "test": "./scripts/test.sh",
-    "build": "./scripts/build.sh",
-    "start": "./scripts/start.sh"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quantum9Innovation/proto.git"
-  },
-  "keywords": [
-    "language",
-    "language-learning",
-    "linguistics"
-  ],
-  "author": "quantum9innovation (q9i)",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/quantum9Innovation/proto/issues"
-  },
-  "homepage": "https://github.com/quantum9Innovation/proto#readme"
+	"name": "proto",
+	"version": "0.0.1",
+	"description": "Learn any language",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+		"test": "playwright test",
+		"lint": "standard --plugin svelte3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/quantum9Innovation/proto.git"
+	},
+	"keywords": [
+		"language",
+		"language-learning",
+		"linguistics"
+	],
+	"author": "quantum9innovation (q9i)",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/quantum9Innovation/proto/issues"
+	},
+	"homepage": "https://github.com/quantum9Innovation/proto#readme",
+	"devDependencies": {
+		"@playwright/test": "^1.25.0",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@types/cookie": "^0.5.1",
+		"eslint": "^8.16.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"standard": "^17.0.0",
+		"svelte": "^3.46.0",
+		"svelte-check": "^2.7.1",
+		"typescript": "^4.7.4",
+		"vite": "^3.1.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@fontsource/fira-mono": "^4.5.0",
+		"cookie": "^0.4.1"
+	}
 }
