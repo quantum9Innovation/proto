@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: 'yarn'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[dep]'
+      prefix-development: '[dep/dev]'
+    labels:
+      - 'dependabot'
