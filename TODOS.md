@@ -7,6 +7,7 @@ User interface and experience design/testing on the actual website as it is disp
 - [x] Choose frontend framework
   - [x] Pick framework: Svelte
   - [x] Setup framework boilerplate
+- [ ] **Create basic app template for other steps**
 - [ ] Choose design language
 - [ ] Create color scheme
 - [ ] Prepare for internationalization
@@ -40,7 +41,7 @@ Core backend logic responsible for optimizing things like spaced-repetition, con
 
 Any miscellaneous updates related to general maintenance
 
-- [ ] Add code style
+- [x] Add code style
 - [ ] Create code QA checks
 - [ ] Define testing framework and write mock tests
   - [ ] Code coverage? (integrate with provider; e.g. CodeCov)
