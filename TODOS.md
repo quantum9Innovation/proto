@@ -8,6 +8,8 @@ User interface and experience design/testing on the actual website as it is disp
   - [x] Pick framework: Svelte
   - [x] Setup framework boilerplate
 - [ ] **Create basic app template for other steps**
+  - [x] Create favicon logo
+  - [ ] Create loading screen animation
 - [ ] Choose design language
 - [ ] Create color scheme
 - [ ] Prepare for internationalization
