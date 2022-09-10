@@ -1,5 +1,5 @@
 <script>
-  import { log } from './bridge.js'
+  import { log } from '$lib/bridge.js'
   log()
 </script>
 
