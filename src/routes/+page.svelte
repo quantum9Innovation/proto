@@ -1,6 +1,8 @@
 <script>
-  import { log } from '$lib/bridge.js'
-  log()
+  import log from '$lib/bridge.js'
+  log().then(res => {
+    console.log(res)
+  })
 </script>
 
 <svelte:head>
