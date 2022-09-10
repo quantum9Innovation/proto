@@ -3,9 +3,9 @@
 	"version": "0.0.1",
 	"description": "Learn any language",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
+		"dev": "node api/ & vite dev && fg; wait",
+		"build": "node api/ & vite build && fg; wait",
+		"preview": "node api/ & vite preview && fg; wait",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"test": "playwright test",
@@ -42,6 +42,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
-		"cookie": "^0.4.1"
+		"cookie": "^0.4.1",
+		"express": "^4.18.1"
 	}
 }
