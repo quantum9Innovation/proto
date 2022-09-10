@@ -18,7 +18,7 @@ User interface and experience design/testing on the actual website as it is disp
 
 Javascript and other logic used on the client-side to call APIs and display the relevant content
 
-- [ ] Create bridge to communicate with server APIs
+- [x] Create bridge to communicate with server APIs
 - [ ] Show tutorial on first visit
 - [ ] Link with UI framework
 
@@ -26,6 +26,7 @@ Javascript and other logic used on the client-side to call APIs and display the 
 
 API that links the frontend with the backend, handling all web requests
 
+- [ ] **Create API**
 - [ ] Call scripts on API requests
 - [ ] Structure API endpoints
 - [ ] Create autosave routine
