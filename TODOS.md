@@ -27,7 +27,7 @@ Javascript and other logic used on the client-side to call APIs and display the 
 API that links the frontend with the backend, handling all web requests
 
 - [x] Create API
-- [x] Call scripts on API requests
+  - [x] Call scripts on API requests
 - [ ] Structure API endpoints
 - [ ] Create autosave routine
 - [ ] Plan for scalability
@@ -36,7 +36,9 @@ API that links the frontend with the backend, handling all web requests
 
 Core backend logic responsible for optimizing things like spaced-repetition, content delivery, and corpus analysis
 
-- [ ] Manage cache
+- [ ] Run basic file system routines
+  - [ ] Read config dir (serve on correct port)
+  - [ ] Create cache dir
 - [ ] Create working directory
 - [ ] Fetch/read data from autosave routine
 
