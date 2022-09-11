@@ -44,7 +44,7 @@ jobs:
     - name: Commit changes
       continue-on-error: true
       run: |
-        git add .
+        git add *.js
         git commit -m "[auto]: Fix code style"
         git push
         
