@@ -46,7 +46,7 @@ Core backend logic responsible for optimizing things like spaced-repetition, con
 Any miscellaneous updates related to general maintenance
 
 - [x] Add code style
-- [ ] Create code QA checks
+- [x] Create code QA checks
 - [ ] Define testing framework and write mock tests
   - [ ] Code coverage? (integrate with provider; e.g. CodeCov)
 - [ ] Create CI/CD routines
