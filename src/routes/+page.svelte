@@ -26,7 +26,7 @@
   #loading {
     display: block;
     margin-top: 50px;
-    left: calc(50%-100px);
+    left: calc(50% - 100px);
     width: 200px;
   }
 </style>
