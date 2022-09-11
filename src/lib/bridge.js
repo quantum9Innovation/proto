@@ -13,7 +13,7 @@ const log = async () => {
   if (res.ok) return await res.json()
   return {
     status: res.status,
-    error: new Error(),
+    error: new Error()
   }
 }
 
