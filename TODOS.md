@@ -36,9 +36,8 @@ API that links the frontend with the backend, handling all web requests
 
 Core backend logic responsible for optimizing things like spaced-repetition, content delivery, and corpus analysis
 
-- [ ] Run basic file system routines
-  - [ ] Read config dir (serve on correct port)
-  - [ ] Create cache dir
+- [x] Run basic file system routines
+  - [x] Read config dir (serve on correct port)
 - [ ] Create working directory
 - [ ] Fetch/read data from autosave routine
 
