@@ -23,9 +23,9 @@ jobs:
         node-version: '18.9'
     - name: Install dependencies
       run: |
-        yarn install
         yarn cache clean
         yarn install --update-checksums
+        yarn install
     - name: Configure Git
       run: |
         git config user.name github-actions
