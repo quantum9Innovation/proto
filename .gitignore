@@ -112,3 +112,6 @@ dist
 !.env.example
 .vercel
 .output
+
+# Project-specific files
+src/lib/app.json
