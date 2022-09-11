@@ -24,6 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         yarn install
+        yarn cache clean
+        yarn install --update-checksums
     - name: Configure Git
       run: |
         git config user.name github-actions
