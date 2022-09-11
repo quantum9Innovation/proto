@@ -1,12 +1,16 @@
 // API endpoint
 
+import { init } from './dirs.js'
 import express from 'express'
+
+const CONFIG = init()
+
 const app = express()
-const port = 3000
+const port = CONFIG.port
 
 app.get('/', (req, res) => {
   res.send({
-    message: 'Hello World!'
+    message: 'Hello world!'
   })
 })
 
