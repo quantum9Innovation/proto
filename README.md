@@ -23,6 +23,12 @@ If you don't have Yarn, you can install it via `npm` like so:
 npm i yarn@latest
 ```
 
+Then, install all dependencies with:
+
+```sh
+yarn install
+```
+
 Once you have that taken care of, make sure to run the API before starting the build to copy any config files to the `lib` directory, where they can be accessed by the bridge module.
 This can be done with:
 
