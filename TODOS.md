@@ -10,7 +10,8 @@ User interface and experience design/testing on the actual website as it is disp
 - [x] Create basic app template for other steps
   - [x] Create favicon logo
   - [x] Create loading screen animation
-- [x] Integrate Tailwind.cssStarting build
+- [x] Integrate Tailwind.css
+- [ ] Create design language
 - [ ] Create color scheme
 - [ ] Prepare for internationalization
 
