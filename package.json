@@ -27,7 +27,7 @@
 	},
 	"homepage": "https://github.com/quantum9Innovation/proto#readme",
 	"devDependencies": {
-		"@playwright/test": "^1.26.1",
+		"@playwright/test": "^1.27.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.5.1",
