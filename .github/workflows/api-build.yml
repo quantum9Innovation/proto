@@ -1,0 +1,39 @@
+name: Code QA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'api/**.ts'
+      - 'api/config.json'
+      - 'api/tsconfig.json'
+      - 'api/package.json'
+  pull_request:
+    branches:
+      - main
+  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '19.2'
+    - name: Install dependencies
+      run: |
+        yarn cache clean
+        yarn install --update-checksums
+        yarn install
+    - name: Run tests
+      continue-on-error: true
+      run: |
+        yarn retest
+        
