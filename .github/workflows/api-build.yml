@@ -1,4 +1,4 @@
-name: Code QA
+name: Test
 
 on:
   push:
@@ -36,5 +36,6 @@ jobs:
     - name: Run tests
       continue-on-error: true
       run: |
+        cd api
         yarn retest
         
