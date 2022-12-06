@@ -34,7 +34,6 @@ jobs:
         yarn install --update-checksums
         yarn install
     - name: Run tests
-      continue-on-error: true
       run: |
         cd api
         yarn retest
