@@ -17,8 +17,13 @@ on:
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./api
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
 
     steps:
     - uses: actions/checkout@v3
@@ -35,6 +40,5 @@ jobs:
         yarn install
     - name: Run tests
       run: |
-        cd api
         yarn retest
         
