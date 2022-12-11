@@ -28,6 +28,7 @@ jobs:
         node-version: '19.2'
     - name: Install dependencies
       run: |
+        cd ./api
         yarn cache clean
         yarn install --update-checksums
         yarn install
@@ -39,7 +40,7 @@ jobs:
     - name: Run QA checks
       continue-on-error: true
       run: |
-        cd api
+        cd ./api
         yarn run lint
     - name: Commit changes
       continue-on-error: true
@@ -50,7 +51,7 @@ jobs:
     - name: Rerun QA checks
       continue-on-error: true
       run: |
-        cd api
+        cd ./api
         yarn run lint
         yarn audit
         
