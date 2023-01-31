@@ -76,28 +76,28 @@ flutter:
   fonts:
     - family: InterTight
       fonts:
-        - asset: fonts/Inter_Tight/static/InterTight-ExtraBold.ttf
-        - asset: fonts/Inter_Tight/static/InterTight-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Inter_Tight/static/InterTight-ExtraBold.ttf
+        - asset: assets/fonts/Inter_Tight/static/InterTight-ExtraBoldItalic.ttf
           style: italic
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto/Roboto-Light.ttf
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
           weight: 300
-        - asset: fonts/Roboto/Roboto-LightItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
           weight: 300
           style: italic
-        - asset: fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
           weight: 400
-        - asset: fonts/Roboto/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
           weight: 400
           style: italic
-        - asset: fonts/Roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
-        - asset: fonts/Roboto/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
           weight: 500
           style: italic
-        - asset: fonts/Roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
-        - asset: fonts/Roboto/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
           weight: 700
           style: italic
