@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import "sample.dart"; //sample random app
+import 'colors.g.dart';
+import 'home.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Proto',
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFF8200),
-          foregroundColor: Color(0xFFE6FFF9),
-        ),
-      ),
-      home: const RandomWords(), // And add the const back here.
+      home: const Home(),
     );
   }
 }
