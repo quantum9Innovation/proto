@@ -1,4 +1,4 @@
-name: Code QA
+name: API Code QA
 
 on:
   push:
