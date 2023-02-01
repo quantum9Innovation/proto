@@ -2,5 +2,5 @@
 
 - [x] Add automatic static analysis workflow for Flutter
   - [x] Use `analysis_options.yaml` as config
-- [ ] Add a code coverage provider to tests
+- [ ] Add a code coverage provider to tests (after public debut)
   - Use CodeCov or another provider so that GitHub workflows will include code coverage analysis, which should ideally remain at 100%
