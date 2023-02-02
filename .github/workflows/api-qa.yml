@@ -31,7 +31,6 @@ jobs:
         cd ./api
         yarn set version berry
         yarn cache clean
-        yarn install --update-checksums
         yarn install
     - name: Configure Git
       run: |

@@ -37,7 +37,6 @@ jobs:
       run: |
         yarn set version berry
         yarn cache clean
-        yarn install --update-checksums
         yarn install
     - name: Run tests
       run: |
