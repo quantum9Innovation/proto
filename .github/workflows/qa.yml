@@ -16,16 +16,20 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v3
-     - uses: dart-lang/setup-dart@v1
+     - uses: subosito/flutter-action@v2
+       with:
+        channel: 'stable'
      - name: Configure Git
        run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git pull
+     - name: Install dependencies
+       run: flutter pub get
      - name: Run QA checks
        continue-on-error: true
        run: |
-        dart analyze
+        flutter analyze
         dart fix --apply
         dart format .
      - name: Commit changes
@@ -36,4 +40,4 @@ jobs:
         git push
      - name: Rerun QA checks
        run: |
-        dart analyze
+        flutter analyze
