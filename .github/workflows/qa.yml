@@ -36,6 +36,7 @@ jobs:
        continue-on-error: true
        run: |
         git add .
+        git reset pubspec.lock
         git commit -m "[auto]: Fix code style"
         git push
      - name: Rerun QA checks
