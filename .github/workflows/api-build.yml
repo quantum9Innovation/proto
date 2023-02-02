@@ -37,7 +37,7 @@ jobs:
       run: |
         yarn set version berry
         yarn cache clean
-        yarn install --frozen-lockfile
+        yarn install --immutable
     - name: Run tests
       run: |
         yarn retest

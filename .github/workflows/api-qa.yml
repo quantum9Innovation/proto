@@ -31,7 +31,7 @@ jobs:
         cd ./api
         yarn set version berry
         yarn cache clean
-        yarn install --frozen-lockfile
+        yarn install --immutable
     - name: Configure Git
       run: |
         git config user.name github-actions
