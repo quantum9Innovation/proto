@@ -48,6 +48,8 @@ jobs:
       run: |
         git add .
         git reset api/yarn.lock
+        git reset api/.yarnrc.yml
+        git reset api/package.json
         git commit -m "[auto]: Fix code style"
         git push
     - name: Rerun QA checks
