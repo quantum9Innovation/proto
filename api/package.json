@@ -46,6 +46,5 @@
       "@typescript-eslint/no-var-requires": 0,
       "@typescript-eslint/explicit-function-return-type": 0
     }
-  },
-  "packageManager": "yarn@3.4.1"
+  }
 }
