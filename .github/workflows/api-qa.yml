@@ -25,10 +25,11 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '19.2'
+        node-version: 19
     - name: Install dependencies
       run: |
         cd ./api
+        yarn set version berry
         yarn cache clean
         yarn install --update-checksums
         yarn install
@@ -53,5 +54,5 @@ jobs:
       run: |
         cd ./api
         yarn run lint
-        yarn audit
+        yarn npm audit
         
