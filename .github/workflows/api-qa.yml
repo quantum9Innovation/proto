@@ -31,7 +31,7 @@ jobs:
         cd ./api
         yarn set version berry
         yarn cache clean
-        yarn install
+        yarn install --frozen-lockfile
     - name: Configure Git
       run: |
         git config user.name github-actions
@@ -46,7 +46,6 @@ jobs:
       continue-on-error: true
       run: |
         git add .
-        git reset api/yarn.lock
         git commit -m "[auto]: Fix code style"
         git push
     - name: Rerun QA checks
