@@ -31,7 +31,7 @@ jobs:
         cd ./api
         yarn set version berry
         yarn cache clean
-        rm -rf yarn.lock
+        export YARN_ENABLE_IMMUTABLE_INSTALLS=false
         yarn install
     - name: Configure Git
       run: |
