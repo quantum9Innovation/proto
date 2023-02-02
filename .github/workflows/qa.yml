@@ -1,0 +1,41 @@
+name: Flutter Code QA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.dart'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v3
+     - uses: dart-lang/setup-dart@v1
+     - name: Configure Git
+       run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git pull
+     - name: Install dependencies
+       run: dart pub get
+     - name: Run QA checks
+       continue-on-error: true
+       run: |
+        dart analyze
+        dart fix --apply
+        dart format .
+     - name: Commit changes
+       continue-on-error: true
+       run: |
+        git add .
+        git commit -m "[auto]: Fix code style"
+        git push
+     - name: Rerun QA checks
+       run: |
+        dart analyze
