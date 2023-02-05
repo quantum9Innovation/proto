@@ -30,7 +30,7 @@
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "ts-standard": "^12.0.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "eslintConfig": {
     "extends": "standard-with-typescript",
