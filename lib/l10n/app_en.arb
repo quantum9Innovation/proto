@@ -1,0 +1,9 @@
+{
+    "@@locale": "en",
+    "@@author": "Proto Development Team",
+    "title": "Proto",
+    "helloWorld": "Hello world!",
+    "@helloWorld": {
+        "description": "The conventional newborn programmer greeting"
+    }
+}

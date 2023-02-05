@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_l10n.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,18 +10,18 @@ class Home extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 2,
-          title: const Text('Material Theme Builder'),
+          title: Text(AppLocalizations.of(context)!.helloWorld),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                'Update with your UI',
-              ),
-            ],
-          ),
-        ),
+        // body: Center(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: const [
+        //       Text(
+        //         'Update with your UI',
+        //       ),
+        //     ],
+        //   ),
+        // ),
         floatingActionButton: FloatingActionButton(
             onPressed: () => {},
             tooltip: 'Increment',
