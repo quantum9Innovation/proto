@@ -11,3 +11,6 @@ Proto borrows most standards and components from [**Material You**](https://m3.m
 
 - [Typography](./typography.md)
   - This document describes the use of typography within Proto's application suite as well as its implications regarding internationalization and multilingual support
+
+- [Localization](./i18n.md)
+  - This document covers internationalization and localization norms regarding Proto and how they should be applied in app design.
