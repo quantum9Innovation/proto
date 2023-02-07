@@ -29,7 +29,7 @@
     "node-fetch": "^3.3.0",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
-    "ts-standard": "^12.0.1",
+    "ts-standard": "^12.0.2",
     "typescript": "^4.9.5"
   },
   "eslintConfig": {
