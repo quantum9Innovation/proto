@@ -32,9 +32,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
+  flutter_localizations: 
     sdk: flutter
   cupertino_icons: ^1.0.2
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  # For i18n
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -74,10 +78,12 @@ flutter:
   # list giving the asset and other descriptors for the font.
   # TODO: Add Noto fonts
   fonts:
-    - family: InterTight
+    - family: Inter Tight
       fonts:
         - asset: assets/fonts/Inter_Tight/static/InterTight-ExtraBold.ttf
+          weight: 800
         - asset: assets/fonts/Inter_Tight/static/InterTight-ExtraBoldItalic.ttf
+          weight: 800
           style: italic
     - family: Roboto
       fonts:
@@ -101,3 +107,35 @@ flutter:
         - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
           weight: 700
           style: italic
+    - family: Noto Sans
+      fonts:
+        - asset: assets/fonts/Noto_Sans/NotoSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Noto_Sans/NotoSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Noto_Sans/NotoSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Noto_Sans/NotoSans-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Noto_Sans/NotoSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Noto_Sans/NotoSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Noto_Sans/NotoSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Noto_Sans/NotoSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+    - family: Noto Sans JP
+      fonts:
+        - asset: assets/fonts/Noto_Sans_JP/NotoSansJP-Light.otf
+          weight: 300
+        - asset: assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Noto_Sans_JP/NotoSansJP-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf
+          weight: 700
