@@ -1,3 +1,7 @@
+// Locale select
+// The initial screen shown on first app startup
+// Used to determine user locale preferences
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_l10n.dart';
 
@@ -12,19 +16,17 @@ class Home extends StatelessWidget {
           elevation: 2,
           title: Text(AppLocalizations.of(context)!.helloWorld),
         ),
-        // body: Center(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: const [
-        //       Text(
-        //         'Update with your UI',
-        //       ),
-        //     ],
-        //   ),
-        // ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.main,
+              ),
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () => {},
-            tooltip: 'Increment',
-            child: const Icon(Icons.add)));
+            onPressed: () => {}, child: const Icon(Icons.add)));
   }
 }

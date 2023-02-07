@@ -1,16 +1,18 @@
+// Entry point
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_l10n.dart';
 import 'colors.g.dart';
-import 'home.dart';
+import 'locale.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
