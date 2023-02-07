@@ -991,26 +991,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-serve-static-core@npm:^4.17.18":
-  version: 4.17.31
-  resolution: "@types/express-serve-static-core@npm:4.17.31"
+"@types/express-serve-static-core@npm:^4.17.33":
+  version: 4.17.33
+  resolution: "@types/express-serve-static-core@npm:4.17.33"
   dependencies:
     "@types/node": "*"
     "@types/qs": "*"
     "@types/range-parser": "*"
-  checksum: 009bfbe1070837454a1056aa710d0390ee5fb8c05dfe5a1691cc3e2ca88dc256f80e1ca27cb51a978681631d2f6431bfc9ec352ea46dd0c6eb183d0170bde5df
+  checksum: dce580d16b85f207445af9d4053d66942b27d0c72e86153089fa00feee3e96ae336b7bedb31ed4eea9e553c99d6dd356ed6e0928f135375d9f862a1a8015adf2
   languageName: node
   linkType: hard
 
-"@types/express@npm:^4.17.14":
-  version: 4.17.14
-  resolution: "@types/express@npm:4.17.14"
+"@types/express@npm:^4.17.17":
+  version: 4.17.17
+  resolution: "@types/express@npm:4.17.17"
   dependencies:
     "@types/body-parser": "*"
-    "@types/express-serve-static-core": ^4.17.18
+    "@types/express-serve-static-core": ^4.17.33
     "@types/qs": "*"
     "@types/serve-static": "*"
-  checksum: 15c1af46d02de834e4a225eccaa9d85c0370fdbb3ed4e1bc2d323d24872309961542b993ae236335aeb3e278630224a6ea002078d39e651d78a3b0356b1eaa79
+  checksum: 0196dacc275ac3ce89d7364885cb08e7fb61f53ca101f65886dbf1daf9b7eb05c0943e2e4bbd01b0cc5e50f37e0eea7e4cbe97d0304094411ac73e1b7998f4da
   languageName: node
   linkType: hard
 
@@ -1079,10 +1079,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.8.4":
+"@types/node@npm:*":
   version: 18.11.13
   resolution: "@types/node@npm:18.11.13"
   checksum: b0c1aa3bd2f5df8240e61096a49d6d4be600109b824d23408ec4ba1ec057dc0c60588e09f73b8a60455ad26d367e9c5562fad8403099f885cbc7b4cace83ec4c
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.11.19":
+  version: 18.11.19
+  resolution: "@types/node@npm:18.11.19"
+  checksum: d7cd19fcfc59cbdd3f9ba0b4072cb7adc21bd575bd8eb7d7e698975e63564aaa83f03434f32b12331f84f73d0b369d9cbe2371e359d9d7f5c3361f4987f4f7da
   languageName: node
   linkType: hard
 
@@ -4635,14 +4642,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^3.2.10":
-  version: 3.2.10
-  resolution: "node-fetch@npm:3.2.10"
+"node-fetch@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "node-fetch@npm:3.3.0"
   dependencies:
     data-uri-to-buffer: ^4.0.0
     fetch-blob: ^3.1.4
     formdata-polyfill: ^4.0.10
-  checksum: e65322431f4897ded04197aa5923eaec63a8d53e00432de4e70a4f7006625c8dc32629c5c35f4fe8ee719a4825544d07bf53f6e146a7265914262f493e8deac1
+  checksum: e9936908d2783d3c48a038e187f8062de294d75ef43ec8ab812d7cbd682be2b67605868758d2e9cad6103706dcfe4a9d21d78f6df984e8edf10e7a5ce2e665f8
   languageName: node
   linkType: hard
 
@@ -5137,19 +5144,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "proto@workspace:."
   dependencies:
-    "@types/express": ^4.17.14
+    "@types/express": ^4.17.17
     "@types/jest": ^29.4.0
-    "@types/node": ^18.8.4
+    "@types/node": ^18.11.19
     "@types/supertest": ^2.0.12
     body-parser: ^1.20.1
     eslint: ^8.25.0
     express: ^4.18.2
     helmet: ^6.0.1
     jest: ^29.4.1
-    node-fetch: ^3.2.10
+    node-fetch: ^3.3.0
     supertest: ^6.3.3
     ts-node: ^10.9.1
-    ts-standard: ^12.0.1
+    ts-standard: ^12.0.2
     typescript: ^4.9.5
     untildify: ^4.0.0
   languageName: unknown
@@ -5876,9 +5883,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-standard@npm:^12.0.1":
-  version: 12.0.1
-  resolution: "ts-standard@npm:12.0.1"
+"ts-standard@npm:^12.0.2":
+  version: 12.0.2
+  resolution: "ts-standard@npm:12.0.2"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
@@ -5896,7 +5903,7 @@ __metadata:
     typescript: "*"
   bin:
     ts-standard: cli.js
-  checksum: 4c5a1eac10a13801d5ef9caaf66e5c6b00acf1727c1eefa5a12712f0adce35951b2e046c9830c607983ba78e4edcd3dcb3d9bd7ab2c6c9fb5607089b1ba346e0
+  checksum: fb01e0a82abf3013b6b7be4513412a4af2eb9051c14a8bb1e96fb757a3992031201999926e6e4afd525eaf31ee08698944dbd1a3b0d10a4db3f0172bc4ee1ae5
   languageName: node
   linkType: hard
 
