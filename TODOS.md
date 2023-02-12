@@ -5,6 +5,7 @@
 
 ## After public debut
 
+- [ ] Fix Crowdin changing .arb metadata
 - [ ] Add a code coverage provider to tests
   - Use CodeCov or another provider so that GitHub workflows will include code coverage analysis, which should ideally remain at 100%
 - [ ] First-class support for RTL languages
