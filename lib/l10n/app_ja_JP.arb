@@ -1,13 +1,6 @@
 {
-    "@@locale": "en",
+    "@@locale": "en_US",
     "@@author": "Proto Development Team",
     "title": "Proto",
-    "helloWorld": "Hello world!",
-    "@helloWorld": {
-        "description": "The conventional newborn programmer greeting"
-    },
-    "main": "Select a language",
-    "@main": {
-        "description": "This is where the app content lives"
-    }
+    "helloWorld": "Hello world!"
 }
