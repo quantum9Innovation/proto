@@ -2,6 +2,7 @@
 
 - [x] Add automatic static analysis workflow for Flutter
   - [x] Use `analysis_options.yaml` as config
+- [ ] Create an automatic workflow to build production translations from incomplete Crowdin translations
 
 ## After public debut
 
