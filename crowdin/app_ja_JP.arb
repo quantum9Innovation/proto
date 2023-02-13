@@ -6,7 +6,7 @@
     "@helloWorld": {
         "description": "The conventional newborn programmer greeting"
     },
-    "main": "Select a language",
+    "main": "言語を選択してください",
     "@main": {
         "description": "This is where the app content lives"
     }
