@@ -5,12 +5,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_l10n.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class Locale extends StatelessWidget {
+  const Locale({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // Locale root
   @override
   Widget build(BuildContext context) {
+    final appLocale = Localizations.localeOf(context).toString();
+    final lang = appLocale.split('_')[0];
+    final locales = {
+      'en_US': {
+        'name': 'English',
+        'country': 'United States',
+      },
+      'es_MX': {
+        'name': 'Español',
+        'country': 'México',
+      }
+    };
+
     return Scaffold(
         appBar: AppBar(
           elevation: 2,
