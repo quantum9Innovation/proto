@@ -1,6 +1,5 @@
 {
     "@@locale": "en_US",
     "@@author": "Proto Development Team",
-    "title": "Proto",
-    "helloWorld": "Hello world!"
+    "title": "Proto"
 }

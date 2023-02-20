@@ -2,12 +2,8 @@
     "@@locale": "en",
     "@@author": "Proto Development Team",
     "title": "Proto",
-    "helloWorld": "Hello world!",
-    "@helloWorld": {
-        "description": "The conventional newborn programmer greeting"
-    },
-    "main": "Select a language",
-    "@main": {
-        "description": "This is where the app content lives"
+    "locale_title": "Select a language",
+    "@locale_title": {
+        "description": "Prompt for the user to select their locale"
     }
 }
