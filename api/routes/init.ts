@@ -1,8 +1,8 @@
 // Initialize API
 
 // Type definitions
-import { Config, Session, SessionReq } from './req'
-import { orderedList } from './utils'
+import { type Config, type Session, type SessionReq } from './req'
+import { type orderedList } from './utils'
 
 // Imports
 import { root } from '../index'

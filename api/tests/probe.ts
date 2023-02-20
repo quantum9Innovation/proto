@@ -1,7 +1,7 @@
 // Probe all top-level API endpoints
 
 // Type definitions
-import { StdRes, JSONRes } from './res'
+import { type StdRes, type JSONRes } from './res'
 
 // Imports
 import { endpoint } from './setup'

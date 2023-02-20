@@ -2,7 +2,7 @@
 // See docs/repetition.md for more info
 
 // Type definitions
-import { History } from '../elements'
+import { type History } from '../elements'
 
 // Helper funcs
 const Sigma = (lower: number, upper: number, expr: (i: number) => number) => {

@@ -1,7 +1,9 @@
 // Setup Jest for all tests
 
+// Type definitions
+import { type Express } from 'express'
+
 // Imports
-import { Express } from 'express'
 import * as fs from 'fs'
 import * as supertest from 'supertest'
 

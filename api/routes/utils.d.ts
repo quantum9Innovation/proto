@@ -7,4 +7,4 @@ interface Choice {
   multiple?: boolean
 }
 
-export { email, orderedList, Choice, Test }
+export type { email, orderedList, Choice, Test }

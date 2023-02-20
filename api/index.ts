@@ -3,8 +3,8 @@
 // > See ./run.ts or use `node .`
 
 // Type definitions
-import { Config } from './config'
-import { Router } from 'express'
+import { type Config } from './config'
+import { type Router } from 'express'
 
 // Imports
 import untildify = require('untildify')
@@ -56,7 +56,7 @@ else {
   fs.readdirSync(ROOT, { withFileTypes: true }).forEach(pathname => {
     if (pathname.isDirectory() && pathname.name.includes('lang')) languages.push(pathname.name)
   })
-  languages.forEach(lang => rescore(lang, lang))
+  languages.forEach(lang => { rescore(lang, lang) })
 }
 
 // Configure app

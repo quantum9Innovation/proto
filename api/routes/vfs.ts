@@ -1,7 +1,7 @@
 // Virtual File System (VFS)
 
 // Type definitions
-import { Document } from './req'
+import { type Document } from './req'
 
 // Imports
 import { root, loc } from '../index'
