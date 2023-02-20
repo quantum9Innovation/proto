@@ -1,8 +1,8 @@
 // Test all endpoints in init/
 
 // Type definitions
-import { StdRes, JSONRes } from './res'
-import { Session } from '../routes/req'
+import { type StdRes, type JSONRes } from './res'
+import { type Session } from '../routes/req'
 
 // Imports
 import { endpoint } from './setup'

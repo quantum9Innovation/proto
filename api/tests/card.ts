@@ -1,7 +1,7 @@
 // Test all endpoints in card/
 
 // Type definitions
-import { StdRes, JSONRes } from './res'
+import { type StdRes, type JSONRes } from './res'
 
 // Imports
 import { endpoint } from './setup'

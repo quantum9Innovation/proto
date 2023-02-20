@@ -1,5 +1,5 @@
-import { email, orderedList } from './utils'
-import { GrammarProp, Card } from './elements'
+import { type email, type orderedList } from './utils'
+import { type GrammarProp, type Card } from './elements'
 
 export interface Config {
   user: {
@@ -12,7 +12,7 @@ export interface Config {
     native: string | string[] | orderedList
     target: string | string[]
   }
-  config: {}
+  config: Record<string, unknown>
 }
 
 export interface SessionReq {

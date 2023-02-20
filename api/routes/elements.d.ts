@@ -1,4 +1,4 @@
-import { Choice, Test } from './utils'
+import { type Choice, type Test } from './utils'
 
 export interface History {
   tests: Test[]
@@ -21,7 +21,7 @@ export interface GrammarProp {
 export interface Grammar {
   pos?: string
   context?: string
-  properties?: { [key: string]: any }
+  properties?: Record<string, any>
 }
 
 export interface Phrase {

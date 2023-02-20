@@ -1,7 +1,7 @@
 // Test all endpoints in vfs/
 
 // Type definitions
-import { StdRes, JSONRes, FileStructure } from './res'
+import { type StdRes, type JSONRes, type FileStructure } from './res'
 
 // Imports
 import { endpoint } from './setup'

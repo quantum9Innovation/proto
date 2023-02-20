@@ -1,8 +1,8 @@
 // Cards
 
 // Type Definitions
-import { AddHistory, LangConfig, NewCard } from './req'
-import { GrammarProp, Card } from './elements'
+import { type AddHistory, type LangConfig, type NewCard } from './req'
+import { type GrammarProp, type Card } from './elements'
 
 // Imports
 import { root } from '../index'
@@ -209,8 +209,7 @@ card.get('/list', (req, res) => {
       fs.readdirSync(dir).forEach(file => {
         const abs = path.join(dir, file)
         /* istanbul ignore next */
-        if (fs.statSync(abs).isDirectory()) return traverse(abs)
-        else if (fs.statSync(abs).isFile()) return files.push(abs)
+        if (fs.statSync(abs).isDirectory()) { traverse(abs) } else if (fs.statSync(abs).isFile()) return files.push(abs)
       })
     }
     traverse(pathname)
@@ -410,8 +409,7 @@ const rescore = (loc: string, lang: string) => {
   const traverse = (dir: string) => {
     fs.readdirSync(dir).forEach(file => {
       const abs = path.join(dir, file)
-      if (fs.statSync(abs).isDirectory()) return traverse(abs)
-      else if (fs.statSync(abs).isFile()) return files.push(abs)
+      if (fs.statSync(abs).isDirectory()) { traverse(abs) } else if (fs.statSync(abs).isFile()) return files.push(abs)
     })
   }
   traverse(pathname)
