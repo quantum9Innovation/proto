@@ -5,5 +5,9 @@
     "locale_title": "Select a language",
     "@locale_title": {
         "description": "Prompt for the user to select their locale"
+    },
+    "locale_search": "Search for a language",
+    "@locale_search": {
+        "description": "Prompt in the search box to search for a locale from the grid below"
     }
 }
