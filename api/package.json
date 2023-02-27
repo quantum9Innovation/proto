@@ -14,7 +14,7 @@
   "author": "q9i <46249765+quantum9Innovation@users.noreply.github.com>",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "body-parser": "^1.20.1",
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "untildify": "^4.0.0"
