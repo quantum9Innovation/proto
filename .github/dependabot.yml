@@ -16,4 +16,4 @@ updates:
     labels: ["dep/flutter"]
     ignore:
      - dependency-name: "*"
-       update-types: ["version-update:semver-patch"]
+       update-types: ["version-update:semver-minor"]
