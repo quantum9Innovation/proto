@@ -4,12 +4,12 @@
   "description": "Learn any language",
   "scripts": {
     "start": "node ./compiled/run.js",
-    "restart": "tsc -p tsconfig.json; node ./compiled/run.js",
-    "build": "tsc -p tsconfig.json",
+    "restart": "scripts/build.sh; node ./compiled/run.js",
+    "build": "scripts/build.sh",
     "test": "jest --runInBand --coverage",
     "lint": "scripts/qa.sh",
     "debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "retest": "tsc -p tsconfig.json; jest --runInBand --coverage"
+    "retest": "scripts/build.sh; jest --runInBand --coverage"
   },
   "main": "compiled/run.js",
   "repository": "https://github.com/quantum9Innovation/proto.git",
