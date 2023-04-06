@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Learn any language",
   "scripts": {
+    "start": "node ./compiled/run.js",
     "build": "tsc -p tsconfig.json",
     "test": "jest --runInBand --coverage",
     "lint": "scripts/qa.sh",
