@@ -41,7 +41,6 @@
   },
   "eslintConfig": {
     "extends": "standard-with-typescript",
-    "ignorePatterns": "**/compiled/*",
     "ignorePatterns": [
       "**/*.js"
     ],
@@ -54,7 +53,8 @@
         "before"
       ],
       "@typescript-eslint/no-var-requires": 0,
-      "@typescript-eslint/explicit-function-return-type": 0
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/no-non-null-assertion": 0
     }
   }
 }
