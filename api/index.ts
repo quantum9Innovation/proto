@@ -73,6 +73,19 @@ app.get('/api', (_, res) => {
   res.send(INFO)
 })
 
+// Initialize frontend
+app.get('/', (_, res) => {
+  res.sendFile('frontend/index.html', { root: LOC }, e => {
+    if (e !== undefined) {
+      console.error(e)
+      res.status(500).send('Internal server error; frontend could not be loaded.')
+    } else {
+      console.log('Successfully received frontend request')
+    }
+  })
+})
+app.use('/frontend', express.static(path.join(LOC, 'frontend')))
+
 // Load routes
 for (const route in routes) app.use(route, routes[route])
 
