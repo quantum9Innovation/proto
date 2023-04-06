@@ -1,1 +1,4 @@
-console.log('Hello, world!')
+// Make file preview scaffold
+setTitle('Files')
+makeContent()
+buildFiles()
