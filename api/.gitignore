@@ -135,3 +135,5 @@ dist
 # ================
 storage/
 compiled/
+webjs/
+*.js
