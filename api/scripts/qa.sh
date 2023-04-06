@@ -4,7 +4,7 @@ echo '=============='
 yarn run tsc --noEmit -p tsconfig.json || exit 1
 echo $'\nChecking with `eslint`'
 echo '======================'
-yarn run eslint . || exit 1
+yarn run eslint .
 echo $'\nFixing style issues'
 echo '==================='
 yarn run eslint --fix . || exit 1
