@@ -42,6 +42,9 @@
   "eslintConfig": {
     "extends": "standard-with-typescript",
     "ignorePatterns": "**/compiled/*",
+    "ignorePatterns": [
+      "**/*.js"
+    ],
     "parserOptions": {
       "project": "./tsconfig.json"
     },
