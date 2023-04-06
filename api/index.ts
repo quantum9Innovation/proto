@@ -41,9 +41,9 @@ if (port == null) port = 3000
 
 // Define routes
 const routes: Record<string, Router> = {
-  '/init': init,
-  '/vfs': vfs,
-  '/card': card
+  '/api/init': init,
+  '/api/vfs': vfs,
+  '/api/card': card
 }
 
 // Create root dir
@@ -69,7 +69,7 @@ const INFO = 'Local Proto server listening on port '
 app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.get('/', (_, res) => {
+app.get('/api', (_, res) => {
   res.send(INFO)
 })
 
