@@ -29,6 +29,7 @@ const endpoint = (
   if (typeof options.contentType === 'undefined') {
     options.contentType = 'application/json; charset=utf-8'
   }
+  URL = '/api' + URL
   return async () => {
     switch (options.method) {
       case 'get': {
