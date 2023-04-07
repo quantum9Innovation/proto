@@ -1,7 +1,25 @@
 // Globals
 let pwd = '/'
 
+// Register session
+const register = async () => {
+  const res = await fetch('/api/init/session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ timestamp: Date.now() })
+  })
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error('Failed to establish connection!\nReload to try again.')
+    console.error(e)
+    alert(e)
+  }
+}
+
 // Make file preview scaffold
+register().catch(e => { console.error(e) })
 setTitle('Files')
 makeContent()
 buildFiles()
