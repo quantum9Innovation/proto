@@ -2,11 +2,27 @@
   --background-color: #f2f2f2;
   --on-hover: #e6e6e6;
   --border-large: 24px;
+  --border-mid: 12px;
   --border-small: 4px;
   --padding-large: 24px;
+  --padding-mid: 12px;
   --padding-small: 4px;
+  --margin-mid: 12px;
   --document: #283dff;
+  --document-text: #0010a8;
   --folder: #28aa3d;
+  --folder-text: #104318;
+  --cancel: #c44;
+  --accept: #3b3;
+  --scrim: brightness(75%);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 #content {
@@ -15,9 +31,20 @@
   background-color: var(--background-color);
 }
 
+.row {
+  margin-bottom: var(--margin-mid);
+}
+
 .item {
   border-radius: var(--border-small);
   padding: var(--padding-small);
+  height: 41px;
+  line-height: 41px;
+}
+
+.item span {
+  display: inline-block;
+  min-width: 100px;
 }
 
 .item:hover {
@@ -25,11 +52,78 @@
   font-weight: bold;
 }
 
+.delete {
+  background-color: inherit;
+  float: right;
+  height: 35px;
+  margin-top: 3px;
+  line-height: 35px;
+  padding-top: 0px;
+}
+
+.delete:hover {
+  background-color: var(--cancel);
+  color: white;
+}
+
 .document {
+  color: var(--document);
+}
+
+#create-doc {
   color: var(--document);
 }
 
 .folder {
   cursor: pointer;
   color: var(--folder);
+}
+
+#create-folder {
+  color: var(--folder-text);
+}
+
+#create-doc,
+#create-folder {
+  font-weight: bold;
+}
+
+.popup {
+  background: white;
+  margin: var(--margin-mid);
+  margin-left: 0px;
+  padding: var(--padding-mid);
+  padding-left: var(--padding-large);
+  border-radius: var(--border-mid);
+  max-width: 350px;
+}
+
+.popup h2 {
+  margin-top: 0px;
+}
+
+.popup input {
+  margin-bottom: var(--margin-mid);
+}
+
+.close {
+  background-color: var(--cancel);
+  color: white;
+}
+
+.close:hover {
+  background-color: var(--cancel);
+  filter: var(--scrim);
+  font-weight: bold;
+}
+
+.submit {
+  background-color: var(--accept);
+  color: white;
+}
+
+.submit:hover {
+  background-color: var(--accept);
+  filter: var(--scrim);
+  font-weight: bold;
 }
