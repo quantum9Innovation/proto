@@ -1,5 +1,9 @@
 # Todos
 
+*These directives were originally created for a Flutter frontend.*  
+All the following directives must be adapted for the new frontend framework before its release.
+<!-- TODO: update todos for new frontend -->
+
 - [x] Add automatic static analysis workflow for Flutter
   - [x] Use `analysis_options.yaml` as config
 - [ ] Create an automatic workflow to build production translations from incomplete Crowdin translations
