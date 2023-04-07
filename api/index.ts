@@ -79,8 +79,6 @@ app.get('/', (_, res) => {
     if (e !== undefined) {
       console.error(e)
       res.status(500).send('Internal server error; frontend could not be loaded.')
-    } else {
-      console.log('Successfully received frontend request')
     }
   })
 })
