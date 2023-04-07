@@ -31,8 +31,19 @@ const readFiles = async (dir: string) => {
 const putFiles = (dirs: string[], docs: string[]) => {
   const filePreview = document.getElementById('file-preview')
   if (filePreview === null) return
-  for (const dir of dirs) filePreview.innerHTML += `<div class="folder">${dir}</div>`
-  for (const doc of docs) filePreview.innerHTML += `<div class="document">${doc}</div>`
+  for (const dir of dirs) {
+    const folder = document.createElement('div')
+    folder.className = 'item folder'
+    folder.innerText = dir
+    filePreview.appendChild(folder)
+    folder.addEventListener('click', e => { cd(dir) })
+  }
+  for (const doc of docs) {
+    const folder = document.createElement('div')
+    folder.className = 'item document'
+    folder.innerText = doc
+    filePreview.appendChild(folder)
+  }
 }
 
 const buildFiles = () => {
@@ -53,9 +64,27 @@ const buildFiles = () => {
   }).catch(e => { console.error(e) })
 }
 
+const showDir = (dir: string) => {
+  const filePreview = document.getElementById('file-preview')
+  if (filePreview !== null) filePreview.innerHTML = ''
+  readFiles(dir).then(items => {
+    // Build file selector
+    const dirs: string[] = items.folders
+    const docs: string[] = items.documents
+    const subdirs = dir.split('/')
+    let traversals = subdirs.length - 2
+    for (const subdir of subdirs) {
+      if (subdir === '..') traversals -= 2
+    }
+    if (traversals > 0) dirs.splice(0, 0, '..')
+    putFiles(dirs, docs)
+  }).catch(e => { console.error(e) })
+}
+
 window.exports = {
   setTitle,
   reset,
   makeContent,
-  buildFiles
+  buildFiles,
+  showDir
 }
