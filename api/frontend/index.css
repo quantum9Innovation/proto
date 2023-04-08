@@ -12,8 +12,8 @@
   --document-text: #0010a8;
   --folder: #28aa3d;
   --folder-text: #104318;
-  --cancel: #c44;
-  --accept: #3b3;
+  --close: #c44;
+  --submit: #3b3;
   --scrim: brightness(75%);
 }
 
@@ -62,7 +62,7 @@
 }
 
 .delete:hover {
-  background-color: var(--cancel);
+  background-color: var(--close);
   color: white;
 }
 
@@ -107,23 +107,23 @@
 }
 
 .close {
-  background-color: var(--cancel);
+  background-color: var(--close);
   color: white;
 }
 
 .close:hover {
-  background-color: var(--cancel);
+  background-color: var(--close);
   filter: var(--scrim);
   font-weight: bold;
 }
 
 .submit {
-  background-color: var(--accept);
+  background-color: var(--submit);
   color: white;
 }
 
 .submit:hover {
-  background-color: var(--accept);
+  background-color: var(--submit);
   filter: var(--scrim);
   font-weight: bold;
 }
