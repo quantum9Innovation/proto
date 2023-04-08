@@ -32,7 +32,23 @@
 }
 
 .row {
+  margin-top: var(--margin-mid);
   margin-bottom: var(--margin-mid);
+}
+
+.card {
+  border-radius: var(--border-small);
+  padding: var(--padding-small);
+  height: 50px;
+  line-height: 50px;
+}
+
+.card span {
+  display: inline-block;
+  font-size: 22px;
+  white-space: nowrap;
+  max-width: calc(100% - 300px);
+  overflow-x: hidden;
 }
 
 .item {
@@ -47,11 +63,16 @@
   min-width: 100px;
 }
 
-.item:hover {
+.item:hover,
+.card:hover {
   background-color: var(--on-hover);
+}
+
+.item span:hover {
   font-weight: bold;
 }
 
+.edit,
 .delete {
   background-color: inherit;
   float: right;
@@ -59,6 +80,20 @@
   margin-top: 3px;
   line-height: 35px;
   padding-top: 0px;
+}
+
+.card .edit,
+.card .delete {
+  max-width: 150px;
+  height: 40px;
+  margin-top: 5px;
+  line-height: 40px;
+  padding-top: 0px;
+}
+
+.edit:hover {
+  background-color: var(--document);
+  color: white;
 }
 
 .delete:hover {
@@ -75,17 +110,15 @@
 }
 
 .folder {
-  cursor: pointer;
   color: var(--folder);
+}
+
+.folder span:hover {
+  cursor: pointer;
 }
 
 #create-folder {
   color: var(--folder-text);
-}
-
-#create-doc,
-#create-folder {
-  font-weight: bold;
 }
 
 .popup {
