@@ -1,4 +1,12 @@
-const setTitle = (title: string) => {
+const deconstructVFS = () => {
+  // Teardown VFS layout
+  const title = document.getElementById('title')
+  const content = document.getElementById('content')
+  if (title !== null) title.remove()
+  if (content !== null) content.remove()
+}
+
+const setVFSTitle = (title: string) => {
   // Change title
   if (document.getElementById('title') !== undefined) {
     const titleEl = document.createElement('h1')
@@ -8,17 +16,11 @@ const setTitle = (title: string) => {
   } else (document.getElementById('title') as HTMLHeadingElement).innerText = title
 }
 
-const makeContent = () => {
+const makeVFSContent = () => {
   // Build content
   const content = document.createElement('div')
   content.id = 'content'
   document.body.appendChild(content)
-}
-
-const reset = () => {
-  // Reset all content
-  const content = document.getElementById('content')
-  if (content !== null) content.innerHTML = ''
 }
 
 const readFiles = async (dir: string) => {
@@ -63,9 +65,14 @@ const putFiles = (dirs: string[], docs: string[]) => {
     fileDel.addEventListener('click', e => {
       rm(doc).catch(e => { console.error(e) })
     })
+    const fileEdit = document.createElement('button')
+    fileEdit.className = 'edit'
+    fileEdit.innerText = 'Edit'
+    fileEdit.addEventListener('click', e => { openEditor(doc) })
 
     file.appendChild(fileText)
     file.appendChild(fileDel)
+    if (!(doc === 'session.json' || doc === 'grammar.json')) file.appendChild(fileEdit)
     filePreview.appendChild(file)
   }
 }
@@ -170,7 +177,7 @@ const makePopups = () => {
   return popups
 }
 
-const hidePopups = () => {
+const hideVFSPopups = () => {
   const popups = document.getElementsByClassName('popup')
   for (const popup of popups) {
     if (popup.classList.contains('show') || !popup.classList.contains('hide')) {
@@ -178,13 +185,17 @@ const hidePopups = () => {
       popup.classList.add('hide')
     }
   }
+  const inputs = document.getElementsByTagName('input')
+  for (const input of inputs) {
+    if (input.type === 'text') input.value = ''
+  }
 }
 
-const buildFiles = () => {
+const buildFiles = (dir: string) => {
   // Build content for file selector
   let content = document.getElementById('content')
   if (content === null) {
-    makeContent()
+    makeVFSContent()
     content = document.getElementById('content')
   }
 
@@ -197,13 +208,14 @@ const buildFiles = () => {
   for (const popup of popups) content!.appendChild(popup)
 
   // Read files
-  readFiles('/').then(items => {
+  readFiles(dir).then(items => {
     // Build file selector
     const dirs: string[] = items.folders
     const docs: string[] = items.documents
     const filePreview = document.createElement('div')
     filePreview.id = 'file-preview'
     content!.appendChild(filePreview)
+    if (dir !== '/') dirs.splice(0, 0, '..')
     putFiles(dirs, docs)
   }).catch(e => { console.error(e) })
 }
@@ -221,10 +233,10 @@ const showDir = (dir: string) => {
 }
 
 window.exports = {
-  setTitle,
-  reset,
-  makeContent,
-  hidePopups,
+  deconstructVFS,
+  setVFSTitle,
+  makeVFSContent,
+  hideVFSPopups,
   buildFiles,
   showDir
 }
