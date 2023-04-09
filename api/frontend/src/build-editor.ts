@@ -30,6 +30,96 @@ const readCards = async (name: string) => {
   return file.cards
 }
 
+const addCardDetails = (card: any, details: Element, phrase: boolean) => {
+  // Add details to card
+  if (phrase) {
+    const term: string = card.term
+    const definition: string = card.definition
+    const phraseEl = document.createElement('p')
+    phraseEl.className = 'phrase-header'
+    phraseEl.innerText = term + ': ' + definition
+    details.appendChild(phraseEl)
+  }
+
+  const tags: string[] | undefined = card.tags
+  if (tags !== undefined) {
+    const tagsEl = document.createElement('p')
+    tagsEl.innerHTML = '<strong>Tags</strong>: ' + tags.join(', ')
+    details.appendChild(tagsEl)
+  }
+
+  const notes: string | undefined = card.notes
+  if (notes !== undefined) {
+    const notesEl = document.createElement('p')
+    notesEl.innerHTML = '<strong>Notes</strong>: ' + notes
+    details.appendChild(notesEl)
+  }
+
+  const grammar = card.grammar
+  if (grammar !== undefined) {
+    const pos: string | undefined = grammar.pos
+    if (pos !== undefined) {
+      const posEl = document.createElement('p')
+      posEl.innerHTML = '<strong>Part of speech</strong>: ' + pos
+      details.appendChild(posEl)
+    }
+
+    const context: string | undefined = grammar.context
+    if (context !== undefined) {
+      const contextEl = document.createElement('p')
+      contextEl.innerHTML = '<strong>Context</strong>: ' + context
+      details.appendChild(contextEl)
+    }
+
+    const properties = grammar.properties
+    if (properties !== undefined) {
+      const propertiesEl = document.createElement('p')
+      propertiesEl.innerHTML = '<strong>Grammar properties</strong>: '
+                               + JSON.stringify(properties, null, 2)
+      details.appendChild(propertiesEl)
+    }
+  }
+
+  if (!phrase) {
+    const phrases: any[] = card.phrases
+    if (phrases === undefined) return
+    const phrasesEl = document.createElement('div')
+    phrasesEl.className = 'phrases'
+    phrases.forEach(phrase => {
+      const phraseEl = document.createElement('div')
+      phraseEl.className = 'phrase'
+      addCardDetails(phrase, phraseEl, true)
+      phrasesEl.appendChild(phraseEl)
+    })
+    details.appendChild(phrasesEl)
+  }
+}
+
+const expandCard = (card: any, cardItem: HTMLDivElement) => {
+  // Expand card to show details or collapse if already expanded
+  if (cardItem.classList.contains('expanded')) {
+    // Collapse
+    cardItem.classList.remove('expanded')
+    const details = cardItem.getElementsByClassName('details')[0]
+    if (details !== undefined) details.classList.add('hide')
+    return
+  }
+
+  cardItem.classList.add('expanded')
+  let details = cardItem.getElementsByClassName('details')[0]
+  if (details !== undefined) {
+    // Show details if already present
+    details.classList.remove('hide')
+    details.classList.add('show')
+    return
+  }
+
+  details = document.createElement('div')
+  details.className = 'details show'
+  addCardDetails(card, details, false)
+  cardItem.appendChild(details)
+}
+
 const putCards = (cards: any[]) => {
   const cardDisplay = document.getElementById('card-display')
   if (cardDisplay === null) return
@@ -45,7 +135,7 @@ const putCards = (cards: any[]) => {
     const cardInfo = document.createElement('button')
     cardInfo.className = 'edit'
     cardInfo.innerText = 'Info'
-    cardInfo.addEventListener('click', e => { /* TODO: info/edit logic */ })
+    cardInfo.addEventListener('click', e => { expandCard(card, cardItem) })
     const cardDel = document.createElement('button')
     cardDel.className = 'delete'
     cardDel.innerText = 'Delete'
