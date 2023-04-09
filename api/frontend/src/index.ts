@@ -55,6 +55,12 @@ const traverse = (dir: string) => {
   paths.splice(paths.length - 2, 2)
   return paths.join('/') + '/'
 }
+const resolveLang = () => {
+  // Get language of current document
+  if (!editing.includes('lang')) return 'UNKNOWN'
+  const lang = editing.split('lang-')[1].split('/')[0]
+  return 'lang-' + lang
+}
 const sanitize = (dirname: string) => dirname.replace(/[^a-z0-9]/gi, '-')
 
 // Define callables
@@ -144,6 +150,32 @@ const rm = async (name: string) => {
   else showDir(pwd)
 }
 
+const addCard = async (card: any) => {
+  // Add card to document
+  const res = await fetch('/api/card/add?', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      loc: editing,
+      lang: resolveLang(),
+      card
+    })
+  })
+
+  // Error handling
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+
+  // Refresh view
+  resetCardInputs()
+  showCards(editing)
+}
+
 const deleteCard = async (i: number) => {
   // Delete card in document
   const res = await fetch(
@@ -175,6 +207,7 @@ window.exports = {
   mkdir,
   touch,
   rm,
+  addCard,
   deleteCard,
   openVFS,
   openEditor

@@ -150,6 +150,199 @@ const putCards = (cards: any[]) => {
   }
 }
 
+const makeCardInputs = (inputs: Element, i: number) => {
+  // TODO: deal with grammatical properties
+
+  // Input fields
+  const termLabel = document.createElement('label')
+  termLabel.htmlFor = `input-term-${i}`
+  termLabel.innerText = 'Term'
+  const term = document.createElement('input')
+  term.id = `input-term-${i}`
+  term.className = 'input-term'
+  inputs.appendChild(termLabel)
+  inputs.appendChild(term)
+
+  const definitionLabel = document.createElement('label')
+  definitionLabel.htmlFor = `input-definition-${i}`
+  definitionLabel.innerText = 'Definition'
+  const definition = document.createElement('input')
+  definition.id = `input-definition-${i}`
+  definition.className = 'input-definition'
+  inputs.appendChild(definitionLabel)
+  inputs.appendChild(definition)
+
+  const tagsLabel = document.createElement('label')
+  tagsLabel.htmlFor = `input-tags-${i}`
+  tagsLabel.innerText = 'Tags'
+  const tags = document.createElement('input')
+  tags.id = `input-tags-${i}`
+  tags.className = 'input-tags'
+  inputs.appendChild(tagsLabel)
+  inputs.appendChild(tags)
+
+  const notesLabel = document.createElement('label')
+  notesLabel.htmlFor = `input-notes-${i}`
+  notesLabel.innerText = 'Notes'
+  const notes = document.createElement('input')
+  notes.id = `input-notes-${i}`
+  notes.className = 'input-notes'
+  inputs.appendChild(notesLabel)
+  inputs.appendChild(notes)
+
+  const posLabel = document.createElement('label')
+  posLabel.htmlFor = `input-pos-${i}`
+  posLabel.innerText = 'Part of speech'
+  const pos = document.createElement('input')
+  pos.id = `input-pos-${i}`
+  pos.className = 'input-pos'
+  inputs.appendChild(posLabel)
+  inputs.appendChild(pos)
+
+  const contextLabel = document.createElement('label')
+  contextLabel.htmlFor = `input-context-${i}`
+  contextLabel.innerText = 'Context'
+  const context = document.createElement('input')
+  context.id = `input-context-${i}`
+  context.className = 'input-context'
+  inputs.appendChild(contextLabel)
+  inputs.appendChild(context)
+}
+
+const resetCardInputs = () => {
+  // Reset all input fields and hide new card popup
+  const inputs = document.getElementsByTagName('input')
+  for (const input of inputs) input.value = ''
+  const phrases = document.querySelectorAll('#editor-phrases-list .inputs')
+  for (const phrase of phrases) phrase.remove()
+  const popup = document.getElementById('editor-popup')
+  if (popup !== null) popup.className = 'popup hide'
+}
+
+const getCardJSON = () => {
+  // Pipe card popup to JSON object
+  const cardJSON: any = {}
+
+  const getter = (name: string, i: number) => {
+    const el: any = document.getElementById(`input-${name}-${i}`)
+    let value = el.value
+    if (name === 'tags') {
+      value = value.split(',')
+      for (let i = 0; i < value.length; i++) {
+        const trimmed = value[i].trim()
+        if (trimmed !== '') value[i] = trimmed
+        else value.splice(i, 1)
+      }
+    }
+    const elStatus = !(el === undefined && el === null)
+    const valueStatus = !(value === undefined || value === '' || value.length === 0)
+    if (elStatus && valueStatus) {
+      if (i === 0) cardJSON[name] = value
+      else cardJSON.phrases[i - 1][name] = value
+    }
+  }
+
+  const grammarGetter = (name: string, i: number) => {
+    const el: any = document.getElementById(`input-${name}-${i}`)
+    const value = el.value
+    const elStatus = !(el === undefined && el === null)
+    const valueStatus = !(value === undefined || value === '' || value.length === 0)
+    if (elStatus && valueStatus) {
+      if (i === 0) cardJSON.grammar[name] = value
+      else cardJSON.phrases[i - 1].grammar[name] = value
+    }
+  }
+
+  getter('term', 0)
+  getter('definition', 0)
+  getter('tags', 0)
+  getter('notes', 0)
+
+  cardJSON.grammar = {}
+  grammarGetter('pos', 0)
+  grammarGetter('context', 0)
+
+  const phrases = document.getElementById('editor-phrases-list')
+  if (phrases === null || phrases.children.length === 0) return cardJSON
+  cardJSON.phrases = []
+  for (let i = 1; i <= phrases.children.length; i++) {
+    cardJSON.phrases.push({})
+
+    getter('term', i)
+    getter('definition', i)
+    getter('tags', i)
+    getter('notes', i)
+
+    cardJSON.phrases[i - 1].grammar = {}
+    grammarGetter('pos', i)
+    grammarGetter('context', i)
+  }
+
+  return cardJSON
+}
+
+const newCard = () => {
+  // Popup for creating a new card
+  const popup = document.createElement('div')
+  popup.id = 'editor-popup'
+  popup.className = 'popup hide'
+  document.body.appendChild(popup)
+
+  // Input fields
+  const inputs = document.createElement('div')
+  inputs.className = 'inputs'
+  makeCardInputs(inputs, 0)
+  popup.appendChild(inputs)
+
+  // Phrases
+  const phrases = document.createElement('div')
+  phrases.id = 'editor-phrases-list'
+  phrases.className = 'inputs-phrases'
+  const phraseBtns = document.createElement('div')
+  phraseBtns.className = 'row'
+  const newPhraseBtn = document.createElement('button')
+  newPhraseBtn.id = 'editor-new-phrase'
+  newPhraseBtn.className = 'submit'
+  newPhraseBtn.innerText = 'New phrase'
+  newPhraseBtn.addEventListener('click', e => {
+    const phrase = document.createElement('div')
+    phrase.className = 'inputs'
+    makeCardInputs(phrase, 1 + phrases.childElementCount)
+    phrases.appendChild(phrase)
+  })
+  const removePhraseBtn = document.createElement('button')
+  removePhraseBtn.id = 'editor-remove-phrase'
+  removePhraseBtn.className = 'close'
+  removePhraseBtn.innerText = 'Delete last'
+  removePhraseBtn.addEventListener('click', e => {
+    const phrase = phrases.lastElementChild
+    if (!(phrase === undefined || phrase === null)) {
+      phrases.removeChild(phrase)
+    }
+  })
+  popup.appendChild(phrases)
+  phraseBtns.appendChild(removePhraseBtn)
+  phraseBtns.appendChild(newPhraseBtn)
+  popup.appendChild(phraseBtns)
+
+  // Navigation
+  const cancelBtn = document.createElement('button')
+  cancelBtn.id = 'editor-close-popup'
+  cancelBtn.innerText = 'Cancel'
+  cancelBtn.addEventListener('click', e => { popup.className = 'popup hide' })
+  const submitBtn = document.createElement('button')
+  submitBtn.id = 'editor-submit-popup'
+  submitBtn.className = 'submit'
+  submitBtn.innerText = 'Finish'
+  submitBtn.addEventListener('click', e => {
+    addCard(getCardJSON()).catch(e => { console.error(e) })
+  })
+  popup.appendChild(cancelBtn)
+  popup.appendChild(submitBtn)
+
+  return popup
+}
+
 const makeRibbon = () => {
   const ribbon = document.createElement('div')
   ribbon.className = 'row'
@@ -165,7 +358,11 @@ const makeRibbon = () => {
 
   // Add event listeners
   cancelBtn.addEventListener('click', e => { openVFS() })
-  submitBtn.addEventListener('click', e => { /* TODO: add new cards */ })
+  submitBtn.addEventListener('click', e => {
+    const popup = document.getElementById('editor-popup')
+    if (popup === null) return
+    popup.className = 'popup show'
+  })
 
   ribbon.appendChild(cancelBtn)
   ribbon.appendChild(submitBtn)
@@ -183,6 +380,10 @@ const buildEditor = (doc: string) => {
   // Append navigation ribbon
   const ribbon = makeRibbon()
   content!.appendChild(ribbon)
+
+  // Make popups
+  const popup = newCard()
+  content!.appendChild(popup)
 
   // Read cards
   const cardDisplay = document.createElement('div')
@@ -205,6 +406,7 @@ window.exports = {
   deconstructEditor,
   setEditorTitle,
   makeEditorContent,
+  resetCardInputs,
   buildEditor,
   showCards
 }
