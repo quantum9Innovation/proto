@@ -180,15 +180,9 @@ const buildEditor = (doc: string) => {
     content = document.getElementById('content')
   }
 
-  // Append create button
-  const container = document.createElement('div')
-  container.className = 'row'
-  const createButton = document.createElement('button')
-  createButton.id = 'editor-create'
-  createButton.className = 'create'
-  createButton.innerText = 'Create'
-  container.appendChild(createButton)
-  content!.appendChild(container)
+  // Append navigation ribbon
+  const ribbon = makeRibbon()
+  content!.appendChild(ribbon)
 
   // Read cards
   const cardDisplay = document.createElement('div')
@@ -197,10 +191,6 @@ const buildEditor = (doc: string) => {
   readCards(doc)
     .then(cards => { putCards(cards) })
     .catch(e => { console.error(e) })
-
-  // Append navigation ribbon
-  const ribbon = makeRibbon()
-  content!.appendChild(ribbon)
 }
 
 const showCards = (doc: string) => {
