@@ -22,7 +22,7 @@
 }
 
 .show {
-  display: block;
+  display: inline;
 }
 
 #content {
@@ -43,12 +43,49 @@
   line-height: 50px;
 }
 
+.card.expanded {
+  height: fit-content;
+  background-color: var(--on-hover);
+}
+
 .card span {
   display: inline-block;
   font-size: 22px;
   white-space: nowrap;
   max-width: calc(100% - 300px);
   overflow-x: hidden;
+}
+
+.details {
+  width: calc(95% - 2 * var(--padding-mid));
+  margin-left: 2.5%;
+  border-radius: var(--border-large);
+  border: 3px var(--document) solid;
+  padding: var(--padding-mid);
+}
+
+.details.show {
+  display: inline-block;
+}
+
+.details.hide {
+  display: none;
+}
+
+.phrases {
+  width: calc(95% - 2 * var(--padding-mid));
+  margin-left: 2.5%;
+}
+
+.phrase {
+  background-color: white;
+  border-radius: var(--border-mid);
+  padding: var(--padding-mid);
+  margin-bottom: var(--margin-mid);
+}
+
+.phrase-header {
+  font-size: 22px;
 }
 
 .item {
