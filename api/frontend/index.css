@@ -23,6 +23,7 @@
 
 .show {
   display: inline;
+  display: block;
 }
 
 #content {
