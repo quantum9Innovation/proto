@@ -8,6 +8,7 @@
   --padding-mid: 12px;
   --padding-small: 4px;
   --margin-mid: 12px;
+  --margin-large: 24px;
   --document: #283dff;
   --document-text: #0010a8;
   --folder: #28aa3d;
@@ -22,7 +23,6 @@
 }
 
 .show {
-  display: inline;
   display: block;
 }
 
@@ -87,6 +87,13 @@
 
 .phrase-header {
   font-size: 22px;
+}
+
+.inputs-phrases .inputs {
+  padding: var(--padding-mid);
+  border-radius: var(--border-mid);
+  border: 3px var(--document) solid;
+  margin-bottom: var(--margin-mid);
 }
 
 .item {
@@ -159,8 +166,21 @@
   color: var(--folder-text);
 }
 
+#editor-popup {
+  width: calc(95% - 2 * var(--padding-mid));
+  max-width: none;
+}
+
+#editor-popup input {
+  width: 75%;
+}
+
+#editor-popup .row {
+  margin-top: var(--margin-large);
+}
+
 .popup {
-  background: white;
+  background-color: white;
   margin: var(--margin-mid);
   margin-left: 0px;
   padding: var(--padding-mid);
