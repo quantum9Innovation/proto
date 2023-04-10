@@ -12,7 +12,7 @@ export interface GrammarCard {
 
 export interface GrammarProp {
   name: string
-  type: string
+  type: 'string' | 'number' | 'boolean' | 'Choice' | 'GrammarCard'
   test: string | string[]
   choices?: Choice
   default?: string | number | boolean | GrammarCard
