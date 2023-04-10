@@ -32,6 +32,27 @@
   background-color: var(--background-color);
 }
 
+input[type=number] {
+  max-width: 100px;
+}
+
+input[type=checkbox] {
+  max-width: 50px;
+}
+
+.inputs {
+  margin-bottom: var(--margin-mid);
+}
+
+.grammar {
+  max-height: 350px;
+  overflow: auto;
+  margin-top: var(--margin-mid);
+  border-radius: var(--border-mid);
+  border: 3px var(--folder) solid;
+  padding: var(--padding-mid);
+}
+
 .row {
   margin-top: var(--margin-mid);
   margin-bottom: var(--margin-mid);
