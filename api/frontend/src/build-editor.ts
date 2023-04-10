@@ -151,9 +151,7 @@ const putCards = (cards: any[]) => {
   }
 }
 
-const makeCardInputs = (inputs: Element, i: number) => {
-  // TODO: deal with grammatical properties
-
+const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
   // Input fields
   const termLabel = document.createElement('label')
   termLabel.htmlFor = `input-term-${i}`
@@ -208,6 +206,95 @@ const makeCardInputs = (inputs: Element, i: number) => {
   context.className = 'input-context'
   inputs.appendChild(contextLabel)
   inputs.appendChild(context)
+
+  if (grammar.length === 0) return
+  const propertiesEl = document.createElement('div')
+  propertiesEl.className = 'grammar'
+  for (let j = 0; j < grammar.length; j++) {
+    const property = grammar[j]
+    const name: string = property.name
+    const type: string = property.type
+    switch (type) {
+      case 'string': {
+        const label = document.createElement('label')
+        label.htmlFor = `input-property-${i}-${j}`
+        label.innerText = name
+        propertiesEl.appendChild(label)
+        const input = document.createElement('input')
+        input.id = `input-property-${i}-${j}`
+        input.className = 'input-property-string'
+        input.type = 'text'
+        propertiesEl.appendChild(input)
+        break
+      }
+      case 'number': {
+        const label = document.createElement('label')
+        label.htmlFor = `input-property-${i}-${j}`
+        label.innerText = name
+        propertiesEl.appendChild(label)
+        const input = document.createElement('input')
+        input.id = `input-property-${i}-${j}`
+        input.className = 'input-property-number'
+        input.type = 'number'
+        propertiesEl.appendChild(input)
+        break
+      }
+      case 'boolean': {
+        const label = document.createElement('label')
+        label.htmlFor = `input-property-${i}-${j}`
+        label.innerText = name
+        propertiesEl.appendChild(label)
+        const input = document.createElement('input')
+        input.id = `input-property-${i}-${j}`
+        input.className = 'input-property-boolean'
+        input.type = 'checkbox'
+        propertiesEl.appendChild(input)
+        const br = document.createElement('br')
+        propertiesEl.appendChild(br)
+        break
+      }
+      case 'Choice': {
+        const label = document.createElement('label')
+        label.htmlFor = `input-property-${i}-${j}`
+        label.innerText = name
+        propertiesEl.appendChild(label)
+        const input = document.createElement('select')
+        input.id = `input-property-${i}-${j}`
+        input.className = 'input-property-choice'
+        if (property.choices.multiple === true) input.multiple = true
+        for (const option of property.choices.options) {
+          const optionEl = document.createElement('option')
+          optionEl.value = option
+          optionEl.innerText = option
+          input.appendChild(optionEl)
+        }
+        propertiesEl.appendChild(input)
+        break
+      }
+      case 'GrammarCard': {
+        const labelTerm = document.createElement('label')
+        labelTerm.htmlFor = `input-property-term-${i}-${j}`
+        labelTerm.innerText = name + ' (Term)'
+        propertiesEl.appendChild(labelTerm)
+        const inputTerm = document.createElement('input')
+        inputTerm.id = `input-property-term-${i}-${j}`
+        inputTerm.className = 'input-property-term'
+        inputTerm.type = 'text'
+        propertiesEl.appendChild(inputTerm)
+        const labelDefinition = document.createElement('label')
+        labelDefinition.htmlFor = `input-property-definition-${i}-${j}`
+        labelDefinition.innerText = name + ' (Definition)'
+        propertiesEl.appendChild(labelDefinition)
+        const inputDefinition = document.createElement('input')
+        inputDefinition.id = `input-property-definition-${i}-${j}`
+        inputDefinition.className = 'input-property-definition'
+        inputDefinition.type = 'text'
+        propertiesEl.appendChild(inputDefinition)
+        break
+      }
+    }
+  }
+  inputs.appendChild(propertiesEl)
 }
 
 const resetCardInputs = () => {
@@ -252,6 +339,12 @@ const getCardJSON = () => {
       if (i === 0) cardJSON.grammar[name] = value
       else cardJSON.phrases[i - 1].grammar[name] = value
     }
+
+    // TODO: grammar getter for grammar properties
+    // correlate inputs with properties using ID indices
+    // get correct value based on input type
+    // check unset conditions and do not include if not set
+    // if there is a default value and the input is unset, it should be recorded as null
   }
 
   getter('term', 0)
@@ -282,7 +375,7 @@ const getCardJSON = () => {
   return cardJSON
 }
 
-const newCard = () => {
+const newCard = (grammar: any) => {
   // Popup for creating a new card
   const popup = document.createElement('div')
   popup.id = 'editor-popup'
@@ -292,7 +385,7 @@ const newCard = () => {
   // Input fields
   const inputs = document.createElement('div')
   inputs.className = 'inputs'
-  makeCardInputs(inputs, 0)
+  makeCardInputs(inputs, grammar, 0)
   popup.appendChild(inputs)
 
   // Phrases
@@ -308,7 +401,7 @@ const newCard = () => {
   newPhraseBtn.addEventListener('click', e => {
     const phrase = document.createElement('div')
     phrase.className = 'inputs'
-    makeCardInputs(phrase, 1 + phrases.childElementCount)
+    makeCardInputs(phrase, grammar, 1 + phrases.childElementCount)
     phrases.appendChild(phrase)
   })
   const removePhraseBtn = document.createElement('button')
@@ -370,7 +463,7 @@ const makeRibbon = () => {
   return ribbon
 }
 
-const buildEditor = (doc: string) => {
+const buildEditor = (doc: string, grammar: any) => {
   // Build content for document editor
   let content = document.getElementById('content')
   if (content === null) {
@@ -383,7 +476,7 @@ const buildEditor = (doc: string) => {
   content!.appendChild(ribbon)
 
   // Make popups
-  const popup = newCard()
+  const popup = newCard(grammar)
   content!.appendChild(popup)
 
   // Read cards

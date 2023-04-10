@@ -37,12 +37,12 @@ const vfs = () => {
   makeVFSContent()
   buildFiles(pwd)
 }
-const editor = () => {
+const editor = (config: any) => {
   deconstruct()
   scene = 'editor'
   setEditorTitle('Document Editor')
   makeEditorContent()
-  buildEditor(editing)
+  buildEditor(editing, config)
 }
 
 // Startup routine
@@ -195,10 +195,24 @@ const deleteCard = async (i: number) => {
   showCards(editing)
 }
 
+const getGrammar = async () => {
+  // Fetch grammar config and update the `grammar` object to match
+  const res = await fetch('/api/card?' + new URLSearchParams({ lang: resolveLang() }).toString())
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+  const grammar = await res.json()
+  return grammar
+}
+
 const openVFS = () => { vfs() }
 const openEditor = (doc: string) => {
   editing = pwd + doc
-  editor()
+  getGrammar()
+    .then(config => { editor(config) })
+    .catch(e => { console.error(e) })
 }
 
 // Export callables
