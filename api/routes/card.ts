@@ -40,6 +40,10 @@ card.post('/', (req, res) => {
   for (const prop of config) {
     /* istanbul ignore next */
     if (prop.name.includes('history')) return res.status(400).send('Invalid grammar property name.')
+    /* istanbul ignore next */
+    if (prop.type === 'Choice' && prop.choices === undefined) {
+      return res.status(400).send(`No choices specified for grammar property ${prop.name}.`)
+    }
   }
 
   // Write to config

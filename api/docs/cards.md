@@ -77,6 +77,7 @@ These settings should contain a list of standard identifiers within this field, 
 - `type`: The type of the property (e.g. `string`, `number`, `boolean`, `Choice`, `GrammarCard`―card without grammar and phrases)
 - `test`: If/when the property should be tested on cards (any valid combination of `never`, `always`, `always-no-hint`, `separately`, `prefix`, `suffix`, `hint`)
 - `separator?`: When `prefix` or `suffix` are enabled, what separator to use (e.g. `space`, `-`)
+- `choices?`: A `Choice` object with a list of choices for the property value, if applicable
 - `default?`: The default value of the property (instance of `type`)
 - `only?`: If test and default are enabled, test only when specified or assume default value and randomly test those that are not specified (e.g. `true`, `false`)
 
@@ -85,8 +86,11 @@ An example for the `article` property described in the above card might be:
 ```json
 {
   "name": "article",
-  "type": "string",
+  "type": "Choice",
   "test": "prefix",
+  "choices": {
+    "options": ["el", "la"]
+  }
 }
 ```
 

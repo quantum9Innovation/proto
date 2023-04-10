@@ -3,7 +3,7 @@ type orderedList = Array<[string, number]>
 type Test = [number, boolean]
 
 interface Choice {
-  choices: string[]
+  options: string[]
   multiple?: boolean
 }
 
