@@ -123,6 +123,7 @@ const expandCard = (card: any, cardItem: HTMLDivElement) => {
 const putCards = (cards: any[]) => {
   const cardDisplay = document.getElementById('card-display')
   if (cardDisplay === null) return
+  if (cards === undefined) return
   for (let i = 0; i < cards.length; i++) {
     const card = cards[i]
     const term: string = card.term
