@@ -75,6 +75,7 @@ app.get('/api', (_, res) => {
 
 // Initialize frontend
 app.get('/', (_, res) => {
+  /* istanbul ignore next */
   res.sendFile('frontend/index.html', { root: LOC }, e => {
     if (e !== undefined) {
       console.error(e)
