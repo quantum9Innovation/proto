@@ -73,6 +73,21 @@ For our example, reasonable values for these properties might be:
 The language settings determine what `grammar.properties` should look like for each card, if it exists.
 These settings should contain a list of standard identifiers within this field, along with various properties about those identifiers, which include:
 
+<!-- TODO: 
+  standardize `test` and `default` values
+  only `test=separately` is handled by the API, which returns cards of the form:
+  `
+    {
+      term: `${card.term} (${propKey})`,
+      definition: props[propKey],
+      history: props[propKey + '-history'],
+      id: (card.id as string) + ':GRAMMAR:' + propKey
+    }
+  `
+  in those cases or a full card in all other cases (which includes properties to be tested separately)
+  separately tested and not tested grammar properties should be discarded; then the test and default/only criteria should determine which ones are tested and how
+  -->
+
 - `name`: Property name (e.g. `article`, `gender`, `tense`)
 - `type`: The type of the property (e.g. `string`, `number`, `boolean`, `Choice`, `GrammarCard`―card without grammar and phrases)
 - `test`: If/when the property should be tested on cards (any valid combination of `never`, `always`, `always-no-hint`, `separately`, `prefix`, `suffix`, `hint`)
