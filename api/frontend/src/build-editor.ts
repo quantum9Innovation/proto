@@ -254,21 +254,46 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
         break
       }
       case 'Choice': {
-        const label = document.createElement('label')
-        label.htmlFor = `input-property-${i}-${j}`
-        label.innerText = name
-        propertiesEl.appendChild(label)
-        const input = document.createElement('select')
-        input.id = `input-property-${i}-${j}`
-        input.className = 'input-property-choice'
-        if (property.choices.multiple === true) input.multiple = true
-        for (const option of property.choices.options) {
-          const optionEl = document.createElement('option')
-          optionEl.value = option
-          optionEl.innerText = option
-          input.appendChild(optionEl)
+        if (property.choices.multiple === true) {
+          const label = document.createElement('label')
+          label.htmlFor = `input-property-${i}-${j}`
+          label.innerText = name
+          const input = document.createElement('div')
+          input.id = `input-property-${i}-${j}`
+          input.className = 'input-property-multiple-choice'
+          for (let k = 0; k < property.choices.options.length; k++) {
+            const option = property.choices.options[k]
+            const label = document.createElement('label')
+            label.className = 'input-property-option'
+            label.htmlFor = `input-property-${i}-${j}-${k}`
+            label.innerText = option
+            const optionEl = document.createElement('input')
+            optionEl.id = `input-property-${i}-${j}-${k}`
+            optionEl.type = 'checkbox'
+            optionEl.value = option
+            const br = document.createElement('br')
+            input.appendChild(optionEl)
+            input.appendChild(label)
+            input.appendChild(br)
+          }
+          propertiesEl.appendChild(label)
+          propertiesEl.appendChild(input)
+        } else {
+          const label = document.createElement('label')
+          label.htmlFor = `input-property-${i}-${j}`
+          label.innerText = name
+          propertiesEl.appendChild(label)
+          const input = document.createElement('select')
+          input.id = `input-property-${i}-${j}`
+          input.className = 'input-property-choice'
+          for (const option of property.choices.options) {
+            const optionEl = document.createElement('option')
+            optionEl.value = option
+            optionEl.innerText = option
+            input.appendChild(optionEl)
+          }
+          propertiesEl.appendChild(input)
         }
-        propertiesEl.appendChild(input)
         break
       }
       case 'GrammarCard': {
