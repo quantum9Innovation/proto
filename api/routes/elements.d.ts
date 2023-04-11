@@ -15,7 +15,7 @@ export interface GrammarProp {
   type: 'string' | 'number' | 'boolean' | 'Choice' | 'GrammarCard'
   test: string | string[]
   choices?: Choice
-  default?: string | number | boolean | GrammarCard
+  default?: string | string[] | number | boolean | GrammarCard
   only?: boolean
 }
 
