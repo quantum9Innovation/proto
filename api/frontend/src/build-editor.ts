@@ -270,7 +270,6 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
             const optionEl = document.createElement('input')
             optionEl.id = `input-property-${i}-${j}-${k}`
             optionEl.type = 'checkbox'
-            optionEl.value = option
             const br = document.createElement('br')
             input.appendChild(optionEl)
             input.appendChild(label)
@@ -325,14 +324,17 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
 const resetCardInputs = () => {
   // Reset all input fields and hide new card popup
   const inputs = document.getElementsByTagName('input')
-  for (const input of inputs) input.value = ''
+  for (const input of inputs) {
+    input.value = ''
+    input.checked = false
+  }
   const phrases = document.querySelectorAll('#editor-phrases-list .inputs')
   for (const phrase of phrases) phrase.remove()
   const popup = document.getElementById('editor-popup')
   if (popup !== null) popup.className = 'popup hide'
 }
 
-const getCardJSON = () => {
+const getCardJSON = (grammar: any) => {
   // Pipe card popup to JSON object
   const cardJSON: any = {}
 
@@ -364,12 +366,100 @@ const getCardJSON = () => {
       if (i === 0) cardJSON.grammar[name] = value
       else cardJSON.phrases[i - 1].grammar[name] = value
     }
+  }
 
-    // TODO: grammar getter for grammar properties
-    // correlate inputs with properties using ID indices
-    // get correct value based on input type
-    // check unset conditions and do not include if not set
-    // if there is a default value and the input is unset, it should be recorded as null
+  const propertiesGetter = (i: number) => {
+    for (let j = 0; j < grammar.length; j++) {
+      const property = grammar[j]
+      const name: string = property.name
+      const type: string = property.type
+      let value
+
+      switch (type) {
+        case 'string': {
+          // text input
+          const el: HTMLInputElement | null = (
+            document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          )
+          const valueStatus = !(el.value === undefined || el.value === '')
+          if (el === null) continue
+          if (!valueStatus) break
+          value = el.value
+          break
+        }
+        case 'number': {
+          // numerical input
+          const el: HTMLInputElement | null = (
+            document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          )
+          const valueStatus = !(el.value === undefined || el.value === '')
+          if (el === null) continue
+          if (!valueStatus) break
+          value = el.valueAsNumber
+          break
+        }
+        case 'boolean': {
+          // checkbox input
+          const el: HTMLInputElement | null = (
+            document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          )
+          if (el === null) continue
+          value = el.checked
+          break
+        }
+        case 'Choice': {
+          if (property.choices.multiple === true) {
+            // multiple checkbox input
+            value = []
+            for (let k = 0; k < property.choices.options.length; k++) {
+              const option = property.choices.options[k]
+              const el: HTMLInputElement | null = (
+                document.getElementById(`input-property-${i}-${j}-${k}`) as HTMLInputElement
+              )
+              if (el === null) continue
+              if (el.checked) value.push(option)
+            }
+            if (value.length === 0) value = undefined
+          } else {
+            // select box
+            const el: HTMLInputElement | null = (
+              document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+            )
+            const valueStatus = !(el.value === undefined || el.value === '')
+            if (el === null) continue
+            if (!valueStatus) break
+            value = el.value
+          }
+          break
+        }
+        case 'GrammarCard': {
+          // both term and definition are text inputs
+          const termEl: HTMLInputElement | null = (
+            document.getElementById(`input-property-term-${i}-${j}`) as HTMLInputElement
+          )
+          const definitionEl: HTMLInputElement | null = (
+            document.getElementById(`input-property-definition-${i}-${j}`) as HTMLInputElement
+          )
+          if (termEl === null) continue
+          if (definitionEl === null) continue
+          const valueStatus = !(
+            termEl.value === undefined || termEl.value === ''
+            || definitionEl.value === undefined || definitionEl.value === ''
+          )
+          if (!valueStatus) break
+          value = { term: termEl.value, definition: definitionEl.value }
+          break
+        }
+      }
+
+      if (value !== undefined) {
+        if (i === 0) cardJSON.grammar.properties[name] = value
+        else cardJSON.phrases[i - 1].grammar.properties[name] = value
+      } else if (property.default !== undefined) {
+        if (i === 0) cardJSON.grammar.properties[name] = property.default
+        else cardJSON.phrases[i - 1].grammar.properties[name] = property.default
+      }
+    }
   }
 
   getter('term', 0)
@@ -380,6 +470,11 @@ const getCardJSON = () => {
   cardJSON.grammar = {}
   grammarGetter('pos', 0)
   grammarGetter('context', 0)
+
+  if (grammar.length > 0) {
+    cardJSON.grammar.properties = {}
+    propertiesGetter(0)
+  }
 
   const phrases = document.getElementById('editor-phrases-list')
   if (phrases === null || phrases.children.length === 0) return cardJSON
@@ -395,6 +490,11 @@ const getCardJSON = () => {
     cardJSON.phrases[i - 1].grammar = {}
     grammarGetter('pos', i)
     grammarGetter('context', i)
+
+    if (grammar.length > 0) {
+      cardJSON.phrases[i - 1].grammar.properties = {}
+      propertiesGetter(i)
+    }
   }
 
   return cardJSON
@@ -454,7 +554,7 @@ const newCard = (grammar: any) => {
   submitBtn.className = 'submit'
   submitBtn.innerText = 'Finish'
   submitBtn.addEventListener('click', e => {
-    addCard(getCardJSON()).catch(e => { console.error(e) })
+    addCard(getCardJSON(grammar)).catch(e => { console.error(e) })
   })
   popup.appendChild(cancelBtn)
   popup.appendChild(submitBtn)
