@@ -233,12 +233,11 @@ card.get('/list', (req, res) => {
   const testedProps: string[] = []
 
   for (const defProp of grammar) {
-    // Get test property with correct type
-    let test: string[]
-    typeof defProp.test === 'string' ? test = [defProp.test] : test = defProp.test
-
-    // Check if test requirements are met
-    if (test.includes('separately')) testedProps.push(defProp.name)
+    // Check if separate testing requirements are met
+    const test = defProp.test
+    let method = defProp.method
+    if (method === undefined) method = 'inline'
+    if (test && method === 'separately') testedProps.push(defProp.name)
   }
 
   // Expand cards into tests (find all subcards)
@@ -432,12 +431,11 @@ const rescore = (loc: string, lang: string) => {
   const testedProps: string[] = []
 
   for (const defProp of grammar) {
-    // Get test property with correct type
-    let test: string[]
-    typeof defProp.test === 'string' ? test = [defProp.test] : test = defProp.test
-
-    // Check if test requirements are met
-    if (test.includes('separately')) testedProps.push(defProp.name)
+    // Check if separate testing requirements are met
+    const test = defProp.test
+    let method = defProp.method
+    if (method === undefined) method = 'inline'
+    if (test && method === 'separately') testedProps.push(defProp.name)
   }
 
   // Expand cards into tests (find all subcards)

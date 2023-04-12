@@ -15,12 +15,13 @@ describe('/card (base)', () => {
     {
       name: 'transitive',
       type: 'boolean',
-      test: ['always', 'separately']
+      test: true,
+      method: 'separately'
     },
     {
       name: 'reflexive',
       type: 'boolean',
-      test: 'never',
+      test: false,
       default: true
     }
   ]

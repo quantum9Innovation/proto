@@ -13,10 +13,13 @@ export interface GrammarCard {
 export interface GrammarProp {
   name: string
   type: 'string' | 'number' | 'boolean' | 'Choice' | 'GrammarCard'
-  test: string | string[]
+  test: boolean
+  method?: 'prefix' | 'suffix' | 'inline' | 'form' | 'separately'
+  hint?: boolean
+  separator?: string
   choices?: Choice
   default?: string | string[] | number | boolean | GrammarCard
-  only?: boolean
+  only?: number
 }
 
 export interface Grammar {
