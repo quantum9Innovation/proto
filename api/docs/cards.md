@@ -90,11 +90,13 @@ These settings should contain a list of standard identifiers within this field, 
 
 - `name`: Property name (e.g. `article`, `gender`, `tense`)
 - `type`: The type of the property (e.g. `string`, `number`, `boolean`, `Choice`, `GrammarCard`―card without grammar and phrases)
-- `test`: If/when the property should be tested on cards (any valid combination of `never`, `always`, `always-no-hint`, `separately`, `prefix`, `suffix`, `hint`)
-- `separator?`: When `prefix` or `suffix` are enabled, what separator to use (e.g. `space`, `-`)
+- `test`: Boolean indicating whether the property should be tested
+- `method?`: When testing is enabled, the method for collecting responses (one of `prefix`, `suffix`, `inline` (**default**), `form`, or `separately`)
+- `hint?`: When `prefix`, `suffix`, or `inline` testing is enabled, whether the property should be tested with a hint (defaults to false)
+- `separator?`: When `prefix` or `suffix` are enabled, what separator to use (default is space)
 - `choices?`: A `Choice` object with a list of choices for the property value, if applicable
 - `default?`: The default value of the property (instance of `type`)
-- `only?`: If test and default are enabled, test only when specified or assume default value and randomly test those that are not specified (e.g. `true`, `false`)
+- `only?`: If test and default are enabled, the probability with which default values should be tested (zero is never, one is always (**default**))
 
 An example for the `article` property described in the above card might be:
 
@@ -102,7 +104,8 @@ An example for the `article` property described in the above card might be:
 {
   "name": "article",
   "type": "Choice",
-  "test": "prefix",
+  "test": true,
+  "method": "prefix",
   "choices": {
     "options": ["el", "la"]
   }
