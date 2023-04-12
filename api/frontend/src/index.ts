@@ -4,6 +4,16 @@ let pwd = '/'
 let editing = ''
 
 // Scene managers
+/**
+  TODO: Study window
+
+  Separately tested grammar properties should be eliminated from returned cards, if present
+  All cards have base form: `{ term, definition, history, id }`
+
+  Returned cards should be parsed for testable grammar properties and a scene should be constructed
+  which creates a study session, which operates independently from the main routine given a list of
+  cards to study as input on startup.
+*/
 const register = async () => {
   const res = await fetch('/api/init/session', {
     method: 'POST',
