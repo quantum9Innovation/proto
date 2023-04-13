@@ -570,6 +570,10 @@ const makeEditorRibbon = () => {
   cancelBtn.id = 'editor-close'
   cancelBtn.innerText = 'Back'
 
+  const startQueueBtn = document.createElement('button')
+  startQueueBtn.id = 'start-queue'
+  startQueueBtn.innerText = 'Start Queue'
+
   const submitBtn = document.createElement('button')
   submitBtn.id = 'editor-submit'
   submitBtn.className = 'submit'
@@ -577,6 +581,9 @@ const makeEditorRibbon = () => {
 
   // Add event listeners
   cancelBtn.addEventListener('click', e => { openVFS() })
+  startQueueBtn.addEventListener('click', e => {
+    openQueue(true).catch(e => { console.error(e) })
+  })
   submitBtn.addEventListener('click', e => {
     const popup = document.getElementById('editor-popup')
     if (popup === null) return
@@ -584,6 +591,7 @@ const makeEditorRibbon = () => {
   })
 
   ribbon.appendChild(cancelBtn)
+  ribbon.appendChild(startQueueBtn)
   ribbon.appendChild(submitBtn)
   return ribbon
 }

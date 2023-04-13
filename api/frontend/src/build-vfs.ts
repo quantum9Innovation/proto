@@ -89,6 +89,10 @@ const makeVFSRibbon = () => {
   createFolderBtn.id = 'create-folder'
   createFolderBtn.innerText = 'Create Folder'
 
+  const startQueueBtn = document.createElement('button')
+  startQueueBtn.id = 'start-queue'
+  startQueueBtn.innerText = 'Start Queue'
+
   // Add event listeners
   createDocBtn.addEventListener('click', e => {
     const popup = document.getElementById('create-doc-popup')
@@ -100,9 +104,13 @@ const makeVFSRibbon = () => {
     if (popup === null) return
     popup.className = 'popup show'
   })
+  startQueueBtn.addEventListener('click', e => {
+    openQueue(false).catch(e => { console.error(e) })
+  })
 
   buttonRow.appendChild(createDocBtn)
   buttonRow.appendChild(createFolderBtn)
+  buttonRow.appendChild(startQueueBtn)
   return buttonRow
 }
 

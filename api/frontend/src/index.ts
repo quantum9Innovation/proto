@@ -2,6 +2,7 @@
 let scene = 'init'
 let pwd = '/'
 let editing = ''
+let cards: any[] = []
 
 // Scene managers
 /**
@@ -38,6 +39,9 @@ const deconstruct = () => {
     case 'editor':
       deconstructEditor()
       break
+    case 'queue':
+      deconstructQueue()
+      break
   }
 }
 const vfs = () => {
@@ -53,6 +57,14 @@ const editor = (config: any) => {
   setEditorTitle('Document Editor')
   makeEditorContent()
   buildEditor(editing, config)
+}
+const queue = (config: any) => {
+  deconstruct()
+  scene = 'queue'
+  setQueueTitle('Queue')
+  makeQueueContent()
+  buildQueueCard(cards[cards.length - 1], config)
+  updateProgressBar(0)
 }
 
 // Startup routine
@@ -224,6 +236,27 @@ const openEditor = (doc: string) => {
     .then(config => { editor(config) })
     .catch(e => { console.error(e) })
 }
+const openQueue = async (doc: boolean) => {
+  const res = await fetch(
+    '/api/card/list?'
+    + new URLSearchParams({
+      path: doc ? editing : pwd,
+      lang: resolveLang()
+    }).toString()
+  )
+  const config = await getGrammar()
+
+  // Error handling
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+
+  // Open queue
+  cards = await res.json()
+  queue(config)
+}
 
 // Export callables
 window.exports = {
@@ -234,5 +267,6 @@ window.exports = {
   addCard,
   deleteCard,
   openVFS,
-  openEditor
+  openEditor,
+  openQueue
 }
