@@ -67,8 +67,8 @@ const traverse = (dir: string) => {
 }
 const resolveLang = () => {
   // Get language of current document
-  if (!editing.includes('lang')) return 'UNKNOWN'
-  const lang = editing.split('lang-')[1].split('/')[0]
+  if (!pwd.includes('lang')) return 'UNKNOWN'
+  const lang = pwd.split('lang-')[1].split('/')[0]
   return 'lang-' + lang
 }
 const sanitize = (dirname: string) => dirname.replace(/[^a-z0-9]/gi, '-')
