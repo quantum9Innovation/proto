@@ -77,7 +77,7 @@ const putFiles = (dirs: string[], docs: string[]) => {
   }
 }
 
-const makeButtonRow = () => {
+const makeVFSRibbon = () => {
   const buttonRow = document.createElement('div')
   buttonRow.className = 'row'
 
@@ -106,7 +106,7 @@ const makeButtonRow = () => {
   return buttonRow
 }
 
-const makePopups = () => {
+const makeVFSPopups = () => {
   // Initialize popups array
   const popups = []
 
@@ -200,11 +200,11 @@ const buildFiles = (dir: string) => {
   }
 
   // Append create buttons
-  const buttonRow = makeButtonRow()
+  const buttonRow = makeVFSRibbon()
   content!.appendChild(buttonRow)
 
   // Make popups
-  const popups = makePopups()
+  const popups = makeVFSPopups()
   for (const popup of popups) content!.appendChild(popup)
 
   // Read files

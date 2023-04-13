@@ -562,7 +562,7 @@ const newCard = (grammar: any) => {
   return popup
 }
 
-const makeRibbon = () => {
+const makeEditorRibbon = () => {
   const ribbon = document.createElement('div')
   ribbon.className = 'row'
 
@@ -597,7 +597,7 @@ const buildEditor = (doc: string, grammar: any) => {
   }
 
   // Append navigation ribbon
-  const ribbon = makeRibbon()
+  const ribbon = makeEditorRibbon()
   content!.appendChild(ribbon)
 
   // Make popups
