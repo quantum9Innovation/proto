@@ -14,7 +14,7 @@ export interface GrammarProp {
   name: string
   type: 'string' | 'number' | 'boolean' | 'Choice' | 'GrammarCard'
   test: boolean
-  method?: 'prefix' | 'suffix' | 'inline' | 'form' | 'separately'
+  method?: 'prefix' | 'suffix' | 'inline' | 'separately'
   hint?: boolean
   separator?: string
   choices?: Choice

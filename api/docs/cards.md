@@ -76,12 +76,17 @@ These settings should contain a list of standard identifiers within this field, 
 - `name`: Property name (e.g. `article`, `gender`, `tense`)
 - `type`: The type of the property (e.g. `string`, `number`, `boolean`, `Choice`, `GrammarCard`―card without grammar and phrases)
 - `test`: Boolean indicating whether the property should be tested
-- `method?`: When testing is enabled, the method for collecting responses (one of `prefix`, `suffix`, `inline` (**default**), `form`, or `separately`)
+- `method?`: When testing is enabled, the method for collecting responses (one of `prefix`, `suffix`, `inline` (**default**), or `separately`)
 - `hint?`: When `prefix`, `suffix`, or `inline` testing is enabled, whether the property should be tested with a hint (defaults to false)
 - `separator?`: When `prefix` or `suffix` are enabled, what separator to use (default is space)
 - `choices?`: A `Choice` object with a list of choices for the property value, if applicable
 - `default?`: The default value of the property (instance of `type`)
 - `only?`: If test and default are enabled, the probability with which default values should be tested (zero is never, one is always (**default**))
+
+There should only be one prefix and one suffix property maximum with the same separator.
+These properties should be either strings, numbers, or single choice items (multiple choices will not be registered).
+Booleans must be tested inline and grammar cards must be tested separately.
+Hinting is disabled for separately tested cards and booleans.
 
 An example for the `article` property described in the above card might be:
 
