@@ -19,7 +19,6 @@ export interface GrammarProp {
   separator?: string
   choices?: Choice
   default?: string | string[] | number | boolean | GrammarCard
-  only?: number
 }
 
 export interface Grammar {

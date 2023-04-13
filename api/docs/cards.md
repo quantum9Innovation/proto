@@ -81,7 +81,6 @@ These settings should contain a list of standard identifiers within this field, 
 - `separator?`: When `prefix` or `suffix` are enabled, what separator to use (default is space)
 - `choices?`: A `Choice` object with a list of choices for the property value, if applicable
 - `default?`: The default value of the property (instance of `type`)
-- `only?`: If test and default are enabled, the probability with which default values should be tested (zero is never, one is always (**default**))
 
 There should only be one prefix and one suffix property maximum with the same separator.
 These properties should be either strings, numbers, or single choice items (multiple choices will not be registered).
