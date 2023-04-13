@@ -15,6 +15,8 @@
   --folder-text: #104318;
   --close: #c44;
   --submit: #3b3;
+  --progress-beginning: #373;
+  --progress-end: #3b3;
   --scrim: brightness(75%);
 }
 
@@ -38,6 +40,35 @@ input[type=number] {
 
 input[type=checkbox] {
   max-width: 50px;
+}
+
+#progress-bar {
+  background: linear-gradient(to right, var(--progress-beginning) 0%, var(--progress-end) 100%);
+  height: 4px;
+  border-radius: 2px;
+}
+
+#flashcard {
+  padding: var(--padding-large);
+}
+
+#queue-props {
+  margin: var(--margin-large);
+  margin-top: 0px;
+}
+
+#flashcard input {
+  width: 50%;
+}
+
+#flashcard input,
+#queue-props input {
+  background: white;
+}
+
+#queue-ribbon {
+  margin: var(--margin-large);
+  margin-top: calc(2 * var(--margin-large));
 }
 
 .inputs {
