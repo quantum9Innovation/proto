@@ -6,6 +6,12 @@ const deconstructQueue = () => {
   if (content !== null) content.remove()
 }
 
+const refreshQueue = () => {
+  // Refresh queue content only
+  const content = document.getElementById('content')
+  if (content !== null) content.innerHTML = ''
+}
+
 const setQueueTitle = (title: string) => {
   // Change title
   if (document.getElementById('title') !== undefined) {
@@ -203,6 +209,7 @@ const buildQueueReview = (correct: boolean, card: any, received: string, stats: 
 
 window.exports = {
   deconstructQueue,
+  refreshQueue,
   setQueueTitle,
   makeQueueContent,
   updateProgressBar,
