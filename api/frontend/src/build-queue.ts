@@ -151,6 +151,38 @@ const includesProperties = (card: any, config: any) => {
   return reqMet
 }
 
+const prefillHints = (card: any, config: any) => {
+  if (card.grammar === undefined) return
+  if (card.grammar.properties === undefined) return
+
+  const properties: Record<string, any> = card.grammar.properties
+
+  for (const name in properties) {
+    const prop: any = properties[name]
+    if (prop === undefined) continue
+
+    let propConfig: any
+    for (const defProp of config) {
+      if (name === defProp.name) {
+        propConfig = defProp
+        break
+      }
+    }
+
+    if (propConfig === undefined) continue
+
+    const type: string = propConfig.type
+    const test: boolean = propConfig.test
+    const hint: boolean | undefined = propConfig.hint
+    const method: string = propConfig.method
+    if (
+      test && hint === true
+      && method === 'inline'
+      && type !== 'boolean'
+    ) addProp(name)
+  }
+}
+
 const buildQueueCard = (card: any, config: any) => {
   // Build content for document editor
   let content = document.getElementById('content')
@@ -173,6 +205,7 @@ const buildQueueCard = (card: any, config: any) => {
   if (grammarStatus) {
     const grammarProps = putProps()
     content!.appendChild(grammarProps)
+    prefillHints(card, config)
   }
   // TODO: prefill hints
   // TODO: refresh content display func between card/review transition
