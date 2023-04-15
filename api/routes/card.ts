@@ -248,7 +248,7 @@ card.get('/list', (req, res) => {
         tests: [],
         score: 0
       }
-    }
+    } else score(card.history)
     tests.push(card)
 
     // Phrase
@@ -262,7 +262,7 @@ card.get('/list', (req, res) => {
             tests: [],
             score: 0
           }
-        }
+        } else score(phraseCard.history)
         tests.push(phraseCard)
 
         // Find tested grammar properties
@@ -276,7 +276,7 @@ card.get('/list', (req, res) => {
                   tests: [],
                   score: 0
                 }
-              }
+              } else score(props[propKey + '-history'])
               tests.push({
                 term: `${phrase.term} (${propKey})`,
                 definition: props[propKey],
@@ -300,7 +300,7 @@ card.get('/list', (req, res) => {
               tests: [],
               score: 0
             }
-          }
+          } else score(props[propKey + '-history'])
           tests.push({
             term: `${card.term} (${propKey})`,
             definition: props[propKey],
@@ -404,6 +404,7 @@ card.post('/history', (req, res) => {
 // Recalculate scores for a given path
 /* istanbul ignore next */
 const rescore = (loc: string, lang: string) => {
+  /* TODO: push to file system */
   const pathname = path.join(root, loc)
   const cards: Card[] = []
 
@@ -412,7 +413,8 @@ const rescore = (loc: string, lang: string) => {
   const traverse = (dir: string) => {
     fs.readdirSync(dir).forEach(file => {
       const abs = path.join(dir, file)
-      if (fs.statSync(abs).isDirectory()) { traverse(abs) } else if (fs.statSync(abs).isFile()) return files.push(abs)
+      if (fs.statSync(abs).isDirectory()) traverse(abs)
+      else if (fs.statSync(abs).isFile()) return files.push(abs)
     })
   }
   traverse(pathname)
