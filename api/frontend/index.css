@@ -15,6 +15,8 @@
   --folder-text: #104318;
   --close: #c44;
   --submit: #3b3;
+  --incorrect: #c445;
+  --correct: #3b35;
   --progress-beginning: #373;
   --progress-end: #3b3;
   --scrim: brightness(75%);
@@ -32,6 +34,41 @@
   padding: var(--padding-large);
   border-radius: var(--border-large);
   background-color: var(--background-color);
+}
+
+#review-card {
+  margin-top: var(--margin-mid);
+  padding: var(--padding-large);
+  border-radius: var(--border-large);
+}
+
+.correct {
+  background-color: var(--correct);
+}
+
+.incorrect {
+  background-color: var(--incorrect);
+}
+
+.score {
+  display: inline-block;
+  background-color: white;
+  height: 100px;
+  width: 75px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100px;
+  margin: var(--margin-mid);
+  border-radius: var(--border-large);
+}
+
+#queue-review-old-score {
+  margin-left: calc(100% - 150px - 50px);
+}
+
+pre {
+  white-space: pre-wrap;
 }
 
 input[type=number] {
