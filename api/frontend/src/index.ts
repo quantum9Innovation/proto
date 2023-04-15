@@ -3,18 +3,11 @@ let scene = 'init'
 let pwd = '/'
 let editing = ''
 let cards: any[] = []
+let noCorrect = 0
+let progress: number = 0
+let configCache: any
 
 // Scene managers
-/**
-  TODO: Study window
-
-  Separately tested grammar properties should be eliminated from returned cards, if present
-  All cards have base form: `{ term, definition, history, id }`
-
-  Returned cards should be parsed for testable grammar properties and a scene should be constructed
-  which creates a study session, which operates independently from the main routine given a list of
-  cards to study as input on startup.
-*/
 const register = async () => {
   const res = await fetch('/api/init/session', {
     method: 'POST',
@@ -63,8 +56,9 @@ const queue = (config: any) => {
   scene = 'queue'
   setQueueTitle('Queue')
   makeQueueContent()
-  buildQueueCard(cards[cards.length - 1], config)
+  buildQueueCard(cards[0], config)
   updateProgressBar(0)
+  configCache = config
 }
 
 // Startup routine
@@ -229,6 +223,74 @@ const getGrammar = async () => {
   return grammar
 }
 
+const startReview = async (card: any, rec: any, correct: boolean) => {
+  // Start queue review
+
+  /*
+    Update card history
+    As of right now, all properties tested with the card are not updated.
+    Instead, these scores are merged into the overall card score.
+  */
+  const res = await fetch('/api/card/history', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: card.id,
+      timestamp: Date.now(),
+      accuracy: correct
+    })
+  })
+
+  // Error handling
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+
+  // Update local variables
+  if (correct) {
+    cards.splice(0, 1)
+    noCorrect++
+  } else {
+    const forReview = cards.splice(0, 1)[0]
+    cards.push(forReview)
+  }
+  rec = JSON.stringify(rec)
+
+  let scoreSum = 0
+  for (const card of cards) {
+    if (card.history === undefined) continue
+    if (card.history.score === undefined) continue
+    scoreSum += card.history.score as number
+  }
+  scoreSum += noCorrect
+
+  let score = 0
+  if (card.history?.score !== undefined) score = card.history.score
+
+  const stats = [score, scoreSum / (cards.length + noCorrect)]
+
+  // Switch to review
+  refreshQueue()
+  buildQueueReview(correct, card, rec, stats)
+  progress = noCorrect / (cards.length + noCorrect)
+  updateProgressBar(progress)
+}
+
+const restartQueue = () => {
+  // Restart queue
+  if (cards.length === 0) {
+    openVFS()
+    return
+  }
+  refreshQueue()
+  buildQueueCard(cards[0], configCache)
+  updateProgressBar(progress)
+}
+
 const openVFS = () => { vfs() }
 const openEditor = (doc: string) => {
   editing = pwd + doc
@@ -255,7 +317,9 @@ const openQueue = async (doc: boolean) => {
 
   // Open queue
   cards = await res.json()
-  queue(config)
+  noCorrect = 0
+  if (cards.length !== 0) queue(config)
+  else alert('No cards to study')
 }
 
 // Export callables
@@ -266,6 +330,8 @@ window.exports = {
   rm,
   addCard,
   deleteCard,
+  startReview,
+  restartQueue,
   openVFS,
   openEditor,
   openQueue

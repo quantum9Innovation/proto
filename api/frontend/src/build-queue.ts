@@ -98,7 +98,223 @@ const newFlashcard = (card: any) => {
   return flashcard
 }
 
-const makeQueueRibbon = (config: any) => {
+const newReviewCard = (correct: boolean, card: any, received: string, stats: number[]) => {
+  // Build review card
+  const reviewCard = document.createElement('div')
+  reviewCard.id = 'review-card'
+  if (correct) reviewCard.className = 'correct'
+  else reviewCard.className = 'incorrect'
+
+  // Build main review card elements
+  const main = document.createElement('div')
+  main.id = 'review-card-main'
+
+  const truth = document.createElement('h2')
+  const term: string = card.term
+  const definition: any = card.definition
+  let definitionStr: string
+  if (typeof definition === 'string') definitionStr = definition
+  else if (typeof definition === 'number') definitionStr = definition.toString()
+  else if (Array.isArray(definition)) definitionStr = definition.join(' ')
+  else definitionStr = JSON.stringify(definition)
+  truth.id = 'queue-review-truth'
+  truth.innerText = term + ' / ' + definitionStr
+
+  const rawTruth = document.createElement('pre')
+  const miniCard = JSON.parse(JSON.stringify(card)) // deep copy
+  if (miniCard.history !== undefined) delete miniCard.history
+  if (miniCard.score !== undefined) delete miniCard.score
+  if (miniCard.id !== undefined) delete miniCard.id
+  if (miniCard.grammar?.properties !== undefined) {
+    for (const prop in miniCard.grammar.properties) {
+      if (prop.includes('history')) delete miniCard.grammar.properties[prop]
+    }
+  }
+  rawTruth.id = 'queue-review-raw-truth'
+  rawTruth.innerText = JSON.stringify(miniCard)
+
+  const rec = document.createElement('pre')
+  rec.id = 'queue-review-received'
+  rec.innerText = received
+
+  main.appendChild(truth)
+  main.appendChild(rawTruth)
+  main.appendChild(rec)
+  reviewCard.appendChild(main)
+
+  // Build stats
+  const reviewStats = document.createElement('div')
+  reviewStats.id = 'queue-review-stats'
+  reviewStats.className = 'scores'
+  const cardOldScore = 100 * stats[0]
+  const overallScore = 100 * stats[stats.length - 1]
+
+  const oldScoreEl = document.createElement('div')
+  oldScoreEl.id = 'queue-review-old-score'
+  oldScoreEl.className = 'score'
+  oldScoreEl.innerText = cardOldScore === 0 ? '0' : cardOldScore.toPrecision(3)
+
+  const overallScoreEl = document.createElement('div')
+  overallScoreEl.id = 'queue-review-overall-score'
+  overallScoreEl.className = 'score'
+  overallScoreEl.innerText = overallScore === 0 ? '0' : overallScore.toPrecision(3)
+
+  reviewStats.appendChild(oldScoreEl)
+  reviewStats.appendChild(overallScoreEl)
+  reviewCard.appendChild(reviewStats)
+
+  return reviewCard
+}
+
+const toQueueReview = (card: any, config: any) => {
+  const definitionEl = (document.getElementById('queue-definition') as HTMLInputElement)
+  const propsList = (document.getElementById('queue-props-list') as HTMLDivElement)
+
+  let correct = true
+  const recGrammar: any = {}
+
+  const matches = (expected: string, received: string) =>
+    (expected.toLowerCase().trim() === received.toLowerCase().trim())
+
+  let definitionReceived = definitionEl.value
+  if (card.grammar?.properties !== undefined) {
+    const props = card.grammar.properties
+
+    // Compile received grammatical properties
+    const grammarInputs: Record<string, string> = {}
+    for (const prop of propsList.children) {
+      if ('value' in prop) {
+        const value = prop.value as string
+        const tokenized = value.split(' ')
+        if (tokenized.length < 2) continue
+        const name = tokenized[0]
+        const definition = tokenized.slice(1).join(' ')
+        grammarInputs[name] = definition
+      }
+    }
+
+    // Check for required grammatical properties
+    for (const name in props) {
+      const prop: any = props[name]
+      if (prop === undefined) continue
+
+      let propConfig: any
+      for (const defProp of config) {
+        if (name === defProp.name) {
+          propConfig = defProp
+          break
+        }
+      }
+
+      if (propConfig === undefined) continue
+
+      const type: string = propConfig.type
+      const test: boolean = propConfig.test
+      const method: string = propConfig.method
+      if (
+        !test || method === 'separately'
+        || (type === 'boolean' && prop !== true)
+        || prop === ''
+        || (prop.length !== undefined && prop.length === 0)
+      ) continue
+
+      switch (method) {
+        case 'prefix': {
+          /* cases: string, number */
+          let separator = propConfig.separator
+          if (separator === undefined) separator = ' '
+          const splitDef = definitionReceived.split(separator)
+          if (splitDef.length < 2) {
+            correct = false
+            recGrammar[name] = false
+            break
+          }
+
+          definitionReceived = splitDef.slice(1).join(separator)
+          const prefix = splitDef[0]
+
+          if (!matches(prop.toString(), prefix)) correct = false
+          recGrammar[name] = matches(prop.toString(), prefix)
+          break
+        }
+        case 'suffix': {
+          /* cases: string, number */
+          let separator = propConfig.separator
+          if (separator === undefined) separator = ' '
+          const splitDef = definitionReceived.split(separator)
+          if (splitDef.length < 2) {
+            correct = false
+            recGrammar[name] = false
+            break
+          }
+
+          definitionReceived = splitDef.slice(0, -1).join(separator)
+          const suffix = splitDef[splitDef.length - 1]
+
+          if (!matches(prop.toString(), suffix)) correct = false
+          recGrammar[name] = matches(prop.toString(), suffix)
+          break
+        }
+        case 'inline': {
+          /* cases: string, number, boolean, multiple choice */
+          const answer = grammarInputs[name]
+          if (answer === undefined) {
+            correct = false
+            recGrammar[name] = false
+            break
+          }
+          switch (type) {
+            case 'string': {
+              if (!matches(prop, answer)) correct = false
+              recGrammar[name] = matches(prop, answer)
+              break
+            }
+            case 'number': {
+              if (!matches(prop.toString(), answer)) correct = false
+              recGrammar[name] = matches(prop.toString(), answer)
+              break
+            }
+            case 'boolean': {
+              /* should already be handled by checking that answer exists */
+              recGrammar[name] = true
+              break
+            }
+            case 'Choice': {
+              const multiple = propConfig.multiple
+              if (multiple !== true) {
+                if (!matches(prop, answer)) correct = false
+                recGrammar[name] = matches(prop, answer)
+                break
+              } else {
+                const propFmt = prop.join(' ')
+                if (!matches(propFmt, answer)) correct = false
+                recGrammar[name] = matches(propFmt, answer)
+                break
+              }
+            }
+          }
+          break
+        }
+      }
+    }
+  }
+
+  const definition = card.definition
+  let definitionStr: string
+  if (typeof definition === 'string') definitionStr = definition
+  else if (typeof definition === 'number') definitionStr = definition.toString()
+  else if (Array.isArray(definition)) definitionStr = definition.join(' ')
+  else definitionStr = JSON.stringify(definition)
+  if (!matches(definitionStr, definitionReceived)) correct = false
+  const received = {
+    definition: matches(definitionStr, definitionReceived),
+    grammar: recGrammar
+  }
+
+  startReview(card, received, correct).catch(e => { console.error(e) })
+}
+
+const makeQueueRibbon = (card: any, config: any) => {
   const ribbon = document.createElement('div')
   ribbon.id = 'queue-ribbon'
   ribbon.className = 'row'
@@ -114,7 +330,30 @@ const makeQueueRibbon = (config: any) => {
 
   // Add event listeners
   closeBtn.addEventListener('click', e => { openVFS() })
-  nextBtn.addEventListener('click', e => { /* TODO: queue review transition (use config) */ })
+  nextBtn.addEventListener('click', e => { toQueueReview(card, config) })
+
+  ribbon.appendChild(closeBtn)
+  ribbon.appendChild(nextBtn)
+  return ribbon
+}
+
+const makeQueueRevRibbon = () => {
+  const ribbon = document.createElement('div')
+  ribbon.id = 'queue-ribbon'
+  ribbon.className = 'row'
+
+  const closeBtn = document.createElement('button')
+  closeBtn.id = 'editor-close'
+  closeBtn.innerText = 'Close'
+
+  const nextBtn = document.createElement('button')
+  nextBtn.id = 'editor-submit'
+  nextBtn.className = 'submit'
+  nextBtn.innerText = 'Next'
+
+  // Add event listeners
+  closeBtn.addEventListener('click', e => { openVFS() })
+  nextBtn.addEventListener('click', e => { restartQueue() })
 
   ribbon.appendChild(closeBtn)
   ribbon.appendChild(nextBtn)
@@ -140,10 +379,12 @@ const includesProperties = (card: any, config: any) => {
       }
     }
 
+    if (propConfig === undefined) continue
+
     const type: string = propConfig.type
     const test: boolean = propConfig.test
     const method: string = propConfig.method
-    if (test && method !== 'separately') {
+    if (test && method === 'inline') {
       if (type !== 'boolean') reqMet = true
       else if (prop !== false) reqMet = true
     }
@@ -207,37 +448,32 @@ const buildQueueCard = (card: any, config: any) => {
     content!.appendChild(grammarProps)
     prefillHints(card, config)
   }
-  // TODO: prefill hints
-  // TODO: refresh content display func between card/review transition
 
   // Append navigation ribbon
-  const ribbon = makeQueueRibbon(config)
+  const ribbon = makeQueueRibbon(card, config)
   content!.appendChild(ribbon)
 }
 
-const buildQueueReview = (correct: boolean, card: any, received: string, stats: number[]) => {
-  // // Build content for document editor
-  // let content = document.getElementById('content')
-  // if (content === null) {
-  //   makeEditorContent()
-  //   content = document.getElementById('content')
-  // }
+const buildQueueReview = (correct: boolean, card: string, received: string, stats: number[]) => {
+  // Build content for review
+  let content = document.getElementById('content')
+  if (content === null) {
+    makeEditorContent()
+    content = document.getElementById('content')
+  }
 
-  // // Append navigation ribbon
-  // const ribbon = makeRibbon()
-  // content!.appendChild(ribbon)
+  // Progress bar
+  const progressBar = document.createElement('div')
+  progressBar.id = 'progress-bar'
+  content!.appendChild(progressBar)
 
-  // // Make popups
-  // const popup = newCard(grammar)
-  // content!.appendChild(popup)
+  // Make review card
+  const revCard = newReviewCard(correct, card, received, stats)
+  content!.appendChild(revCard)
 
-  // // Read cards
-  // const cardDisplay = document.createElement('div')
-  // cardDisplay.id = 'card-display'
-  // content!.appendChild(cardDisplay)
-  // readCards(doc)
-  //   .then(cards => { putCards(cards) })
-  //   .catch(e => { console.error(e) })
+  // Append navigation ribbon
+  const ribbon = makeQueueRevRibbon()
+  content!.appendChild(ribbon)
 }
 
 window.exports = {
