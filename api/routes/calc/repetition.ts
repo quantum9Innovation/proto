@@ -26,11 +26,12 @@ const processResponses = (history: History) => {
   if (n === 0) return { t: 0, n, deltaT: [] }
 
   const now = new Date()
-  const t = now.getTime() - responses[n - 1][0]
+  const DAY = 1000 * 60 * 60 * 24
+  const t = (now.getTime() - responses[n - 1][0]) / DAY
 
   const deltaT: number[] = []
   for (let i = 1; i < n; i++) {
-    deltaT.push(responses[i][0] - responses[i - 1][0])
+    deltaT.push((responses[i][0] - responses[i - 1][0]) / DAY)
   }
 
   return { t, n, deltaT }
@@ -72,7 +73,8 @@ const score = (history: History) => {
   // Calculate score
   const mu = k / (1 - sigma) // retention rate multiplier
   const C = mu - Math.log(x1) // constant of integration
-  history.score = mu / (Math.log(t) + C)
+  const score = mu / (Math.log(t + x1) + C)
+  history.score = score
 }
 
 // Exports
