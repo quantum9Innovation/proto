@@ -1,4 +1,9 @@
 {
+  /*
+    This compiles the frontend as well so that it can be linted with ESLint.
+    However, the frontend is compiled again to a separate directory with different specifications.
+    See: frontend/src/tsconfig.json
+  */
   "compilerOptions": {
     "target": "es6",
     "module": "CommonJS",
