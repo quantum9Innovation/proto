@@ -11,7 +11,7 @@
     "debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "retest": "scripts/build.sh; jest --runInBand --coverage"
   },
-  "main": "compiled/run.js",
+  "private": true,
   "repository": "https://github.com/quantum9Innovation/proto.git",
   "author": "q9i <46249765+quantum9Innovation@users.noreply.github.com>",
   "license": "GPL-3.0-or-later",
