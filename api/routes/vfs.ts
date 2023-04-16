@@ -12,6 +12,21 @@ import * as express from 'express'
 // Create router
 const vfs = express.Router()
 
+// Prevent directory traversal attacks
+const checkPrefix = (prefix: string, candidate: string) => {
+  /* See: https://security.stackexchange.com/a/123723 */
+  // .resolve() removes trailing slashes
+  const absPrefix = path.resolve(prefix) + path.sep
+  const absCandidate = path.resolve(candidate) + path.sep
+  return absCandidate.substring(0, absPrefix.length) === absPrefix
+}
+const safeSuffix = (unsafeSuffix: string, basePath: string) => {
+  /* See: https://security.stackexchange.com/a/123723 */
+  const safeSuffix = path.normalize(unsafeSuffix).replace(/^(\.\.(\/|\\|$))+/, '')
+  const safeJoin = path.join(basePath, safeSuffix)
+  return safeJoin
+}
+
 // Define GET methods
 // Show top-level outline
 vfs.get('/', (_, res) => {
@@ -30,7 +45,9 @@ vfs.get('/', (_, res) => {
 // Browse path or get resource
 vfs.get('/serve', (req, res) => {
   const uri = req.query.path as string
-  const pathname = path.join(root, uri)
+  const pathname = safeSuffix(uri, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, pathname)) return res.status(404).send('Resource not found.')
 
   // Check resource
   if (!fs.existsSync(pathname)) return res.status(404).send('Resource not found.')
@@ -59,7 +76,9 @@ vfs.get('/serve', (req, res) => {
 // Create folder
 vfs.post('/folder', (req, res) => {
   const loc: string = req.body.loc
-  const name = path.join(root, loc)
+  const name = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, name)) return res.status(404).send('Location not found.')
 
   // Check if modifying protected trash directory
   if (loc.includes('purged')) return res.status(403).send('Modifying trash directory disallowed.')
@@ -77,7 +96,12 @@ vfs.post('/folder', (req, res) => {
 vfs.post('/document', (req, res) => {
   const document: Document = req.body
   let { loc, name, content } = document
-  loc = path.join(root, loc)
+  loc = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, loc)) return res.status(404).send('Location not found.')
+  name = safeSuffix(name, loc)
+  /* istanbul ignore if */
+  if (!checkPrefix(loc, name)) return res.status(404).send('Location not found.')
 
   // Check if modifying protected trash directory
   if (loc.includes('purged')) return res.status(403).send('Modifying trash directory disallowed.')
@@ -89,7 +113,7 @@ vfs.post('/document', (req, res) => {
   }
 
   // Write to file
-  fs.writeFileSync(path.join(loc, name) + '.json', JSON.stringify(content))
+  fs.writeFileSync(name + '.json', JSON.stringify(content))
 
   res.json({
     message: 'Document uploaded successfully.'
@@ -100,7 +124,11 @@ vfs.post('/document', (req, res) => {
 // Delete resource
 vfs.delete('/resource', (req, res) => {
   const loc = req.query.loc as string
-  const name = path.join(root, loc)
+  const name = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, name)) {
+    return res.status(200).send('Location does not exist; no deletion performed.')
+  }
 
   // Check if trash directory exists
   const TRASH = path.join(root, 'purged')
@@ -120,7 +148,9 @@ vfs.delete('/resource', (req, res) => {
   }
 
   // Generate new path, including folders in filename
-  const trashPath = path.join(TRASH, loc.split(path.sep).join('-'))
+  const trashPath = safeSuffix(loc.split(path.sep).join('-'), TRASH)
+  /* istanbul ignore if */
+  if (!checkPrefix(TRASH, trashPath)) return res.status(404).send('Deletion failed.')
   // Check if target path already exists
   if (fs.existsSync(trashPath)) fs.rmSync(trashPath, { recursive: true })
   // Move directory to target path

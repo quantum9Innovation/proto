@@ -14,11 +14,31 @@ import * as express from 'express'
 // Create router
 const card = express.Router()
 
+// Prevent directory traversal attacks
+const checkPrefix = (prefix: string, candidate: string) => {
+  /* See: https://security.stackexchange.com/a/123723 */
+  // .resolve() removes trailing slashes
+  const absPrefix = path.resolve(prefix) + path.sep
+  const absCandidate = path.resolve(candidate) + path.sep
+  return absCandidate.substring(0, absPrefix.length) === absPrefix
+}
+const safeSuffix = (unsafeSuffix: string, basePath: string) => {
+  /* See: https://security.stackexchange.com/a/123723 */
+  const safeSuffix = path.normalize(unsafeSuffix).replace(/^(\.\.(\/|\\|$))+/, '')
+  const safeJoin = path.join(basePath, safeSuffix)
+  return safeJoin
+}
+
 // Define config methods
 // Retrieve language config
 card.get('/', (req, res) => {
   const language = req.query.lang as string
-  const config = path.join(root, language, 'grammar.json')
+  const pathname = safeSuffix(language, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, pathname)) {
+    return res.status(404).send('Requested language config does not exist.')
+  }
+  const config = path.join(pathname, 'grammar.json')
   if (!fs.existsSync(config)) {
     return res.status(404).send('Requested language config does not exist.')
   }
@@ -31,7 +51,11 @@ card.get('/', (req, res) => {
 card.post('/', (req, res) => {
   const reqConfig: LangConfig = req.body
   const { lang, config } = reqConfig
-  const langDir = path.join(root, lang)
+  const langDir = safeSuffix(lang, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, langDir)) {
+    return res.status(404).send('Requested language config cannot be created.')
+  }
 
   // Check for language directory
   if (!fs.existsSync(langDir)) fs.mkdirSync(langDir)
@@ -73,7 +97,11 @@ card.get('/fetch', (req, res) => {
     index = parseInt(id[1])
   }
 
-  const name = path.join(root, uri)
+  const name = safeSuffix(uri, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, name)) {
+    return res.status(404).send('Resource not found.')
+  }
 
   // Check resource
   /* istanbul ignore next */
@@ -95,7 +123,12 @@ card.post('/add', (req, res) => {
   const reqAdd: NewCard = req.body
   let { loc, lang, card, index } = reqAdd
   const relPath = loc
-  loc = path.join(root, loc)
+  loc = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, loc)) return res.status(404).send('Location does not exist.')
+  const langDir = safeSuffix(lang, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, langDir)) return res.status(404).send('Language could not be located.')
 
   // Check if modifying protected trash directory
   /* istanbul ignore next */
@@ -118,7 +151,7 @@ card.post('/add', (req, res) => {
 
   // Check card grammatical properties
   const grammar: GrammarProp[] = JSON.parse(
-    fs.readFileSync(path.join(root, lang, 'grammar.json'), 'utf8')
+    fs.readFileSync(path.join(langDir, 'grammar.json'), 'utf8')
   ).config
   if (card.grammar?.properties !== undefined) {
     for (const [prop, value] of Object.entries(card.grammar.properties)) {
@@ -152,7 +185,11 @@ card.post('/add', (req, res) => {
 // Delete a card from an existing document
 card.delete('/remove', (req, res) => {
   const loc = req.query.loc as string
-  const name = path.join(root, loc)
+  const name = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, name)) {
+    return res.status(404).send('Location does not exist; card not found.')
+  }
   let index = parseInt(req.query.index as string)
 
   // Check if location exists
@@ -186,8 +223,13 @@ card.delete('/remove', (req, res) => {
 // Get all items for testing in directory and rank by history criteria
 card.get('/list', (req, res) => {
   const loc = req.query.path as string
-  const pathname = path.join(root, loc)
+  const pathname = safeSuffix(loc, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, pathname)) return res.status(404).send('Resource not found.')
   const lang = req.query.lang as string
+  const langDir = safeSuffix(lang, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, langDir)) return res.status(404).send('Language could not be located.')
 
   const cards: Card[] = []
   const tests: Card[] = []
@@ -228,7 +270,7 @@ card.get('/list', (req, res) => {
 
   // Check card grammatical properties
   const grammar: GrammarProp[] = JSON.parse(
-    fs.readFileSync(path.join(root, lang, 'grammar.json'), 'utf8')
+    fs.readFileSync(path.join(langDir, 'grammar.json'), 'utf8')
   ).config
   const testedProps: string[] = []
 
@@ -330,7 +372,11 @@ card.post('/history', (req, res) => {
   const id = rawID.split(':')
   const uri = id[0]
   const index = parseInt(id[1])
-  const name = path.join(root, uri)
+  const name = safeSuffix(uri, root)
+  /* istanbul ignore if */
+  if (!checkPrefix(root, name)) {
+    return res.status(404).send('Resource not found.')
+  }
 
   // Identify ID object type
   let type = 'base'
