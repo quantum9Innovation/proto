@@ -95,6 +95,7 @@ const mkdir = async (dir: string) => {
     alert('This is a reserved name')
     return
   }
+  /* eslint-disable-next-line @typescript-eslint/restrict-plus-operands */
   const loc = pwd + dirname
   const res = await fetch('/api/vfs/folder', {
     method: 'POST',
