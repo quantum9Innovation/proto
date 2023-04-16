@@ -35,7 +35,6 @@ jobs:
         node-version: 19
     - name: Install dependencies
       run: |
-        yarn set version berry
         yarn cache clean
         export YARN_ENABLE_IMMUTABLE_INSTALLS=false
         yarn install

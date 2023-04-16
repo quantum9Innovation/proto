@@ -29,7 +29,6 @@ jobs:
     - name: Install dependencies
       run: |
         cd ./api
-        yarn set version berry
         yarn cache clean
         export YARN_ENABLE_IMMUTABLE_INSTALLS=false
         yarn install
