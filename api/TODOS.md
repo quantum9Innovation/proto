@@ -10,6 +10,8 @@
 
 ## Backend
 
+- [ ] Automatically clear history for cards when a certain criteria is met
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
+- [ ] Test against directory traversal attacks
 - [ ] Expand test coverage to error cases
