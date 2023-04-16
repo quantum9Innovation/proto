@@ -9,7 +9,8 @@
     "test": "jest --runInBand --coverage",
     "lint": "scripts/qa.sh",
     "debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "retest": "scripts/build.sh; jest --runInBand --coverage"
+    "retest": "scripts/build.sh; jest --runInBand --coverage",
+    "dist": "scripts/dist.sh"
   },
   "private": true,
   "repository": "https://github.com/quantum9Innovation/proto.git",
@@ -28,6 +29,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
+    "@vercel/ncc": "^0.36.1",
     "eslint": "^8.37.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.27.5",
