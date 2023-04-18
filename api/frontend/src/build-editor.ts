@@ -2,8 +2,10 @@ const deconstructEditor = () => {
   // Teardown editor layout
   const title = document.getElementById('title')
   const content = document.getElementById('content')
+  const score = document.getElementById('editor-score')
   if (title !== null) title.remove()
   if (content !== null) content.remove()
+  if (score !== null) score.remove()
 }
 
 const setEditorTitle = (title: string) => {
@@ -619,6 +621,14 @@ const buildEditor = (doc: string, grammar: any) => {
   readCards(doc)
     .then(cards => { putCards(cards) })
     .catch(e => { console.error(e) })
+
+  // Show score
+  getScore(true).then(score => {
+    if (score === undefined) return
+    const scoreEl = makeScore(score)
+    scoreEl.id = 'editor-score'
+    document.body.appendChild(scoreEl)
+  }).catch(e => { console.error(e) })
 }
 
 const showCards = (doc: string) => {

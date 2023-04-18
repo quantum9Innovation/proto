@@ -2,8 +2,10 @@ const deconstructVFS = () => {
   // Teardown VFS layout
   const title = document.getElementById('title')
   const content = document.getElementById('content')
+  const score = document.getElementById('vfs-score')
   if (title !== null) title.remove()
   if (content !== null) content.remove()
+  if (score !== null) score.remove()
 }
 
 const setVFSTitle = (title: string) => {
@@ -226,6 +228,14 @@ const buildFiles = (dir: string) => {
     if (dir !== '/') dirs.splice(0, 0, '..')
     putFiles(dirs, docs)
   }).catch(e => { console.error(e) })
+
+  // Show score
+  getScore(false).then(score => {
+    if (score === undefined) return
+    const scoreEl = makeScore(score)
+    scoreEl.id = 'vfs-score'
+    document.body.appendChild(scoreEl)
+  }).catch(e => { console.error(e) })
 }
 
 const showDir = (dir: string) => {
@@ -237,6 +247,16 @@ const showDir = (dir: string) => {
     const docs: string[] = items.documents
     if (dir !== '/') dirs.splice(0, 0, '..')
     putFiles(dirs, docs)
+  }).catch(e => { console.error(e) })
+
+  // Show score
+  getScore(false).then(score => {
+    let scoreEl = document.getElementById('vfs-score')
+    if (scoreEl !== null) scoreEl.remove()
+    if (score === undefined) return
+    scoreEl = makeScore(score)
+    scoreEl.id = 'vfs-score'
+    document.body.appendChild(scoreEl)
   }).catch(e => { console.error(e) })
 }
 

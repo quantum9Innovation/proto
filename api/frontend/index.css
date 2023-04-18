@@ -63,6 +63,14 @@
   border-radius: var(--border-large);
 }
 
+#vfs-score,
+#editor-score {
+  position: absolute;
+  display: block;
+  bottom: var(--margin-large);
+  right: var(--margin-large);
+}
+
 #queue-review-old-score {
   margin-left: calc(100% - 150px - 50px);
 }

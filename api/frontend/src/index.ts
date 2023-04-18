@@ -61,10 +61,6 @@ const queue = (config: any) => {
   configCache = config
 }
 
-// Startup routine
-register().catch(e => { console.error(e) })
-vfs()
-
 // Helper funcs
 const traverse = (dir: string) => {
   const paths = dir.split('/')
@@ -319,6 +315,41 @@ const makeScore = (score: number) => {
   return scoreEl
 }
 
+const getScore = async (doc: boolean) => {
+  if (resolveLang() === 'UNKNOWN') return
+
+  const res = await fetch(
+    '/api/card/list?'
+    + new URLSearchParams({
+      path: doc ? editing : pwd,
+      lang: resolveLang()
+    }).toString()
+  )
+
+  // Error handling
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+
+  // Read cards
+  cards = await res.json()
+  if (cards.length === 0) return 1
+  else {
+    let score = 0
+    let total = 0
+    for (const card of cards) {
+      if (card.history?.score !== undefined) {
+        const cardScore: number = card.history.score
+        score += cardScore
+        total++
+      }
+    }
+    return total === 0 ? 1 : score / total
+  }
+}
+
 const openVFS = () => { vfs() }
 const openEditor = (doc: string) => {
   editing = pwd + doc
@@ -361,7 +392,10 @@ window.exports = {
   startReview,
   restartQueue,
   makeScore,
+  getScore,
   openVFS,
   openEditor,
-  openQueue
+  openQueue,
+  register,
+  vfs
 }
