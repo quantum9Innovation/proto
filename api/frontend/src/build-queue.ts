@@ -149,15 +149,10 @@ const newReviewCard = (correct: boolean, card: any, received: string, stats: num
   const cardOldScore = 100 * stats[0]
   const overallScore = 100 * stats[stats.length - 1]
 
-  const oldScoreEl = document.createElement('div')
+  const oldScoreEl = makeScore(cardOldScore)
   oldScoreEl.id = 'queue-review-old-score'
-  oldScoreEl.className = 'score'
-  oldScoreEl.innerText = cardOldScore === 0 ? '0' : cardOldScore.toPrecision(3)
-
-  const overallScoreEl = document.createElement('div')
+  const overallScoreEl = makeScore(overallScore)
   overallScoreEl.id = 'queue-review-overall-score'
-  overallScoreEl.className = 'score'
-  overallScoreEl.innerText = overallScore === 0 ? '0' : overallScore.toPrecision(3)
 
   reviewStats.appendChild(oldScoreEl)
   reviewStats.appendChild(overallScoreEl)

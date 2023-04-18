@@ -292,6 +292,33 @@ const restartQueue = () => {
   updateProgressBar(progress)
 }
 
+const makeScore = (score: number) => {
+  // Create score element
+  const scoreEl = document.createElement('div')
+  scoreEl.className = 'score'
+  scoreEl.innerText = score === 0 ? '0' : score.toPrecision(3)
+
+  // Colors
+  const ZERO = [156, 47, 47]
+  const MIDPOINT = [198, 168, 9]
+  const ONE = [8, 154, 6]
+  const OPACITY = 0.5
+  const blend = (c1: number[], c2: number[], p: number) => [
+    c1[0] * (1 - p) + c2[0] * p,
+    c1[1] * (1 - p) + c2[1] * p,
+    c1[2] * (1 - p) + c2[2] * p
+  ]
+  if (score < 0.5) {
+    const bg = blend(ZERO, MIDPOINT, score / 0.5)
+    scoreEl.style.backgroundColor = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${OPACITY})`
+  } else {
+    const bg = blend(MIDPOINT, ONE, (score - 0.5) / 0.5)
+    scoreEl.style.backgroundColor = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${OPACITY})`
+  }
+
+  return scoreEl
+}
+
 const openVFS = () => { vfs() }
 const openEditor = (doc: string) => {
   editing = pwd + doc
@@ -333,6 +360,7 @@ window.exports = {
   deleteCard,
   startReview,
   restartQueue,
+  makeScore,
   openVFS,
   openEditor,
   openQueue

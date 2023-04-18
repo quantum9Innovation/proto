@@ -5,7 +5,7 @@
 **Planned for first alpha**
 
 - [ ] Show overall card score on VFS and document screens
-- [ ] Color score boxes according to score
+- [x] Color score boxes according to score
 - [ ] Add config option for daily card limit
 
 ---
