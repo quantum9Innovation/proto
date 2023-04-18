@@ -32,8 +32,8 @@ jobs:
         node-version: 19
     - name: Install dependencies
       run: |
-        yarn install
+        npm install
     - name: Run tests
       run: |
-        yarn retest
+        npm retest
         

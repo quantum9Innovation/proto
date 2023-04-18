@@ -30,7 +30,7 @@ jobs:
         node-version: 19
     - name: Install dependencies
       run: |
-        yarn install
+        npm install
     - name: Configure Git
       run: |
         cd ..
@@ -40,7 +40,7 @@ jobs:
     - name: Run QA checks
       continue-on-error: true
       run: |
-        yarn lint
+        npm lint
     - name: Commit changes
       continue-on-error: true
       run: |
@@ -53,5 +53,5 @@ jobs:
         git push
     - name: Rerun QA checks
       run: |
-        yarn lint
-        yarn npm audit
+        npm lint
+        npm audit
