@@ -7,6 +7,7 @@ on:
       - 'api/config.json'
       - 'api/tsconfig.json'
       - 'api/package.json'
+      - '.github/workflows/**.yml'
   pull_request:
   workflow_dispatch:
   
