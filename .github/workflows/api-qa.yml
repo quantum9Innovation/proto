@@ -32,9 +32,8 @@ jobs:
       with:
         node-version: 19
     - name: Install dependencies
-      uses: Borales/actions-yarn@v4.2.0
-      with:
-        cmd: install
+      run: |
+        yarn install
     - name: Configure Git
       run: |
         cd ..
@@ -43,9 +42,8 @@ jobs:
         git pull
     - name: Run QA checks
       continue-on-error: true
-      uses: Borales/actions-yarn@v4.2.0
-      with:
-        cmd: lint
+      run: |
+        yarn lint
     - name: Commit changes
       continue-on-error: true
       run: |
@@ -57,6 +55,6 @@ jobs:
         git commit -m "[auto]: Fix code style"
         git push
     - name: Rerun QA checks
-      uses: Borales/actions-yarn@v4.2.0
-      with:
-        cmd: lint
+      run: |
+        yarn lint
+        yarn npm audit
