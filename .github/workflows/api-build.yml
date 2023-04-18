@@ -2,16 +2,12 @@ name: Test API
 
 on:
   push:
-    branches:
-      - main
     paths:
       - 'api/**.ts'
       - 'api/config.json'
       - 'api/tsconfig.json'
       - 'api/package.json'
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
   
 

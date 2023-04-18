@@ -2,14 +2,10 @@ name: API Code QA
 
 on:
   push:
-    branches:
-      - main
     paths:
       - 'api/**.ts'
       - 'api/package.json'
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
   
 
