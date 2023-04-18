@@ -35,5 +35,5 @@ jobs:
         npm install
     - name: Run tests
       run: |
-        npm retest
+        npm run retest
         

@@ -40,7 +40,7 @@ jobs:
     - name: Run QA checks
       continue-on-error: true
       run: |
-        npm lint
+        npm run lint
     - name: Commit changes
       continue-on-error: true
       run: |
@@ -53,5 +53,5 @@ jobs:
         git push
     - name: Rerun QA checks
       run: |
-        npm lint
+        npm run lint
         npm audit
