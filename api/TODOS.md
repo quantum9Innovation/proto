@@ -2,6 +2,14 @@
 
 ## Frontend
 
+**Planned for first alpha**
+
+- [ ] Show overall card score on VFS and document screens
+- [ ] Color score boxes according to score
+- [ ] Add config option for daily card limit
+
+---
+
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
 - [ ] Do not check order for multiple choice cards
