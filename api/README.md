@@ -5,6 +5,45 @@
 This is the backend code for the Proto Language Server API Protocol.
 This *must* be run as a separate process and available for devices to connect to for the app to work.
 
+## Installation
+
+Please note that Proto is currently in the **private alpha** stage of development and released code may be unstable and not work as expected.
+If you encounter any issues or need help, please either [open an issue](https://github.com/quantum9Innovation/proto/issues/new) or contact a project maintainer.
+
+If you have already cloned the repository, you can run `yarn dist` to generate all the required files in the `dist` directory.
+Instructions for a production deployment in another location should be printed to the terminal.
+
+Run the following commands to update your local Proto version:
+
+```sh
+git pull
+yarn install
+yarn dist
+```
+
+**Important:**
+Do not use the Proto repository as a production environment.
+Stored files will be overwritten when you run `yarn test` or similar commands.
+Always extract production releases to a separate location used exclusively for its intended purpose (i.e. not development).
+
+**Warning:**
+Always extract any distribution tarballs inside a subdirectory as the bootstrapper might spawn files in the parent directory.
+Do not modify or otherwise tamper with generated files that are not intended for user configuration.
+
+If you do not have the repository cloned and do not want to clone it, you can install a tarball from the latest release.
+Follow the below steps regarding setup:
+
+> To run in production, move the tarball to the desired location.
+> Then, run the bootstrapper from within the extracted location:  
+> `$ ./bootstrap.sh`
+>
+> Make any necessary changes to config.json and then run:  
+> `$ ./start.sh`
+
+*These are the same steps that will be printed to the terminal when you run `yarn dist`.*
+
+:warning: **Make sure to backup your card storage directory often!**
+
 ---
 
 ## Configuration
