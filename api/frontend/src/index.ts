@@ -6,6 +6,7 @@ let cards: any[] = []
 let noCorrect = 0
 let progress: number = 0
 let configCache: any
+let limit: number
 
 // Scene managers
 const register = async () => {
@@ -220,6 +221,18 @@ const getGrammar = async () => {
   return grammar
 }
 
+const getLimit = async () => {
+  // Fetch queue limit
+  const res = await fetch('/api/card/limit')
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+  const data = await res.json()
+  limit = data.limit
+}
+
 const startReview = async (card: any, rec: any, correct: boolean) => {
   // Start queue review
 
@@ -253,7 +266,9 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
     noCorrect++
   } else {
     const forReview = cards.splice(0, 1)[0]
-    cards.push(forReview)
+    if (limit - noCorrect - 1 > cards.length) cards.push(forReview)
+    else if (limit - noCorrect - 1 < 0) cards.splice(0, 0, forReview)
+    else cards.splice(limit - noCorrect - 1, 0, forReview)
   }
   rec = JSON.stringify(rec)
 
@@ -273,8 +288,8 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
   // Switch to review
   refreshQueue()
   buildQueueReview(correct, card, rec, stats)
-  progress = noCorrect / (cards.length + noCorrect)
-  updateProgressBar(progress)
+  progress = noCorrect / limit
+  updateProgressBar(Math.min(progress, 1))
 }
 
 const restartQueue = () => {
@@ -285,7 +300,7 @@ const restartQueue = () => {
   }
   refreshQueue()
   buildQueueCard(cards[0], configCache)
-  updateProgressBar(progress)
+  updateProgressBar(Math.min(progress, 1))
 }
 
 const makeScore = (score: number) => {
@@ -366,6 +381,7 @@ const openQueue = async (doc: boolean) => {
     }).toString()
   )
   const config = await getGrammar()
+  await getLimit()
 
   // Error handling
   if (res.status !== 200) {

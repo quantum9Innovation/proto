@@ -38,6 +38,9 @@ let port = CONFIG.port
 if (host == null) host = 'localhost'
 /* istanbul ignore next */
 if (port == null) port = 3000
+if (CONFIG.settings !== undefined) {
+  if (CONFIG.settings.limit !== undefined) app.set('limit', CONFIG.settings.limit)
+}
 
 // Define routes
 const routes: Record<string, Router> = {

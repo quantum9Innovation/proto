@@ -222,6 +222,11 @@ describe('Advanced card methods', () => {
         lang: 'lang-eng'
       }
     }))
+
+    test('limit', endpoint(app, '/card/limit', (res: JSONRes) => {
+      const limit = JSON.parse(res.text).limit
+      expect(['number', 'undefined']).toContain(typeof limit)
+    }))
   })
 
   // Upload new histories

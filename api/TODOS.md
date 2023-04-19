@@ -6,7 +6,7 @@
 
 - [x] Show overall card score on VFS and document screens
 - [x] Color score boxes according to score
-- [ ] Add config option for daily card limit
+- [x] Add config option for daily card limit
 
 ---
 

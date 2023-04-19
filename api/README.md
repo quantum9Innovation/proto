@@ -21,6 +21,11 @@ The `host` and `port` parameters will control where the API listens for requests
 The `root` parameter contains the storage directory for all API artifacts.
 This *should not* be changed during development so that all artifacts are stored in the repository directory at build time (these are automatically ignored by Git).
 
+### Other Settings
+
+Specify other settings in the `settings` object, which can currently contain the `limit: number` property, which determines the number of cards to study in each queue.
+This will affect when incorrect answers are restudied and progress bar indicators.
+
 ## Testing
 
 Project builds are cached in a `compiled` folder, which contains the corresponding JS and JS source maps for all TS code.

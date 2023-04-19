@@ -5,7 +5,7 @@ import { type AddHistory, type LangConfig, type NewCard } from './req'
 import { type GrammarProp, type Card } from './elements'
 
 // Imports
-import { root } from '../index'
+import { app, root } from '../index'
 import { score } from './calc/repetition'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -363,6 +363,11 @@ card.get('/list', (req, res) => {
     return a.history.score - b.history.score
   })
   res.json(tests)
+})
+
+card.get('/limit', (req, res) => {
+  const limit = app.get('limit')
+  res.json({ limit })
 })
 
 // Append or update history to object given ID
