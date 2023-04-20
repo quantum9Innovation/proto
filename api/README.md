@@ -74,6 +74,7 @@ Additionally, to check for style and QA issues, there is a custom `eslint` templ
 - `yarn build`: Builds the project
 - `yarn test`: Tests code and reports coverage
 - `yarn lint`: Lints code and runs QA checks
+- `yarn dist`: Generate distribution release
 
 ## Debugging
 
