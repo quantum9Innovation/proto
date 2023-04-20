@@ -21,6 +21,7 @@ import { card, rescore } from './routes/card'
 
 // Get version info
 const CONFIG: Config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+const PROTO_VERSION: string = JSON.parse(fs.readFileSync('./package.json', 'utf8')).version
 const EXPRESS_VERSION: string = JSON.parse(
   fs.readFileSync('./package.json', 'utf8')
 )
@@ -63,7 +64,7 @@ else {
 }
 
 // Configure app
-const INFO = 'Local Proto server listening on port '
+const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
              + `<a href='http://${host}:${port}'>http://${host}:${port}</a>`
              + '<br>\n'
              + `Running Express ${EXPRESS_VERSION} `
