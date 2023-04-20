@@ -2,7 +2,7 @@
 
 ## Frontend
 
-**Planned for first alpha**
+**Completed** :white_check_mark: (v0.1.0)
 
 - [x] Show overall card score on VFS and document screens
 - [x] Color score boxes according to score
@@ -13,6 +13,7 @@
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
 - [ ] Do not check order for multiple choice cards
+- [ ] Support JSON with comments or other JSON extensions in config formats
 - [ ] Possible frontend testing
 - [ ] Transition to new frontend design (see [planned todos](../TODOS.md))
 
