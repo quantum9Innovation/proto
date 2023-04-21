@@ -10,9 +10,9 @@
 
 ---
 
+- [x] Add option not to select a choice
 - [ ] Add dedicated dark mode
 - [ ] Fix fetch errors on creating new/blank document
-- [ ] Add option not to select a choice
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
 - [ ] Do not check order for multiple choice cards

@@ -287,6 +287,11 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
           const input = document.createElement('select')
           input.id = `input-property-${i}-${j}`
           input.className = 'input-property-choice'
+          /* option to not select anything */
+          const optionEl = document.createElement('option')
+          optionEl.value = 'deselected'
+          optionEl.innerText = 'Not selected'
+          input.appendChild(optionEl)
           for (const option of property.choices.options) {
             const optionEl = document.createElement('option')
             optionEl.value = option
@@ -427,7 +432,11 @@ const getCardJSON = (grammar: any) => {
             const el: HTMLInputElement | null = (
               document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
             )
-            const valueStatus = !(el.value === undefined || el.value === '')
+            const valueStatus = !(
+              el.value === undefined
+              || el.value === ''
+              || el.value === 'deselected'
+            )
             if (el === null) continue
             if (!valueStatus) break
             value = el.value
