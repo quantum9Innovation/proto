@@ -19,7 +19,6 @@ echo 'Cleaned distributions'
 echo '====================='
 echo 'Generating tarball'
 cp package.json dist/package.json
-cp config.json dist/config.json
 touch dist/bootstrap.sh
 printf "#!bin/bash\n" >> dist/bootstrap.sh
 printf "cd ..\n" >> dist/bootstrap.sh
@@ -38,5 +37,5 @@ echo '> node dist/index.js'
 echo $'\nAlternatively, to run in production, move dist/dist.tar.gz to the desired location'
 echo 'Then, run the bootstrapper from within the extracted location: '
 echo '> ./bootstrap.sh'
-echo 'Make any necessary changes to config.json and then run:'
+echo 'Create and edit config.json and then run:'
 echo '> ./start.sh'

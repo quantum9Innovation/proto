@@ -37,7 +37,7 @@ Follow the below steps regarding setup:
 > Then, run the bootstrapper from within the extracted location:  
 > `$ ./bootstrap.sh`
 >
-> Make any necessary changes to config.json and then run:  
+> Create and edit config.json and then run:  
 > `$ ./start.sh`
 
 *These are the same steps that will be printed to the terminal when you run `yarn dist`.*
