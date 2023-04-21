@@ -19,6 +19,7 @@
 
 ## Backend
 
+- [ ] Only use correct responses for spaced repetition calculations (incorrect responses should receive an automatic zero score)
 - [ ] Automatically clear history for cards when a certain criteria is met
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
