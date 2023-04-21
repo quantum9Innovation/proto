@@ -11,6 +11,7 @@
 ---
 
 - [x] Add option not to select a choice
+- [ ] **Use consistent root directory for all VFS and card requests**
 - [ ] Add dedicated dark mode
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
