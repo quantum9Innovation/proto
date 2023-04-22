@@ -21,6 +21,7 @@
 - [ ] Format JSON outputs for easy editing access
 - [ ] Only use correct responses for spaced repetition calculations (incorrect responses should receive an automatic zero score)
 - [ ] Automatically clear history for cards when a certain criteria is met
+- [ ] CI/CD setup and pre-commit hooks
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
 - [ ] Expand test coverage to error cases
