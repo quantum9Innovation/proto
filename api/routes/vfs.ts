@@ -114,7 +114,7 @@ vfs.post('/document', (req, res) => {
   }
 
   // Write to file
-  fs.writeFileSync(name + '.json', JSON.stringify(content))
+  fs.writeFileSync(name + '.json', JSON.stringify(content, null, 2))
 
   res.json({
     message: 'Document uploaded successfully.'

@@ -50,7 +50,7 @@ init.post('/', (req, res) => {
   // Write to config
   fs.writeFileSync(
     path.join(root, 'config.json'),
-    JSON.stringify({ user, languages, config })
+    JSON.stringify({ user, languages, config }, null, 2)
   )
 
   res.json({
@@ -85,7 +85,7 @@ init.post('/session', (req, res) => {
   // Write to config
   fs.writeFileSync(
     path.join(root, 'session.json'),
-    JSON.stringify(data)
+    JSON.stringify(data, null, 2)
   )
 
   res.json({

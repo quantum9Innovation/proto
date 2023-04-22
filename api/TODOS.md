@@ -18,7 +18,7 @@
 
 ## Backend
 
-- [ ] Format JSON outputs for easy editing access
+- [x] Format JSON outputs for easy editing access
 - [ ] Only use correct responses for spaced repetition calculations (incorrect responses should receive an automatic zero score)
 - [ ] Automatically clear history for cards when a certain criteria is met
 - [ ] CI/CD setup and pre-commit hooks

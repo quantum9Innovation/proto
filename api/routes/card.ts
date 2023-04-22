@@ -75,7 +75,7 @@ card.post('/', (req, res) => {
   // Write to config
   fs.writeFileSync(
     path.join(langDir, 'grammar.json'),
-    JSON.stringify({ config })
+    JSON.stringify({ config }, null, 2)
   )
 
   res.json({
@@ -178,7 +178,7 @@ card.post('/add', (req, res) => {
   // Write to file
   card.id = relPath + ':' + index.toString()
   cards.splice(index, 0, card)
-  fs.writeFileSync(loc, JSON.stringify({ cards }))
+  fs.writeFileSync(loc, JSON.stringify({ cards }, null, 2))
 
   res.json({
     message: 'Card uploaded successfully.'
@@ -215,7 +215,7 @@ card.delete('/remove', (req, res) => {
 
   // Write to file
   cards.splice(index, 1)
-  fs.writeFileSync(name, JSON.stringify({ cards }))
+  fs.writeFileSync(name, JSON.stringify({ cards }, null, 2))
 
   res.json({
     message: 'Card moved to trash.'
@@ -449,7 +449,7 @@ card.post('/history', (req, res) => {
   }
 
   // Write new data
-  fs.writeFileSync(name, JSON.stringify({ cards: data }))
+  fs.writeFileSync(name, JSON.stringify({ cards: data }, null, 2))
   res.send({
     message: 'Successfully updated history.'
   })
