@@ -5,7 +5,7 @@
 - [x] Show context in parentheses
 - [x] Show part of speech to distinguish between similar terms
 - [x] Don't error for cards without grammatical properties
-- [ ] Use grammar card term instead of standard term
+- [x] Use grammar card term instead of standard term
 - [ ] Add dedicated dark mode
 - [ ] Fix score display in place (use sticky instead of absolute positioning)
 - [ ] Fix fetch errors on creating new/blank document

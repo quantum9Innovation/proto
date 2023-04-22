@@ -81,10 +81,14 @@ const newFlashcard = (card: any) => {
   const flashcard = document.createElement('div')
   flashcard.id = 'flashcard'
 
+  // Check for grammar card
+  let grammar = false
+  if (card.definition.term !== undefined) grammar = true
+
   // Extract necessary card data
-  const term: string = card.term
-  const pos: string = card.grammar?.pos
-  const context: string = card.grammar?.context
+  const term: string = grammar ? `${card.term as string} / ${card.definition.term as string}` : card.term
+  const pos: string = grammar ? undefined : card.grammar?.pos
+  const context: string = grammar ? undefined : card.grammar?.context
 
   // Build flashcard elements
   if (pos !== undefined) {
@@ -307,7 +311,7 @@ const toQueueReview = (card: any, config: any) => {
     }
   }
 
-  const definition = card.definition
+  const definition = card.definition.definition ?? card.definition
   let definitionStr: string
   if (typeof definition === 'string') definitionStr = definition
   else if (typeof definition === 'number') definitionStr = definition.toString()
