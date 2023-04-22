@@ -181,7 +181,11 @@ const toQueueReview = (card: any, config: any) => {
     (expected.toLowerCase().trim() === received.toLowerCase().trim())
 
   let definitionReceived = definitionEl.value
-  if (card.grammar?.properties !== undefined) {
+  if (
+    card.grammar?.properties !== undefined
+    && !(propsList === undefined || propsList === null)
+    && !(propsList.children === undefined || propsList.children === null || propsList.children.length === 0)
+  ) {
     const props = card.grammar.properties
 
     // Compile received grammatical properties

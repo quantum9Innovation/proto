@@ -4,6 +4,7 @@
 
 - [x] Show context in parentheses
 - [x] Show part of speech to distinguish between similar terms
+- [x] Don't error for cards without grammatical properties
 - [ ] Add dedicated dark mode
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
