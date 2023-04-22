@@ -74,7 +74,7 @@ const score = (history: History) => {
   const mu = k / (1 - sigma) // retention rate multiplier
   const C = mu - Math.log(x1) // constant of integration
   const score = mu / (Math.log(t + x1) + C)
-  history.score = score
+  history.score = Math.round(score * 1000) / 1000 // round to 3 decimal places
 }
 
 // Exports
