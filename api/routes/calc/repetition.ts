@@ -5,11 +5,6 @@
 import { type History } from '../elements'
 
 // Helper funcs
-const Sigma = (lower: number, upper: number, expr: (i: number) => number) => {
-  let sum = 0
-  for (let i = lower; i <= upper; i++) sum += expr(i)
-  return sum
-}
 const processResponses = (history: History) => {
   /*
     Process past responses and return:
@@ -45,29 +40,30 @@ const score = (history: History) => {
 
   // Check if enough data exists for score calculation
   /* istanbul ignore next */
-  if (n === 0) {
+  const tests = history.tests
+  if (n === 0 || !tests[tests.length - 1][1]) {
     history.score = 0
     return
   }
 
-  // Current streak of correct responses, calculated like `NTotal` but only for streak
+  // Current streak of correct responses, calculated only for streak
   let NCorrect = 0
   for (let i = n - 1; i >= 0; i--) {
-    if (history.tests[i][1]) {
+    /* istanbul ignore next */
+    if (tests[i][1]) {
       i === 0 ? NCorrect += 1 : NCorrect += deltaT[i - 1] / (deltaT[i - 1] + K)
-    } else break
+    } else {
+      break
+    }
   }
   const sigma = (NCorrect + 1) / (NCorrect + 2)
-
-  // Weighted total tests
-  const NTotal = Sigma(0, n - 1, i => i === 0 ? 1 : deltaT[i - 1] / (deltaT[i - 1] + K))
 
   // Learning parameters
   const m = 3 // rate of change of initial retention from learning
   const b = 1 // initial retention after first learning
 
   // Calculate estimated parameters
-  const x1 = m * NTotal + b // initial retention from learning
+  const x1 = m * NCorrect + b // initial retention from learning
   const k = 0.25 // proportionality constant for retention rate multiplier
 
   // Calculate score
