@@ -28,11 +28,12 @@ const safeSuffix = (unsafeSuffix: string, basePath: string) => {
   const safeJoin = path.join(basePath, safeSuffix)
   return safeJoin
 }
+const sanitize = (dirname: string) => dirname.replace(/[^a-z0-9]/gi, '-')
 
 // Define config methods
 // Retrieve language config
 card.get('/', (req, res) => {
-  const language = req.query.lang as string
+  const language = sanitize(req.query.lang as string)
   const pathname = safeSuffix(language, root)
   /* istanbul ignore if */
   if (!checkPrefix(root, pathname)) {
@@ -50,7 +51,8 @@ card.get('/', (req, res) => {
 // Upload initial language config
 card.post('/', (req, res) => {
   const reqConfig: LangConfig = req.body
-  const { lang, config } = reqConfig
+  let { lang, config } = reqConfig
+  lang = sanitize(lang)
   const langDir = safeSuffix(lang, root)
   /* istanbul ignore if */
   if (!checkPrefix(root, langDir)) {
@@ -122,6 +124,7 @@ card.get('/fetch', (req, res) => {
 card.post('/add', (req, res) => {
   const reqAdd: NewCard = req.body
   let { loc, lang, card, index } = reqAdd
+  lang = sanitize(lang)
   const relPath = loc
   loc = safeSuffix(loc, root)
   /* istanbul ignore if */
@@ -226,7 +229,7 @@ card.get('/list', (req, res) => {
   const pathname = safeSuffix(loc, root)
   /* istanbul ignore if */
   if (!checkPrefix(root, pathname)) return res.status(404).send('Resource not found.')
-  const lang = req.query.lang as string
+  const lang = sanitize(req.query.lang as string)
   const langDir = safeSuffix(lang, root)
   /* istanbul ignore if */
   if (!checkPrefix(root, langDir)) return res.status(404).send('Language could not be located.')
