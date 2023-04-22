@@ -4,7 +4,7 @@
 import { type Document } from './req'
 
 // Imports
-import { root, loc } from '../index'
+import { root } from '../index'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
@@ -45,6 +45,7 @@ vfs.get('/', (_, res) => {
 // Browse path or get resource
 vfs.get('/serve', (req, res) => {
   const uri = req.query.path as string
+  /* TODO: (security) sanitize uri path */
   const pathname = safeSuffix(uri, root)
   /* istanbul ignore if */
   if (!checkPrefix(root, pathname)) return res.status(404).send('Resource not found.')
@@ -57,7 +58,7 @@ vfs.get('/serve', (req, res) => {
   if (!isFile && !isDirectory) return res.status(500).send('Resource type could not be determined.')
 
   // Serve resource
-  if (isFile) res.sendFile(pathname, { root: loc })
+  if (isFile) res.sendFile(uri, { root })
   else {
     const documents: string[] = []
     const folders: string[] = []
