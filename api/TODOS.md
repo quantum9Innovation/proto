@@ -24,7 +24,7 @@
 - [ ] CI/CD setup and pre-commit hooks
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
-- [ ] Expand test coverage to error cases
+- [ ] Expand test coverage to edge cases
 
 ---
 
