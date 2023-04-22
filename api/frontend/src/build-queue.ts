@@ -82,12 +82,21 @@ const newFlashcard = (card: any) => {
   flashcard.id = 'flashcard'
 
   // Extract necessary card data
-  const term = card.term
+  const term: string = card.term
+  const pos: string = card.grammar?.pos
+  const context: string = card.grammar?.context
 
   // Build flashcard elements
+  if (pos !== undefined) {
+    const posEl = document.createElement('p')
+    posEl.id = 'queue-pos'
+    posEl.innerText = pos
+    flashcard.appendChild(posEl)
+  }
+
   const termEl = document.createElement('h2')
   termEl.id = 'queue-term'
-  termEl.innerText = term
+  termEl.innerText = context !== undefined ? `${term} (${context})` : term
   flashcard.appendChild(termEl)
 
   const definitionEl = document.createElement('input')
