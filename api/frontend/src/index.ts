@@ -9,6 +9,39 @@ let configCache: any
 let limit: number
 
 // Scene managers
+const setTheme = (name: 'light' | 'dark') => {
+  // Set theme
+  localStorage.setItem('theme', name)
+  document.body.className = name
+
+  // Purge existing stylesheets
+  const water = document.getElementById('water')
+  if (!(water === null || water === undefined)) document.head.removeChild(water)
+
+  // Load water.css stylesheets
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.id = 'water'
+  if (name === 'dark') {
+    link.href = 'https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css'
+  } else {
+    link.href = 'https://cdn.jsdelivr.net/npm/water.css@2/out/light.css'
+  }
+  document.head.appendChild(link)
+}
+
+const loadTheme = () => {
+  // Load theme from local storage
+  if (localStorage.getItem('theme') === 'dark') setTheme('dark')
+  else setTheme('light')
+}
+
+const toggleTheme = () => {
+  // Change theme to opposite
+  if (localStorage.getItem('theme') === 'dark') setTheme('light')
+  else setTheme('dark')
+}
+
 const register = async () => {
   const res = await fetch('/api/init/session', {
     method: 'POST',
@@ -413,5 +446,8 @@ window.exports = {
   openEditor,
   openQueue,
   register,
-  vfs
+  vfs,
+  setTheme,
+  loadTheme,
+  toggleTheme
 }

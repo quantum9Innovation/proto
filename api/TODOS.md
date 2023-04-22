@@ -6,8 +6,8 @@
 - [x] Show part of speech to distinguish between similar terms
 - [x] Don't error for cards without grammatical properties
 - [x] Use grammar card term instead of standard term
-- [ ] Add dedicated dark mode
-- [ ] Fix score display in place (use sticky instead of absolute positioning)
+- [x] Add dedicated dark mode
+- [x] Fix score display in place (use fixed instead of absolute positioning)
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems

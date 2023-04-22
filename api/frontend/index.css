@@ -1,4 +1,5 @@
 :root {
+  --bg: white;
   --background-color: #f2f2f2;
   --on-hover: #e6e6e6;
   --border-large: 24px;
@@ -14,6 +15,23 @@
   --folder: #28aa3d;
   --folder-text: #104318;
   --close: #c44;
+  --submit: #3b3;
+  --incorrect: #c445;
+  --correct: #3b35;
+  --progress-beginning: #373;
+  --progress-end: #3b3;
+  --scrim: brightness(75%);
+}
+
+.dark {
+  --bg: #234;
+  --background-color: #414b57;
+  --on-hover: #5c6b7c;
+  --document: #8e99ff;
+  --document-text: #8e99ff;
+  --folder: #28aa3d;
+  --folder-text: #28aa3d;
+  --close: #d76c6c;
   --submit: #3b3;
   --incorrect: #c445;
   --correct: #3b35;
@@ -65,7 +83,7 @@
 
 #vfs-score,
 #editor-score {
-  position: absolute;
+  position: fixed;
   display: block;
   bottom: var(--margin-large);
   right: var(--margin-large);
@@ -108,7 +126,7 @@ input[type=checkbox] {
 
 #flashcard input,
 #queue-props input {
-  background: white;
+  background: var(--bg);
 }
 
 #queue-ribbon {
@@ -176,7 +194,7 @@ input[type=checkbox] {
 }
 
 .phrase {
-  background-color: white;
+  background-color: var(--bg);
   border-radius: var(--border-mid);
   padding: var(--padding-mid);
   margin-bottom: var(--margin-mid);
@@ -235,12 +253,12 @@ input[type=checkbox] {
 
 .edit:hover {
   background-color: var(--document);
-  color: white;
+  color: var(--bg);
 }
 
 .delete:hover {
   background-color: var(--close);
-  color: white;
+  color: var(--bg);
 }
 
 .document {
@@ -248,7 +266,7 @@ input[type=checkbox] {
 }
 
 #create-doc {
-  color: var(--document);
+  color: var(--document-text);
 }
 
 .folder {
@@ -277,7 +295,7 @@ input[type=checkbox] {
 }
 
 .popup {
-  background-color: white;
+  background-color: var(--bg);
   margin: var(--margin-mid);
   margin-left: 0px;
   padding: var(--padding-mid);
@@ -296,7 +314,7 @@ input[type=checkbox] {
 
 .close {
   background-color: var(--close);
-  color: white;
+  color: var(--bg);
 }
 
 .close:hover {
@@ -307,7 +325,7 @@ input[type=checkbox] {
 
 .submit {
   background-color: var(--submit);
-  color: white;
+  color: var(--bg);
 }
 
 .submit:hover {
