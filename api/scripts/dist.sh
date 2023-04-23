@@ -20,13 +20,13 @@ echo '====================='
 echo 'Generating tarball'
 cp package.json dist/package.json
 touch dist/bootstrap.sh
-printf "#!bin/bash\n" >> dist/bootstrap.sh
+printf "#!/bin/bash\n" >> dist/bootstrap.sh
 printf "cd ..\n" >> dist/bootstrap.sh
 printf "mkdir frontend\n" >> dist/bootstrap.sh
 printf "mv dist/frontend/index.html frontend/index.html\n" >> dist/bootstrap.sh
 printf "cd dist; yarn install\n" >> dist/bootstrap.sh
 touch dist/start.sh
-printf "#!bin/bash\n" >> dist/start.sh
+printf "#!/bin/bash\n" >> dist/start.sh
 printf "node .\n" >> dist/start.sh
 tar -czvf dist/dist.tar.gz dist
 echo 'Tarball generated'
