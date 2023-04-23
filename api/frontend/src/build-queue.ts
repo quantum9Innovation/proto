@@ -190,23 +190,28 @@ const toQueueReview = (card: any, config: any) => {
     (expected.toLowerCase().trim() === received.toLowerCase().trim())
 
   let definitionReceived = definitionEl.value
-  if (
-    card.grammar?.properties !== undefined
-    && !(propsList === undefined || propsList === null)
-    && !(propsList.children === undefined || propsList.children === null || propsList.children.length === 0)
-  ) {
+  if (card.grammar?.properties !== undefined) {
     const props = card.grammar.properties
 
     // Compile received grammatical properties
     const grammarInputs: Record<string, string> = {}
-    for (const prop of propsList.children) {
-      if ('value' in prop) {
-        const value = prop.value as string
-        const tokenized = value.split(' ')
-        if (tokenized.length < 2) continue
-        const name = tokenized[0]
-        const definition = tokenized.slice(1).join(' ')
-        grammarInputs[name] = definition
+    if (
+      !(propsList === undefined || propsList === null)
+      && !(
+        propsList.children === undefined
+        || propsList.children === null
+        || propsList.children.length === 0
+      )
+    ) {
+      for (const prop of propsList.children) {
+        if ('value' in prop) {
+          const value = prop.value as string
+          const tokenized = value.split(' ')
+          if (tokenized.length < 2) continue
+          const name = tokenized[0]
+          const definition = tokenized.slice(1).join(' ')
+          grammarInputs[name] = definition
+        }
       }
     }
 

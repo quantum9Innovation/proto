@@ -4,6 +4,7 @@
 
 - [x] Only send checkboxes when checked
 - [x] Don't show only grammar properties history in editor info, queue
+- [x] Check grammar properties even when there are no input boxes
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
