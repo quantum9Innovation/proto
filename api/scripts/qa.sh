@@ -6,7 +6,7 @@ echo $'\nChecking frontend types'
 echo '======================='
 yarn run tsc --noEmit -p frontend/src/tsconfig.json || exit 1
 echo $'\nChecking with ESLint'
-echo '======================'
+echo '===================='
 yarn run eslint .
 echo $'\nFixing style issues'
 echo '==================='
