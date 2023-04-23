@@ -308,7 +308,7 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
       case 'GrammarCard': {
         const labelTerm = document.createElement('label')
         labelTerm.htmlFor = `input-property-term-${i}-${j}`
-        labelTerm.innerText = name + ' (Term)'
+        labelTerm.innerText = name + ' (term)'
         propertiesEl.appendChild(labelTerm)
         const inputTerm = document.createElement('input')
         inputTerm.id = `input-property-term-${i}-${j}`
@@ -317,7 +317,7 @@ const makeCardInputs = (inputs: Element, grammar: any, i: number) => {
         propertiesEl.appendChild(inputTerm)
         const labelDefinition = document.createElement('label')
         labelDefinition.htmlFor = `input-property-definition-${i}-${j}`
-        labelDefinition.innerText = name + ' (Definition)'
+        labelDefinition.innerText = name + ' (definition)'
         propertiesEl.appendChild(labelDefinition)
         const inputDefinition = document.createElement('input')
         inputDefinition.id = `input-property-definition-${i}-${j}`
