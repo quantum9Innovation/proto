@@ -340,7 +340,7 @@ const makeScore = (score: number) => {
   // Create score element
   const scoreEl = document.createElement('div')
   scoreEl.className = 'score'
-  scoreEl.innerText = score === 0 ? '0' : score.toPrecision(3)
+  scoreEl.innerText = score === 0 ? '0' : (100 * score).toPrecision(3)
 
   // Colors
   const ZERO = [156, 47, 47]
