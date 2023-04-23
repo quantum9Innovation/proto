@@ -142,7 +142,11 @@ const newReviewCard = (correct: boolean, card: any, received: string, stats: num
   if (miniCard.history !== undefined) delete miniCard.history
   if (miniCard.score !== undefined) delete miniCard.score
   if (miniCard.id !== undefined) delete miniCard.id
-  if (miniCard.grammar?.properties !== undefined) delete miniCard.grammar.properties
+  if (miniCard.grammar?.properties !== undefined) {
+    for (const prop in miniCard.grammar.properties) {
+      if (prop.includes('history')) delete miniCard.grammar.properties[prop]
+    }
+  }
   if (miniCard.phrases !== undefined) delete miniCard.phrases
   rawTruth.id = 'queue-review-raw-truth'
   rawTruth.innerText = JSON.stringify(miniCard)

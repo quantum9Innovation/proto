@@ -75,6 +75,9 @@ const addCardDetails = (card: any, details: Element, phrase: boolean) => {
 
     const properties = grammar.properties
     if (properties !== undefined) {
+      for (const prop in properties) {
+        if (prop.includes('history')) delete properties[prop]
+      }
       const propertiesEl = document.createElement('p')
       propertiesEl.innerHTML = '<strong>Grammar properties</strong>: '
                                + JSON.stringify(properties, null, 2)
