@@ -159,8 +159,8 @@ const newReviewCard = (correct: boolean, card: any, received: string, stats: num
   const reviewStats = document.createElement('div')
   reviewStats.id = 'queue-review-stats'
   reviewStats.className = 'scores'
-  const cardOldScore = 100 * stats[0]
-  const overallScore = 100 * stats[stats.length - 1]
+  const cardOldScore = stats[0]
+  const overallScore = stats[stats.length - 1]
 
   const oldScoreEl = makeScore(cardOldScore)
   oldScoreEl.id = 'queue-review-old-score'
