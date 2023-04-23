@@ -122,9 +122,13 @@ const newReviewCard = (correct: boolean, card: any, received: string, stats: num
   const main = document.createElement('div')
   main.id = 'review-card-main'
 
+  // Check for grammar card
+  let grammar = false
+  if (card.definition.term !== undefined) grammar = true
+
   const truth = document.createElement('h2')
-  const term: string = card.term
-  const definition: any = card.definition
+  const term: string = grammar ? card.definition.term : card.term
+  const definition: any = grammar ? card.definition.definition : card.definition
   let definitionStr: string
   if (typeof definition === 'string') definitionStr = definition
   else if (typeof definition === 'number') definitionStr = definition.toString()
