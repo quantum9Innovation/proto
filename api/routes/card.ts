@@ -323,7 +323,7 @@ card.get('/list', (req, res) => {
                 }
               } else score(props[propKey + '-history'])
               tests.push({
-                term: `${phrase.term} (${propKey})`,
+                term: `${phrase.definition} (${propKey})`,
                 definition: props[propKey],
                 history: props[propKey + '-history'],
                 id: phraseCard.id + ':GRAMMAR:' + propKey
@@ -347,7 +347,7 @@ card.get('/list', (req, res) => {
             }
           } else score(props[propKey + '-history'])
           tests.push({
-            term: `${card.term} (${propKey})`,
+            term: `${card.definition} (${propKey})`,
             definition: props[propKey],
             history: props[propKey + '-history'],
             id: (card.id as string) + ':GRAMMAR:' + propKey

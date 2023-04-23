@@ -15,6 +15,7 @@
 ## Backend
 
 - [ ] Differentiate between cards different translations of the same term in the same context and part of speech
+- [x] Use definition as term when testing grammar separately
 - [ ] CI/CD setup and pre-commit hooks
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
