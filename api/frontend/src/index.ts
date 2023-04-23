@@ -343,10 +343,9 @@ const makeScore = (score: number) => {
   scoreEl.innerText = score === 0 ? '0' : (100 * score).toPrecision(3)
 
   // Colors
-  const ZERO = [156, 47, 47]
-  const MIDPOINT = [198, 168, 9]
-  const ONE = [8, 154, 6]
-  const OPACITY = 0.5
+  const ZERO = [156, 47, 47] // #9c2f2f
+  const MIDPOINT = [198, 168, 9] // #c6a809
+  const ONE = [8, 154, 6] // #089a06
   const blend = (c1: number[], c2: number[], p: number) => [
     c1[0] * (1 - p) + c2[0] * p,
     c1[1] * (1 - p) + c2[1] * p,
@@ -354,10 +353,10 @@ const makeScore = (score: number) => {
   ]
   if (score < 0.5) {
     const bg = blend(ZERO, MIDPOINT, score / 0.5)
-    scoreEl.style.backgroundColor = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${OPACITY})`
+    scoreEl.style.backgroundColor = `rgb(${bg[0]}, ${bg[1]}, ${bg[2]})`
   } else {
     const bg = blend(MIDPOINT, ONE, (score - 0.5) / 0.5)
-    scoreEl.style.backgroundColor = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${OPACITY})`
+    scoreEl.style.backgroundColor = `rgb(${bg[0]}, ${bg[1]}, ${bg[2]})`
   }
 
   return scoreEl
