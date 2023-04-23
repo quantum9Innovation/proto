@@ -2,7 +2,7 @@
 
 ## Frontend
 
-- [ ] Only send checkboxes when checked
+- [x] Only send checkboxes when checked
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems

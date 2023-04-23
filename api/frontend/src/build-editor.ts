@@ -411,7 +411,7 @@ const getCardJSON = (grammar: any) => {
             document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
           )
           if (el === null) continue
-          value = el.checked
+          value = el.checked ? true : undefined
           break
         }
         case 'Choice': {
