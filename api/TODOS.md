@@ -8,6 +8,7 @@
 - [x] Use grammar card term instead of standard term
 - [x] Add dedicated dark mode
 - [x] Fix score display in place (use fixed instead of absolute positioning)
+- [x] Remove phrases and grammar properties from review cards before displaying
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
