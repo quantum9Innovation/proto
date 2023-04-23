@@ -2,6 +2,7 @@
 
 ## Frontend
 
+- [ ] Only send checkboxes when checked
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
@@ -12,6 +13,7 @@
 
 ## Backend
 
+- [ ] Differentiate between cards different translations of the same term in the same context and part of speech
 - [ ] CI/CD setup and pre-commit hooks
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
