@@ -5,6 +5,8 @@
 - [x] Only send checkboxes when checked
 - [x] Don't show only grammar properties history in editor info, queue
 - [x] Check grammar properties even when there are no input boxes
+- [ ] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
+- [ ] First-class mobile and PWA support
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
