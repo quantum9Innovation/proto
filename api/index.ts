@@ -11,6 +11,8 @@ import untildify = require('untildify')
 import helmet from 'helmet'
 import * as fs from 'fs'
 import * as path from 'path'
+import * as http from 'http'
+import * as https from 'https'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 
@@ -32,13 +34,24 @@ const EXPRESS_VERSION: string = JSON.parse(
 const app = express()
 const ROOT = untildify(CONFIG.root)
 const LOC = path.join(__dirname, '..')
+const HTTPS = CONFIG.https ?? false
 let host = CONFIG.host
 let port = CONFIG.port
+let httpsKey
+let httpsCert
 
 /* istanbul ignore next */
 if (host == null) host = 'localhost'
 /* istanbul ignore next */
 if (port == null) port = 3000
+/* istanbul ignore next */
+if (HTTPS !== false) {
+  let { key, cert } = HTTPS
+  key = untildify(key)
+  cert = untildify(cert)
+  httpsKey = fs.readFileSync(key)
+  httpsCert = fs.readFileSync(cert)
+}
 if (CONFIG.settings !== undefined) {
   if (CONFIG.settings.limit !== undefined) app.set('limit', CONFIG.settings.limit)
 }
@@ -64,12 +77,13 @@ else {
 }
 
 // Configure app
+const URL_PREFIX = HTTPS !== false ? 'https' : 'http'
 const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
-             + `<a href='http://${host}:${port}'>http://${host}:${port}</a>`
+             + `<a href='${URL_PREFIX}://${host}:${port}'>${URL_PREFIX}://${host}:${port}</a>`
              + '<br>\n'
              + `Running Express ${EXPRESS_VERSION} `
              + `on Node ${process.version}<br>\n`
-             + 'Serving as text/html; charset=utf-8 with status code 200'
+             + `Serving as text/html; charset=utf-8 with status code 200 over ${URL_PREFIX}`
 app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -93,9 +107,14 @@ app.use('/frontend', express.static(path.join(LOC, 'frontend')))
 for (const route in routes) app.use(route, routes[route])
 
 // Start API
-const msg = `Listening on http://${host}:${port}`
+const options = {
+  key: httpsKey,
+  cert: httpsCert
+}
+const server = HTTPS !== false ? https.createServer(options, app) : http.createServer(app)
+const msg = `Listening on ${URL_PREFIX}://${host}:${port}`
 export {
-  app,
+  server, app,
   host, port,
   msg,
   ROOT as root,

@@ -1,5 +1,3 @@
 // Entry point
-import { app, host, port, msg } from './index'
-app.listen(port, host, () => {
-  console.log(msg)
-})
+import { server, host, port, msg } from './index'
+server.listen(port, host, () => { console.log(msg) })
