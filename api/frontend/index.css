@@ -164,12 +164,18 @@ input[type=checkbox] {
   background-color: var(--on-hover);
 }
 
-.card span {
+#card-text {
   display: inline-block;
   font-size: 22px;
   white-space: nowrap;
+  min-width: 100px;
   max-width: calc(100% - 300px);
   overflow-x: hidden;
+}
+
+#card-text:hover {
+  cursor: pointer;
+  color: var(--document);
 }
 
 .details {

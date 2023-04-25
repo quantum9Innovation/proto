@@ -125,6 +125,104 @@ const expandCard = (card: any, cardItem: HTMLDivElement) => {
   cardItem.appendChild(details)
 }
 
+const autofillCard = (card: any, grammar: any) => {
+  // Autofill card details into add card popup
+
+  // Input fields
+  const inputs = document.createElement('div')
+  inputs.className = 'inputs'
+
+  // Set arbitrary card values
+  const autofillPart = (card: any, i: number) => {
+    const term = document.getElementById(`input-term-${i}`) as HTMLInputElement
+    term.value = card.term
+    const definition = document.getElementById(`input-definition-${i}`) as HTMLInputElement
+    definition.value = card.definition
+    const tags = document.getElementById(`input-tags-${i}`) as HTMLInputElement
+    tags.value = card.tags !== undefined ? card.tags.join(', ') : ''
+    const notes = document.getElementById(`input-notes-${i}`) as HTMLInputElement
+    notes.value = card.notes ?? ''
+    const pos = document.getElementById(`input-pos-${i}`) as HTMLInputElement
+    pos.value = card.grammar?.pos ?? ''
+    const context = document.getElementById(`input-context-${i}`) as HTMLInputElement
+    context.value = card.grammar?.context ?? ''
+
+    const cardProps: Record<string, any> = card.grammar?.properties
+    if (cardProps === undefined || cardProps.length === 0) return
+    for (let j = 0; j < grammar.length; j++) {
+      const property = grammar[j]
+      const name: string = property.name
+      const type: string = property.type
+
+      const cardProp = cardProps[name]
+      if (cardProp === undefined || cardProp === null) continue
+
+      switch (type) {
+        case 'string': {
+          const input = document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          input.value = cardProp
+          break
+        }
+        case 'number': {
+          const input = document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          input.value = cardProp.toString()
+          break
+        }
+        case 'boolean': {
+          const input = document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+          input.checked = cardProp
+          break
+        }
+        case 'Choice': {
+          if (property.choices.multiple === true) {
+            for (let k = 0; k < property.choices.options.length; k++) {
+              const option = document.getElementById(
+                `input-property-${i}-${j}-${k}`
+              ) as HTMLInputElement
+              const check = (cardProp as string[]).includes(property.choices.options[k])
+              option.checked = check
+            }
+          } else {
+            const input = document.getElementById(`input-property-${i}-${j}`) as HTMLInputElement
+            input.value = cardProp
+          }
+          break
+        }
+        case 'GrammarCard': {
+          const inputTerm = document.getElementById(
+            `input-property-term-${i}-${j}`
+          ) as HTMLInputElement
+          inputTerm.value = cardProp.term
+          const inputDefinition = document.getElementById(
+            `input-property-definition-${i}-${j}`
+          ) as HTMLInputElement
+          inputDefinition.value = cardProp.definition
+          break
+        }
+      }
+    }
+  }
+
+  // Card
+  autofillPart(card, 0)
+
+  // Phrases
+  const phrases = document.getElementById('editor-phrases-list') as HTMLDivElement
+  const newPhrase = () => {
+    const phrase = document.createElement('div')
+    phrase.className = 'inputs'
+    makeCardInputs(phrase, grammar, 1 + phrases.childElementCount)
+    phrases.appendChild(phrase)
+  }
+
+  if (card.phrases === undefined || card.phrases.length === 0) return
+  for (let i = 0; i < card.phrases.length; i++) {
+    const phrase = card.phrases[i]
+    newPhrase()
+    autofillPart(phrase, i + 1)
+  }
+}
+
 const putCards = (cards: any[]) => {
   const cardDisplay = document.getElementById('card-display')
   if (cardDisplay === null) return
@@ -137,11 +235,23 @@ const putCards = (cards: any[]) => {
     const cardItem = document.createElement('div')
     cardItem.className = 'card'
     const cardText = document.createElement('span')
+    cardText.id = 'card-text'
     cardText.innerText = term + ': ' + definition
-    const cardInfo = document.createElement('button')
-    cardInfo.className = 'edit'
-    cardInfo.innerText = 'Info'
-    cardInfo.addEventListener('click', e => { expandCard(card, cardItem) })
+    cardText.addEventListener('click', e => { expandCard(card, cardItem) })
+    const cardEdit = document.createElement('button')
+    cardEdit.className = 'edit'
+    cardEdit.innerText = 'Edit'
+    cardEdit.addEventListener('click', e => {
+      deleteCard(i)
+        .then(async () => {
+          const popup = document.getElementById('editor-popup')
+          if (popup === null) return
+          popup.className = 'popup show'
+          const grammar = await getGrammar()
+          autofillCard(card, grammar)
+        })
+        .catch(e => { console.error(e) })
+    })
     const cardDel = document.createElement('button')
     cardDel.className = 'delete'
     cardDel.innerText = 'Delete'
@@ -150,7 +260,7 @@ const putCards = (cards: any[]) => {
     })
 
     cardItem.appendChild(cardText)
-    cardItem.appendChild(cardInfo)
+    cardItem.appendChild(cardEdit)
     cardItem.appendChild(cardDel)
     cardDisplay.appendChild(cardItem)
   }
