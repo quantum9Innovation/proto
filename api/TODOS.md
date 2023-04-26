@@ -5,8 +5,9 @@
 - [x] Only send checkboxes when checked
 - [x] Don't show only grammar properties history in editor info, queue
 - [x] Check grammar properties even when there are no input boxes
+- [x] Allow editing cards when viewing info
+- [ ] Calculate ping correctly by measuring full round trip instead of assuming clock synchronization
 - [ ] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
-- [ ] Allow editing cards when viewing info
 - [ ] First-class mobile and PWA support
 - [ ] Fix fetch errors on creating new/blank document
 - [ ] Automatically open frontend on backend start (possibly with config option)

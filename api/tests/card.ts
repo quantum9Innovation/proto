@@ -94,6 +94,10 @@ describe('Basic card methods', () => {
       properties: { reflexive: null }
     }
   }
+  const movedCard: any = {
+    term: 'moved',
+    definition: 'this will be moved'
+  }
 
   // Create document
   describe('Create document', () => {
@@ -130,7 +134,18 @@ describe('Basic card methods', () => {
         loc: '/lang-eng/main.json',
         lang: 'lang-eng',
         card: deletedCard,
-        index: -2
+        index: -1
+      }
+    }))
+
+    test('third (to be moved)', endpoint(app, '/card/add', (res: StdRes) => {
+      expect(res.body.message).toBe('Card uploaded successfully.')
+    }, {
+      method: 'post',
+      request: {
+        loc: '/lang-eng/main.json',
+        lang: 'lang-eng',
+        card: movedCard
       }
     }))
   })
@@ -144,7 +159,7 @@ describe('Basic card methods', () => {
     }, {
       request: {
         path: '/lang-eng/main.json',
-        index: 1
+        index: 0
       }
     }))
 
@@ -153,7 +168,7 @@ describe('Basic card methods', () => {
       testCard.id = '/lang-eng/main.json:0'
       expect(card).toStrictEqual(testCard)
     }, {
-      request: { id: '/lang-eng/main.json:1' }
+      request: { id: '/lang-eng/main.json:0' }
     }))
   })
 
@@ -165,7 +180,7 @@ describe('Basic card methods', () => {
       method: 'delete',
       request: {
         loc: '/lang-eng/main.json',
-        index: 0
+        index: 1
       }
     }))
 
@@ -177,8 +192,16 @@ describe('Basic card methods', () => {
       contentType: 'text/html; charset=utf-8',
       request: {
         loc: '/lang-eng/error.json',
-        index: 0
+        index: 1
       }
+    }))
+
+    test('moved', endpoint(app, '/card/fetch', (res: JSONRes) => {
+      const card = JSON.parse(res.text)
+      movedCard.id = '/lang-eng/main.json:1'
+      expect(card).toStrictEqual(movedCard)
+    }, {
+      request: { id: '/lang-eng/main.json:1' }
     }))
   })
 
@@ -191,10 +214,21 @@ describe('Basic card methods', () => {
       status: 404,
       request: {
         path: '/lang-eng/main.json',
-        index: 1
+        index: 2
       }
     }))
   })
+
+  // Now, delete all cards but one
+  test('remove all', endpoint(app, '/card/remove', (res: StdRes) => {
+    expect(res.body.message).toBe('Card moved to trash.')
+  }, {
+    method: 'delete',
+    request: {
+      loc: '/lang-eng/main.json',
+      index: 1
+    }
+  }))
 })
 
 // Advanced card methods

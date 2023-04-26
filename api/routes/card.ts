@@ -150,7 +150,7 @@ card.post('/add', (req, res) => {
 
   // Check if index is defined
   if (index === undefined) index = cards.length
-  else if (index < 0) index += cards.length
+  else if (index < 0) index += cards.length + 1
 
   // Check card grammatical properties
   const grammar: GrammarProp[] = JSON.parse(
@@ -178,6 +178,15 @@ card.post('/add', (req, res) => {
   // Write to file
   card.id = relPath + ':' + index.toString()
   cards.splice(index, 0, card)
+  for (let i = index + 1; i < cards.length; i++) {
+    // Increase ID index by 1
+    const ID = cards[i].id
+    /* istanbul ignore next */
+    if (ID === undefined) continue
+    const newID = ID.split(':')
+    newID[1] = (parseInt(newID[1]) + 1).toString()
+    cards[i].id = newID.join(':')
+  }
   fs.writeFileSync(loc, JSON.stringify({ cards }, null, 2))
 
   res.json({
@@ -215,6 +224,15 @@ card.delete('/remove', (req, res) => {
 
   // Write to file
   cards.splice(index, 1)
+  for (let i = index; i < cards.length; i++) {
+    // Reduce ID index by 1
+    const ID = cards[i].id
+    /* istanbul ignore next */
+    if (ID === undefined) continue
+    const newID = ID.split(':')
+    newID[1] = (parseInt(newID[1]) - 1).toString()
+    cards[i].id = newID.join(':')
+  }
   fs.writeFileSync(name, JSON.stringify({ cards }, null, 2))
 
   res.json({
@@ -368,6 +386,7 @@ card.get('/list', (req, res) => {
   res.json(tests)
 })
 
+// Get queue limit from config
 card.get('/limit', (req, res) => {
   const limit = app.get('limit')
   res.json({ limit })
