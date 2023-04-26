@@ -34,6 +34,7 @@ const EXPRESS_VERSION: string = JSON.parse(
 const app = express()
 const ROOT = untildify(CONFIG.root)
 const LOC = path.join(__dirname, '..')
+/* istanbul ignore next */
 const HTTPS = CONFIG.https ?? false
 let host = CONFIG.host
 let port = CONFIG.port
@@ -77,6 +78,7 @@ else {
 }
 
 // Configure app
+/* istanbul ignore next */
 const URL_PREFIX = HTTPS !== false ? 'https' : 'http'
 const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
              + `<a href='${URL_PREFIX}://${host}:${port}'>${URL_PREFIX}://${host}:${port}</a>`
@@ -111,6 +113,7 @@ const options = {
   key: httpsKey,
   cert: httpsCert
 }
+/* istanbul ignore next */
 const server = HTTPS !== false ? https.createServer(options, app) : http.createServer(app)
 const msg = `Listening on ${URL_PREFIX}://${host}:${port}`
 export {
