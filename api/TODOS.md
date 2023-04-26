@@ -2,10 +2,6 @@
 
 ## Frontend
 
-- [x] Only send checkboxes when checked
-- [x] Don't show only grammar properties history in editor info, queue
-- [x] Check grammar properties even when there are no input boxes
-- [x] Allow editing cards when viewing info
 - [ ] Calculate ping correctly by measuring full round trip instead of assuming clock synchronization
 - [ ] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
 - [ ] First-class mobile and PWA support
@@ -19,13 +15,22 @@
 
 ## Backend
 
-- [x] Use definition as term when testing grammar separately
 - [ ] Debug unusual spaced repetition behaviors
 - [ ] Auto-detect duplicate cards with same term, PoS, and context
 - [ ] CI/CD setup and pre-commit hooks
 - [ ] Add detailed API endpoint documentation
 - [ ] Add enhanced card verification (check if choices are valid)
 - [ ] Expand test coverage to edge cases
+
+---
+
+**Completed** :white_check_mark: (v0.4.0)
+
+- [x] Only send checkboxes when checked
+- [x] Don't show only grammar properties history in editor info, queue
+- [x] Check grammar properties even when there are no input boxes
+- [x] Allow editing cards when viewing info
+- [x] Use definition as term when testing grammar separately
 
 ---
 
