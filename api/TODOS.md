@@ -2,6 +2,7 @@
 
 ## Frontend
 
+- [ ] Fix boolean inline checks which require repeat property name
 - [ ] Calculate ping correctly by measuring full round trip instead of assuming clock synchronization
 - [ ] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
 - [ ] First-class mobile and PWA support
