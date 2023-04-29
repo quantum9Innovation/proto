@@ -42,6 +42,97 @@ const toggleTheme = () => {
 }
 
 const alertPing = () => { alert(`Ping is ${ping}ms`) }
+const konami = () => {
+  const clamp = (c: number[]) => [
+    Math.max(0, Math.min(255, c[0])),
+    Math.max(0, Math.min(255, c[1])),
+    Math.max(0, Math.min(255, c[2]))
+  ]
+  const norm = (c: number[]) => [
+    c[0] * 0.75 + 255 * 0.125,
+    c[1] * 0.75 + 255 * 0.125,
+    c[2] * 0.75 + 255 * 0.125
+  ]
+  const randomize = (c: number[]) => clamp([
+    c[0] + 255 * 2 * (Math.random() - 1 / 2) / 4,
+    c[0] + 255 * 2 * (Math.random() - 1 / 2) / 4,
+    c[0] + 255 * 2 * (Math.random() - 1 / 2) / 4
+  ])
+  const random = () => [
+    255 * Math.random(),
+    255 * Math.random(),
+    255 * Math.random()
+  ]
+  const C1 = norm(random())
+  const C2 = randomize(C1)
+  const C3 = norm(random())
+  const C4 = randomize(C3)
+  const C5 = norm(random())
+  const C6 = randomize(C5)
+
+  const blend = (c1: number[], c2: number[], p: number) => [
+    c1[0] * (1 - p) + c2[0] * p,
+    c1[1] * (1 - p) + c2[1] * p,
+    c1[2] * (1 - p) + c2[2] * p
+  ]
+  const saturate = (c: number[], factor: number) => {
+    const [r, g, b] = c
+    const max = Math.max(r, g, b)
+    const min = Math.min(r, g, b)
+    const k = 255 * factor / (max - min)
+    return [
+      k * (r - min),
+      k * (g - min),
+      k * (b - min)
+    ]
+  }
+  const cDocument = saturate(blend(C1, C2, 0.25), 0.75)
+  const cDocumentText = saturate(blend(C1, C2, 0.75), 0.75)
+  const cCorrect = saturate(blend(C3, C4, 0), 0.75)
+  const cSubmit = saturate(blend(C3, C4, 0.25), 0.75)
+  const cFolder = saturate(blend(C3, C4, 0.5), 0.75)
+  const cProgressBeginning = saturate(blend(C3, C4, 0.75), 0.75)
+  const cFolderText = saturate(blend(C3, C4, 1), 0.75)
+  const cIncorrect = saturate(blend(C5, C6, 0.25), 0.75)
+  const cClose = saturate(blend(C5, C6, 0.75), 0.75)
+
+  const content = document.getElementById('content')
+  if (content === null || content === undefined) return
+
+  content.style.setProperty(
+    '--document', `rgb(${cDocument[0]}, ${cDocument[1]}, ${cDocument[2]})`
+  )
+  content.style.setProperty(
+    '--document-text', `rgb(${cDocumentText[0]}, ${cDocumentText[1]}, ${cDocumentText[2]})`
+  )
+  content.style.setProperty(
+    '--correct', `rgba(${cCorrect[0]}, ${cCorrect[1]}, ${cCorrect[2]}, 0.3125)`
+  )
+  content.style.setProperty(
+    '--submit', `rgb(${cSubmit[0]}, ${cSubmit[1]}, ${cSubmit[2]})`
+  )
+  content.style.setProperty(
+    '--progress-end', `rgb(${cSubmit[0]}, ${cSubmit[1]}, ${cSubmit[2]})`
+  )
+  content.style.setProperty(
+    '--folder', `rgb(${cFolder[0]}, ${cFolder[1]}, ${cFolder[2]})`
+  )
+  content.style.setProperty(
+    '--progress-beginning',
+    `rgb(${cProgressBeginning[0]}, ${cProgressBeginning[1]}, ${cProgressBeginning[2]})`
+  )
+  content.style.setProperty(
+    '--folder-text', `rgb(${cFolderText[0]}, ${cFolderText[1]}, ${cFolderText[2]})`
+  )
+  content.style.setProperty(
+    '--incorrect', `rgba(${cIncorrect[0]}, ${cIncorrect[1]}, ${cIncorrect[2]}, 0.3125)`
+  )
+  content.style.setProperty(
+    '--close', `rgb(${cClose[0]}, ${cClose[1]}, ${cClose[2]})`
+  )
+
+  alert('Konami code activated!')
+}
 const register = async () => {
   const sent = Date.now()
   const res = await fetch('/api/init/session', {
@@ -392,6 +483,7 @@ const getScore = async (doc: boolean) => {
   // Error handling
   if (res.status !== 200) {
     const e = await res.text()
+    if (e === 'Document contains no cards.') return 0
     console.error(e)
     alert(e)
   }
@@ -434,7 +526,6 @@ const openQueue = async (doc: boolean) => {
   // Error handling
   if (res.status !== 200) {
     const e = await res.text()
-    if (e === 'Document contains no cards.') return 0
     console.error(e)
     alert(e)
   }
@@ -449,6 +540,7 @@ const openQueue = async (doc: boolean) => {
 // Export callables
 window.exports = {
   alertPing,
+  konami,
   cd,
   mkdir,
   touch,
