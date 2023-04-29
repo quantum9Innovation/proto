@@ -434,6 +434,7 @@ const openQueue = async (doc: boolean) => {
   // Error handling
   if (res.status !== 200) {
     const e = await res.text()
+    if (e === 'Document contains no cards.') return 0
     console.error(e)
     alert(e)
   }
