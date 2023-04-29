@@ -207,7 +207,10 @@ const toQueueReview = (card: any, config: any) => {
         if ('value' in prop) {
           const value = prop.value as string
           const tokenized = value.split(' ')
-          if (tokenized.length < 2) continue
+          if (tokenized.length < 2) {
+            // Assume boolean property
+            tokenized.push('')
+          }
           const name = tokenized[0]
           const definition = tokenized.slice(1).join(' ')
           grammarInputs[name] = definition
