@@ -15,12 +15,8 @@ export interface Config {
   config: Record<string, unknown>
 }
 
-export interface SessionReq {
-  timestamp: number
-}
-
 export interface Session {
-  url: URL
+  URL: URL
   timestamp: number
   delay: number
 }

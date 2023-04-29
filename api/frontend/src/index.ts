@@ -7,6 +7,7 @@ let noCorrect = 0
 let progress: number = 0
 let configCache: any
 let limit: number
+let ping: number
 
 // Scene managers
 const setTheme = (name: 'light' | 'dark') => {
@@ -29,30 +30,45 @@ const setTheme = (name: 'light' | 'dark') => {
   }
   document.head.appendChild(link)
 }
-
 const loadTheme = () => {
   // Load theme from local storage
   if (localStorage.getItem('theme') === 'dark') setTheme('dark')
   else setTheme('light')
 }
-
 const toggleTheme = () => {
   // Change theme to opposite
   if (localStorage.getItem('theme') === 'dark') setTheme('light')
   else setTheme('dark')
 }
 
+const alertPing = () => { alert(`Ping is ${ping}ms`) }
 const register = async () => {
+  const sent = Date.now()
   const res = await fetch('/api/init/session', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ timestamp: Date.now() })
+    body: JSON.stringify({ timestamp: sent })
   })
   if (res.status !== 200) {
     const e = await res.text()
     console.error('Failed to establish connection!\nReload to try again.')
+    console.error(e)
+    alert(e)
+  }
+  ping = Date.now() - sent
+
+  const pingRes = await fetch('/api/init/ping', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ ping })
+  })
+  if (pingRes.status !== 200) {
+    const e = await pingRes.text()
+    console.error('Ping request failed.')
     console.error(e)
     alert(e)
   }
@@ -431,6 +447,7 @@ const openQueue = async (doc: boolean) => {
 
 // Export callables
 window.exports = {
+  alertPing,
   cd,
   mkdir,
   touch,

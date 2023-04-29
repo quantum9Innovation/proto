@@ -1,11 +1,11 @@
 // Initialize API
 
 // Type definitions
-import { type Config, type Session, type SessionReq } from './req'
+import { type Config, type Session } from './req'
 import { type orderedList } from './utils'
 
 // Imports
-import { root } from '../index'
+import { app, root } from '../index'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as express from 'express'
@@ -75,11 +75,9 @@ init.get('/session', (_, res) => {
 // Upload session config
 init.post('/session', (req, res) => {
   // Collect request data
-  const session: SessionReq = req.body
   const data = {
     URL: req.socket.remoteAddress,
-    timestamp: Date.now(),
-    delay: Date.now() - session.timestamp
+    timestamp: Date.now()
   }
 
   // Write to config
@@ -90,6 +88,15 @@ init.post('/session', (req, res) => {
 
   res.json({
     message: 'Session config successful.'
+  })
+})
+
+// Ping
+init.post('/ping', (req, res) => {
+  const ping: number = req.body.ping
+  app.set('ping', ping)
+  res.json({
+    message: 'Pong!'
   })
 })
 

@@ -34,8 +34,23 @@ describe('/init/session', () => {
   describe('GET /init/session', () => {
     test('retrieval', endpoint(app, '/init/session', (res: JSONRes) => {
       const data: Session = JSON.parse(res.text)
-      expect(req.timestamp + data.delay).toBeGreaterThan(data.timestamp - 5)
-      expect(req.timestamp + data.delay).toBeLessThan(data.timestamp + 5)
+      expect(data.URL).toBe('::ffff:127.0.0.1')
+    }))
+  })
+})
+
+// Other initialization routines
+describe('/init/*', () => {
+  // Example ping request
+  const req = { ping: 100 }
+
+  // Check for config
+  describe('POST /init/ping', () => {
+    test('*', endpoint(app, '/init/ping', (res: StdRes) => {
+      expect(res.body.message).toBe('Pong!')
+    }, {
+      method: 'post',
+      request: req
     }))
   })
 })
