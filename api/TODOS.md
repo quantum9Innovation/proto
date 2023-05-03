@@ -2,13 +2,6 @@
 
 ## Frontend
 
-- [x] Fix boolean inline checks which require repeat property name
-- [x] Calculate ping correctly by measuring full round trip instead of assuming clock synchronization
-- [x] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
-- [x] Fix fetch errors on creating new/blank document
-
----
-
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
@@ -31,6 +24,15 @@
 - [ ] Use type coercion and type verification for requests
 - [ ] Add enhanced card verification (check if choices are valid)
 - [ ] Expand test coverage to edge cases
+
+---
+
+**Completed** :white_check_mark: (v0.5.0)
+
+- [x] Fix boolean inline checks which require repeat property name
+- [x] Calculate ping correctly by measuring full round trip instead of assuming clock synchronization
+- [x] Fix <kbd>\\</kbd> keybind activating in text fields, add other keybinds
+- [x] Fix fetch errors on creating new/blank document
 
 ---
 
