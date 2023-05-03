@@ -20,7 +20,10 @@
 
 ## Backend
 
+- [ ] Consider switching imports to use `require()`
 - [ ] Debug unusual spaced repetition behaviors
+- [ ] Decide on how to structure phrases
+- [ ] Context-dependent grammar properties (only show certain properties when a part of speech or other context matches some criteria)
 - [ ] Add automatic card ID checking and history rescoring
 - [ ] Auto-detect duplicate cards with same term, PoS, and context
 - [ ] CI/CD setup and pre-commit hooks
