@@ -5,6 +5,7 @@ export interface Config {
   https?: {
     key: string
     cert: string
+    pin?: string
   }
   settings?: {
     limit?: number

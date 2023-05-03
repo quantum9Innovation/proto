@@ -9,6 +9,9 @@ let configCache: any
 let limit: number
 let ping: number
 
+// Ambient context
+declare let Cookies: any
+
 // Scene managers
 const setTheme = (name: 'light' | 'dark') => {
   // Set theme
@@ -42,6 +45,10 @@ const toggleTheme = () => {
 }
 
 const alertPing = () => { alert(`Ping is ${ping}ms`) }
+const forgetPIN = () => {
+  Cookies.remove('pin')
+  alert('PIN successfully reset.')
+}
 const konami = () => {
   const clamp = (c: number[]) => [
     Math.max(0, Math.min(255, c[0])),
@@ -143,6 +150,18 @@ const register = async () => {
     body: JSON.stringify({ timestamp: sent })
   })
   if (res.status !== 200) {
+    if (res.status === 403) {
+      // Get PIN code from user
+      const PIN = prompt('Enter PIN code')
+      if (PIN === null) {
+        alert('Reload to try again.')
+        return
+      }
+      Cookies.set('pin', PIN)
+      register()
+      return
+    }
+
     const e = await res.text()
     console.error('Failed to establish connection!\nReload to try again.')
     console.error(e)
@@ -540,6 +559,7 @@ const openQueue = async (doc: boolean) => {
 // Export callables
 window.exports = {
   alertPing,
+  forgetPIN,
   konami,
   cd,
   mkdir,

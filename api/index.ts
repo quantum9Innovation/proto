@@ -13,8 +13,10 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as http from 'http'
 import * as https from 'https'
+import * as crypto from 'crypto'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
 
 // Route imports
 import { init } from './routes/init'
@@ -87,11 +89,32 @@ const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
              + `on Node ${process.version}<br>\n`
              + `Serving as text/html; charset=utf-8 with status code 200 over ${URL_PREFIX}`
 app.use(helmet())
+app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api', (_, res) => {
   res.send(INFO)
 })
+
+// Custom middleware to check PIN
+/* istanbul ignore next */
+if (HTTPS !== false && HTTPS.pin !== undefined) {
+  app.use((req, res, next) => {
+    if (req.path.includes('/frontend') || req.path === '/') {
+      // Allow accessing frontend static assets
+      next()
+      return
+    }
+    if (req.cookies.pin === undefined) {
+      res.status(403).send('Forbidden')
+      return
+    }
+    const received = Buffer.from(req.cookies.pin, 'utf8')
+    const pin = Buffer.from(HTTPS.pin!, 'utf8')
+    if (crypto.timingSafeEqual(received, pin)) next()
+    else res.status(403).send('Forbidden')
+  })
+}
 
 // Initialize frontend
 /* istanbul ignore next */

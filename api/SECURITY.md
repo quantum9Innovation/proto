@@ -3,7 +3,7 @@
 Normally this document would contain a security policy of sorts, which would be ideal for a stable release.
 However, given the precarious state of this project, this document is being turned into a security vulnerability tracker so that we can fix all the necessary problems before a stable release, by which point these issues **must** be resolved.
 
-- [ ] Validate session
+- [x] Validate session
   - This is necessary, along with HTTPS, to prevent the deletion of key resources when accessing the Proto server from another device.
   Without session validation, any attacker could potentially hijack the server by sending modification requests that delete the content of stored documents or overriding the trash directory with blank files of the same name of a file that has already been deleted.
 - [x] Switch to HTTPS
