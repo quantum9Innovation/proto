@@ -2,11 +2,11 @@
 
 ## Public alpha
 
-- [ ] Fill out FAQs with more questions
+- [x] Fill out FAQs with more questions
 - [ ] Reorganize important repository files into parent directory
 - [ ] API setup documentation
 - [ ] Frontend usage documentation
-- [ ] Review current API docs
+- [ ] Review current API, README, and other docs
 - [ ] Add any necessary theory and example usage to API docs
 
 ## Frontend
