@@ -152,13 +152,14 @@ const register = async () => {
   if (res.status !== 200) {
     if (res.status === 403) {
       // Get PIN code from user
-      const PIN = prompt('Enter PIN code')
+      const PIN = prompt('Enter PIN code:')
       if (PIN === null) {
         alert('Reload to try again.')
         return
       }
       Cookies.set('pin', PIN)
       register()
+      vfs()
       return
     }
 

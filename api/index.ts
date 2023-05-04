@@ -111,7 +111,11 @@ if (HTTPS !== false && HTTPS.pin !== undefined) {
     }
     const received = Buffer.from(req.cookies.pin, 'utf8')
     const pin = Buffer.from(HTTPS.pin!, 'utf8')
-    if (crypto.timingSafeEqual(received, pin)) next()
+    let equal: boolean
+    try {
+      equal = crypto.timingSafeEqual(received, pin)
+    } catch (e) { equal = false }
+    if (equal) next()
     else res.status(403).send('Forbidden')
   })
 }
