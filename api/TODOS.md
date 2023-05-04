@@ -1,5 +1,14 @@
 # Todos
 
+## Public alpha
+
+- [ ] Fill out FAQs with more questions
+- [ ] Reorganize important repository files into parent directory
+- [ ] API setup documentation
+- [ ] Frontend usage documentation
+- [ ] Review current API docs
+- [ ] Add any necessary theory and example usage to API docs
+
 ## Frontend
 
 - [ ] First-class mobile and PWA support
@@ -13,6 +22,7 @@
 
 ## Backend
 
+- [x] Fix byte length errors
 - [ ] Consider switching imports to use `require()`
 - [ ] Debug unusual spaced repetition behaviors
 - [ ] Decide on how to structure phrases
