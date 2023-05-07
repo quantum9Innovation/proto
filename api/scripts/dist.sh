@@ -27,6 +27,7 @@ printf "mv dist/frontend/index.html frontend/index.html\n" >> dist/bootstrap.sh
 printf "cd dist; yarn install\n" >> dist/bootstrap.sh
 touch dist/start.sh
 printf "#!/bin/bash\n" >> dist/start.sh
+printf "export NODE_ENV=production\n" >> dist/start.sh
 printf "node .\n" >> dist/start.sh
 tar -czvf dist/dist.tar.gz dist
 echo 'Tarball generated'

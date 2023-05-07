@@ -35,3 +35,8 @@ storage       # only if stored at `./storage`
 Then, create a folder `proto/frontend` and copy `proto/dist/frontend/index.html` into it.
 Once this is complete, you will be able to start the language server and frontend by running `./start.sh` from `proto/dist`.
 Make sure to run `./bootstrap.sh` before if running for the first time.
+
+## Full stack trace/error info is being broadcast in production
+
+Make sure the `NODE_ENV` environment variable is set to `production` before launching the language server to ensure that  server errors are handled internally and not broadcast across potentially insecure channels.
+This should already be done when you run `./start.sh` (you can check by running `echo "$NODE_ENV"` in a Bash shell).

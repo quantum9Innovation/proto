@@ -25,6 +25,7 @@
 ## Backend
 
 - [x] Fix byte length errors
+- [x] Hide detailed error messages from frontend (see FAQ)
 - [ ] Consider switching imports to use `require()`
 - [ ] Debug unusual spaced repetition behaviors
 - [ ] Decide on how to structure phrases
