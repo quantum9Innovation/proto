@@ -9,6 +9,10 @@
 - [ ] Review current API, README, and other docs
 - [ ] Add any necessary theory and example usage to API docs
 
+## Long-term
+
+- [ ] Allow searching for cards, by tags e.g.
+
 ## Frontend
 
 - [x] Confirm all deletions in popup
