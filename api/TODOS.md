@@ -12,6 +12,7 @@
 ## Frontend
 
 - [x] Confirm all deletions in popup
+- [x] Reset select objects in grammar properties after card creation
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems

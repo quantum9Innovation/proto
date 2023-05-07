@@ -625,12 +625,18 @@ const getCardJSON = (grammar: any) => {
   return cardJSON
 }
 
-const newCard = (grammar: any) => {
+const newCard = (grammar: any, create: boolean) => {
   // Popup for creating a new card
-  const popup = document.createElement('div')
-  popup.id = 'editor-popup'
-  popup.className = 'popup hide'
-  document.body.appendChild(popup)
+  let popup: HTMLDivElement
+  if (create) {
+    popup = document.createElement('div')
+    popup.id = 'editor-popup'
+    popup.className = 'popup hide'
+    document.body.appendChild(popup)
+  } else {
+    popup = document.getElementById('editor-popup') as HTMLDivElement
+    popup.innerHTML = ''
+  }
 
   // Input fields
   const inputs = document.createElement('div')
@@ -734,7 +740,7 @@ const buildEditor = (doc: string, grammar: any) => {
   content!.appendChild(ribbon)
 
   // Make popups
-  const popup = newCard(grammar)
+  const popup = newCard(grammar, true)
   content!.appendChild(popup)
 
   // Read cards
@@ -754,7 +760,8 @@ const buildEditor = (doc: string, grammar: any) => {
   }).catch(e => { console.error(e) })
 }
 
-const showCards = (doc: string) => {
+const showCards = (doc: string, grammar: any) => {
+  newCard(grammar, false)
   const cardDisplay = document.getElementById('card-display')
   if (cardDisplay !== null) cardDisplay.innerHTML = ''
   readCards(doc)

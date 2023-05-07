@@ -211,6 +211,7 @@ const editor = (config: any) => {
   setEditorTitle('Document Editor')
   makeEditorContent()
   buildEditor(editing, config)
+  configCache = config
 }
 const queue = (config: any) => {
   deconstruct()
@@ -347,7 +348,7 @@ const addCard = async (card: any) => {
 
   // Refresh view
   resetCardInputs()
-  showCards(editing)
+  showCards(editing, configCache)
 }
 
 const deleteCard = async (i: number) => {
@@ -366,7 +367,7 @@ const deleteCard = async (i: number) => {
   }
 
   // Refresh view
-  showCards(editing)
+  showCards(editing, configCache)
 }
 
 const getGrammar = async () => {
