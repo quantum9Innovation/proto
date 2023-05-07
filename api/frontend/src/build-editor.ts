@@ -256,7 +256,8 @@ const putCards = (cards: any[]) => {
     cardDel.className = 'delete'
     cardDel.innerText = 'Delete'
     cardDel.addEventListener('click', e => {
-      deleteCard(i).catch(e => { console.error(e) })
+      const del = confirm('Are you sure you want to delete this card (' + term + ')?')
+      if (del) deleteCard(i).catch(e => { console.error(e) })
     })
 
     cardItem.appendChild(cardText)

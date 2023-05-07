@@ -46,7 +46,8 @@ const putFiles = (dirs: string[], docs: string[]) => {
     folderDel.className = 'delete'
     folderDel.innerText = 'Delete'
     folderDel.addEventListener('click', e => {
-      rm(dir).catch(e => { console.error(e) })
+      const del = confirm('Are you sure you want to delete ' + dir + '?')
+      if (del) rm(dir).catch(e => { console.error(e) })
     })
 
     folder.appendChild(folderText)
@@ -65,7 +66,8 @@ const putFiles = (dirs: string[], docs: string[]) => {
     fileDel.className = 'delete'
     fileDel.innerText = 'Delete'
     fileDel.addEventListener('click', e => {
-      rm(doc).catch(e => { console.error(e) })
+      const del = confirm('Are you sure you want to delete ' + doc + '?')
+      if (del) rm(doc).catch(e => { console.error(e) })
     })
     const fileEdit = document.createElement('button')
     fileEdit.className = 'edit'

@@ -11,6 +11,7 @@
 
 ## Frontend
 
+- [x] Confirm all deletions in popup
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
