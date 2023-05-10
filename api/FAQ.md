@@ -11,7 +11,9 @@ You can do this by a simple find and replace operation to replace paths starting
 
 ## Site identified as unsafe after HTTPS setup
 
-Because Proto's server is locally hosted, the public certificate in your `config.json` is self-signed and not verified by any certificate authority.
+If you are viewing this site on a desktop device, use [mkcert](https://github.com/FiloSottile/mkcert) to generate a self-signed certificate and add it to your browser's trust store.
+
+If the site is being served over a network and being accessed on a mobile device, this might be harder to fix.
 The simple solution is to simply ignore this error and continue (on Chrome you may need to click 'Advanced' and then 'Proceed to site' to bypass this message).
 The main point of an HTTPS connection is to prevent request interception.
 Since you already know the URL to the language server (which is the one specified in `config.json`), the identity checks your browser runs are pointless.
