@@ -22,6 +22,8 @@
 
 - [x] Confirm all deletions in popup
 - [x] Reset select objects in grammar properties after card creation
+- [ ] Use appropriate Noto fonts
+- [ ] Remove spellcheck and autofill from input boxes
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
