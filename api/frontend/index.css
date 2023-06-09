@@ -40,6 +40,10 @@
   --scrim: brightness(75%);
 }
 
+body {
+  font-family: 'Noto Sans', 'Noto Sans Ethiopic', sans-serif !important;
+}
+
 .hide {
   display: none;
 }
@@ -126,6 +130,7 @@ input[type=checkbox] {
 
 #flashcard input,
 #queue-props input {
+  width: calc(50% - var(--padding-large));
   background: var(--bg);
 }
 
@@ -140,7 +145,8 @@ input[type=checkbox] {
 
 .grammar {
   max-height: 350px;
-  overflow: auto;
+  width: calc(80% - 2 * var(--padding-large));
+  overflow:auto;
   margin-top: var(--margin-mid);
   border-radius: var(--border-mid);
   border: 3px var(--folder) solid;
@@ -315,6 +321,7 @@ input[type=checkbox] {
 }
 
 .popup input {
+  width: calc(100% - var(--padding-large));
   margin-bottom: var(--margin-mid);
 }
 
