@@ -7,6 +7,9 @@ Much of this documentation is still a work-in-progress as backend code is curren
 
 - [Setup](./setup.md)
   - Start here to learn how to set up the Proto Language Server. This should be the first step after installing the latest release.
+- [Philosophy](./philosophy.md)
+  - This section will help you understand how Proto works and how to configure it for your needs.
+  Read this after installing and setting up the Proto Language Server.
 - :tada: **Congratulations!**
   - That's all the documentation we have for now.
   If you encounter any problems, please [open an issue](https://github.com/quantum9innovation/proto/issues/new) to let us know.
