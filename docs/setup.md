@@ -94,7 +94,7 @@ Inside the `dist` directory where you extracted the tarball (`~/proto/dist` in t
 
 The `host` and `port` parameters will control where the API listens for requests and are printed to the console when the server starts.
 This determines the link that will be used to access the frontend.
-For example, if `host=localhost` and `port=8080`, the frontend will be hosted at `http://localhost:8080`.
+For example, if `host='localhost'` and `port=8080`, the frontend will be hosted at `http://localhost:8080`.
 
 ### Storage
 
