@@ -7,7 +7,8 @@
 - [x] API setup documentation
 - [ ] Frontend usage documentation
 - [ ] Review current API, README, and other docs
-- [ ] Add any necessary theory and example usage to API docs
+- [ ] Add Open Source Licenses/credits page
+- [x] Add any necessary theory and example usage to API docs
 
 ## Long-term
 
@@ -19,13 +20,15 @@
 - [ ] Add plugin support
 - [ ] Distribute compiled language server binaries
 - [ ] Switch to SQLite-based database
+- [ ] Allow custom forgetting curves
+- [ ] Allow configuration from frontend
+- [ ] Work on grammar tab
 
 ## Frontend
 
 - [x] Confirm all deletions in popup
 - [x] Reset select objects in grammar properties after card creation
 - [x] Use appropriate Noto fonts
-- [ ] Add Open Source Licenses/credits page
 - [ ] Remove spellcheck and autofill from input boxes
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
