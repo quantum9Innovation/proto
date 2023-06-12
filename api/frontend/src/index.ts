@@ -143,11 +143,7 @@ const konami = () => {
 const register = async () => {
   // Register fonts
   const notoSans = new FontFace('Noto Sans', 'url(frontend/assets/noto-universal.ttf)')
-  const notoSansEthiopic = new FontFace(
-    'Noto Sans Ethiopic', 'url(frontend/assets/noto-ethiopic.ttf)'
-  )
   document.fonts.add(notoSans)
-  document.fonts.add(notoSansEthiopic)
 
   const sent = Date.now()
   const res = await fetch('/api/init/session', {
