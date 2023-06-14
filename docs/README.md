@@ -10,6 +10,9 @@ Much of this documentation is still a work-in-progress as backend code is curren
 - [Philosophy](./philosophy.md)
   - This section will help you understand how Proto works and how to configure it for your needs.
   Read this after installing and setting up the Proto Language Server.
+- [Usage](./usage.md)
+  - This section will guide you through how to use the Proto Language Server, focusing primarily on the frontend UI.
+  Make sure to read this only after you have properly installed and configured the backend.
 - :tada: **Congratulations!**
   - That's all the documentation we have for now.
   If you encounter any problems, please [open an issue](https://github.com/quantum9innovation/proto/issues/new) to let us know.

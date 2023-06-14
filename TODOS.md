@@ -5,7 +5,7 @@
 - [x] Fill out FAQs with more questions
 - [x] Reorganize important repository files into parent directory
 - [x] API setup documentation
-- [ ] Frontend usage documentation
+- [x] Frontend usage documentation
 - [ ] Review current API, README, and other docs
 - [ ] Add Open Source Licenses/credits page
 - [x] Add any necessary theory and example usage to API docs
