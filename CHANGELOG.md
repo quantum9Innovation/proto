@@ -15,6 +15,8 @@
 - Fix byte length errors with PINs
 - Hide detailed error messages from frontend (see [FAQ](./FAQ.md#full-stack-traceerror-info-is-being-broadcast-in-production))
 
+---
+
 ## v0.5.0
 
 - Fix boolean inline checks which require repeat property name
