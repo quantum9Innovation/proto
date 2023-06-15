@@ -10,7 +10,7 @@ We will assume you have finished [setting up](./setup.md) your installation.
 Before we begin, it's important to understand why Proto was developed in the first place.
 Proto is intended to be a **universal, open-source toolset for learning new languages**.
 By **universal**, we mean that Proto's main features are available for all languages—the app is entirely customizable to ensure that it will work well no matter what language you choose to learn.
-By **open-source**, we are referring to Proto's permissive [GPL v3 license](https://www.gnu.org/licenses/quick-guide-gplv3.html), which gives you the right to modify and redistribute Proto's source code with appropriate attribution and an identical license.
+By **open-source**, we are referring to Proto's permissive [GPLv3 license](https://www.gnu.org/licenses/quick-guide-gplv3.html), which gives you the right to modify and redistribute Proto's source code with appropriate attribution and an identical license.
 This ensures all improvements are publicly available forever.
 By **toolset**, we mean that Proto is more than an application—it is a collection of interdependent and flexible tools intended to help you learn new languages.
 
