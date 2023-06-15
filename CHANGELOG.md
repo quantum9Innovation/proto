@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.6.0
+
+- Fill out [FAQs](./FAQ.md) with more questions
+- Reorganize important repository files into parent directory
+- Add [API setup documentation](./docs/setup.md)
+- Add [frontend usage documentation](./docs/usage.md)
+- Review current [API](./api/README.md), [README](./README.md), and other docs
+- Add [Open Source Licenses page](./OSL.md)
+- Add any necessary theory and example usage to [API docs](./docs/philosophy.md)
+- Confirm all deletions in popup
+- Reset select objects in grammar properties after card creation
+- Use [appropriate Noto fonts](./api/frontend/assets/noto-universal.ttf) for each language
+- Fix byte length errors with PINs
+- Hide detailed error messages from frontend (see [FAQ](./FAQ.md#full-stack-traceerror-info-is-being-broadcast-in-production))
+
 ## v0.5.0
 
 - Fix boolean inline checks which require repeat property name

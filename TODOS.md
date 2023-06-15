@@ -1,15 +1,5 @@
 # Todos
 
-## Public alpha
-
-- [x] Fill out FAQs with more questions
-- [x] Reorganize important repository files into parent directory
-- [x] API setup documentation
-- [x] Frontend usage documentation
-- [ ] Review current API, README, and other docs
-- [x] Add Open Source Licenses/credits page
-- [x] Add any necessary theory and example usage to API docs
-
 ## Long-term
 
 - [ ] Option to retest cards (in case of typo)
@@ -26,9 +16,6 @@
 
 ## Frontend
 
-- [x] Confirm all deletions in popup
-- [x] Reset select objects in grammar properties after card creation
-- [x] Use appropriate Noto fonts
 - [ ] Remove spellcheck and autofill from input boxes
 - [ ] First-class mobile and PWA support
 - [ ] Automatically open frontend on backend start (possibly with config option)
@@ -41,8 +28,6 @@
 
 ## Backend
 
-- [x] Fix byte length errors
-- [x] Hide detailed error messages from frontend (see FAQ)
 - [ ] Consider switching imports to use `require()`
 - [ ] Debug unusual spaced repetition behaviors
 - [ ] Decide on how to structure phrases
