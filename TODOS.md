@@ -16,8 +16,10 @@
 
 ## Frontend
 
+- [ ] Create PWA to cache network assets
+- [ ] Fetch large files over network to reduce release size
 - [ ] Remove spellcheck and autofill from input boxes
-- [ ] First-class mobile and PWA support
+- [ ] First-class mobile support
 - [ ] Automatically open frontend on backend start (possibly with config option)
 - [ ] Fix accessibility problems
 - [ ] Do not check order for multiple choice cards
