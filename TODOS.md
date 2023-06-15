@@ -7,7 +7,7 @@
 - [x] API setup documentation
 - [x] Frontend usage documentation
 - [ ] Review current API, README, and other docs
-- [ ] Add Open Source Licenses/credits page
+- [x] Add Open Source Licenses/credits page
 - [x] Add any necessary theory and example usage to API docs
 
 ## Long-term
