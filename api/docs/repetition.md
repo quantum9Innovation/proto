@@ -92,7 +92,7 @@ We can do this by taking:
 
 $$ N = \sum_{i=1}^{n} \frac{\Delta T_i}{\Delta T_i + K} $$
 
-where $ n $ is the number of correct responses, $\Delta T_i$ is the change in time from the most recent relearning event to $T_i$ and $K$ is a constant chosen to reduce the weight of "small" changes in time. $K = 1/8$ is a reasonable choice, which weights 1 hour as being equivalent to 1/4 of a day in terms of learning productivity. $N$ is limited to the current streak of correct responses to eliminate noise from incorrect responses.
+where $n$ is the number of correct responses, $\Delta T_i$ is the change in time from the most recent relearning event to $T_i$ and $K$ is a constant chosen to reduce the weight of "small" changes in time. $K = 1/8$ is a reasonable choice, which weights 1 hour as being equivalent to 1/4 of a day in terms of learning productivity. $N$ is limited to the current streak of correct responses to eliminate noise from incorrect responses.
 
 Turning now to $\sigma$, we need a way of assessing *accuracy* based on previous tests.
 However, its important to note that there is no baseline accuracy measurement, as accuracy is really a function of time that is constantly changing each time a card is relearned.
