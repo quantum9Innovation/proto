@@ -18,6 +18,8 @@
 
 - [x] Randomize initial queue order
 - [x] Add enter keybind in queue
+- [x] Add option to skip review if correct
+- [ ] Restructure API settings endpoints
 - [ ] Create PWA to cache network assets
 - [ ] Fetch large files over network to reduce release size
 - [ ] Remove spellcheck and autofill from input boxes
