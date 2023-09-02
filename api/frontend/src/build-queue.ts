@@ -379,7 +379,6 @@ const makeQueueRevRibbon = () => {
   // Add event listeners
   closeBtn.addEventListener('click', e => { openVFS() })
   nextBtn.addEventListener('click', e => { restartQueue() })
-
   ribbon.appendChild(closeBtn)
   ribbon.appendChild(nextBtn)
   return ribbon
@@ -465,6 +464,7 @@ const buildQueueCard = (card: any, config: any) => {
   // Make flashcard
   const flashcard = newFlashcard(card)
   content!.appendChild(flashcard)
+  document.getElementById('queue-definition')?.focus()
 
   // Grammar property input fields
   const grammarStatus = includesProperties(card, config)

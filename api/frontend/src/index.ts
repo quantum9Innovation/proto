@@ -199,6 +199,7 @@ const deconstruct = () => {
       break
     case 'queue':
       deconstructQueue()
+      document.body.removeEventListener('keypress', progressListener)
       break
   }
 }
@@ -225,9 +226,19 @@ const queue = (config: any) => {
   buildQueueCard(cards[0], config)
   updateProgressBar(0)
   configCache = config
+  document.body.addEventListener('keypress', progressListener)
 }
 
 // Helper funcs
+const progressListener = (e: KeyboardEvent) => {
+  // Alias enter keybind to next button
+  const btn = document.getElementById('editor-submit') as HTMLButtonElement
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    btn.click()
+  }
+}
+
 const shuffle = (array: any[]) => array
   .map(value => ({ value, sort: Math.random() }))
   .sort((a, b) => a.sort - b.sort)
