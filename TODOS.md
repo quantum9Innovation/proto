@@ -16,6 +16,7 @@
 
 ## Frontend
 
+- [x] Randomize initial queue order
 - [ ] Create PWA to cache network assets
 - [ ] Fetch large files over network to reduce release size
 - [ ] Remove spellcheck and autofill from input boxes

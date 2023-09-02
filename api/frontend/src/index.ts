@@ -228,6 +228,11 @@ const queue = (config: any) => {
 }
 
 // Helper funcs
+const shuffle = (array: any[]) => array
+  .map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
+
 const traverse = (dir: string) => {
   const paths = dir.split('/')
   paths.splice(paths.length - 2, 2)
@@ -557,6 +562,10 @@ const openQueue = async (doc: boolean) => {
 
   // Open queue
   cards = await res.json()
+  const queueCards = shuffle(cards.slice(0, limit))
+  for (let i = 0; i < limit; i++) {
+    cards[i] = queueCards[i]
+  }
   noCorrect = 0
   if (cards.length !== 0) queue(config)
   else alert('No cards to study')
