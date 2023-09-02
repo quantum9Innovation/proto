@@ -480,6 +480,7 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
   const stats = [score, scoreSum / (cards.length + noCorrect)]
 
   // Go to next card, depending on settings
+  /* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */
   if (correct && skipIfCorrect) {
     refreshQueue()
     buildQueueCard(cards[0], configCache)

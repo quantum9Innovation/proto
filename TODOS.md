@@ -16,9 +16,8 @@
 
 ## Frontend
 
-- [x] Randomize initial queue order
-- [x] Add enter keybind in queue
-- [x] Add option to skip review if correct
+- [ ] Automatically check for updates and security/bugfix status
+- [ ] Only show start queue button when valid
 - [ ] Restructure API settings endpoints
 - [ ] Create PWA to cache network assets
 - [ ] Fetch large files over network to reduce release size
