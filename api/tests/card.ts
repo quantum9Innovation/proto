@@ -261,6 +261,11 @@ describe('Advanced card methods', () => {
       const limit = JSON.parse(res.text).limit
       expect(['number', 'undefined']).toContain(typeof limit)
     }))
+
+    test('queue', endpoint(app, '/card/queue', (res: JSONRes) => {
+      const skipIfCorrect = JSON.parse(res.text).skipIfCorrect
+      expect(typeof skipIfCorrect).toBe('boolean')
+    }))
   })
 
   // Upload new histories

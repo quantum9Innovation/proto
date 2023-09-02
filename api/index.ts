@@ -55,8 +55,11 @@ if (HTTPS !== false) {
   httpsKey = fs.readFileSync(key)
   httpsCert = fs.readFileSync(cert)
 }
+
+/* istanbul ignore next */
 if (CONFIG.settings !== undefined) {
   if (CONFIG.settings.limit !== undefined) app.set('limit', CONFIG.settings.limit)
+  if (CONFIG.settings.skipIfCorrect !== undefined) app.set('skipIfCorrect', CONFIG.settings.skipIfCorrect)
 }
 
 // Define routes

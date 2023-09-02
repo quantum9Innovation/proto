@@ -9,5 +9,6 @@ export interface Config {
   }
   settings?: {
     limit?: number
+    skipIfCorrect?: boolean
   }
 }

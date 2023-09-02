@@ -392,6 +392,13 @@ card.get('/limit', (req, res) => {
   res.json({ limit })
 })
 
+// Get queue settings from config
+card.get('/queue', (req, res) => {
+  let skipIfCorrect = app.get('skipIfCorrect')
+  if (skipIfCorrect === undefined) skipIfCorrect = false
+  res.json({ skipIfCorrect })
+})
+
 // Append or update history to object given ID
 card.post('/history', (req, res) => {
   // Parse request

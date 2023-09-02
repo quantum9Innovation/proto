@@ -7,6 +7,7 @@ let noCorrect = 0
 let progress: number = 0
 let configCache: any
 let limit: number
+let skipIfCorrect: boolean
 let ping: number
 
 // Ambient context
@@ -414,6 +415,18 @@ const getLimit = async () => {
   limit = data.limit
 }
 
+const getQueueSettings = async () => {
+  // Fetch queue settings
+  const res = await fetch('/api/card/queue')
+  if (res.status !== 200) {
+    const e = await res.text()
+    console.error(e)
+    alert(e)
+  }
+  const data = await res.json()
+  skipIfCorrect = data.skipIfCorrect
+}
+
 const startReview = async (card: any, rec: any, correct: boolean) => {
   // Start queue review
 
@@ -465,6 +478,15 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
   if (card.history?.score !== undefined) score = card.history.score
 
   const stats = [score, scoreSum / (cards.length + noCorrect)]
+
+  // Go to next card, depending on settings
+  if (correct && skipIfCorrect) {
+    refreshQueue()
+    buildQueueCard(cards[0], configCache)
+    progress = noCorrect / limit
+    updateProgressBar(Math.min(progress, 1))
+    return
+  }
 
   // Switch to review
   refreshQueue()
@@ -563,6 +585,7 @@ const openQueue = async (doc: boolean) => {
   )
   const config = await getGrammar()
   await getLimit()
+  await getQueueSettings()
 
   // Error handling
   if (res.status !== 200) {

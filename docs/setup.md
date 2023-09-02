@@ -125,6 +125,8 @@ Before the limit is reached, incorrect cards will be saved and tested at the end
 After the limit is reached, cards are retested immediately following an incorrect response.
 Your progress towards the limit is reset each time you start a new queue session.
 
+If you want to skip the review screen in the queue when your responses are correct, set the `skipIfCorrect` parameter to `true`.
+
 ## Starting the Server
 
 Inside the `dist` folder, you should find a Bash script `start.sh`.
