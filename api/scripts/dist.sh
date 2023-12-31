@@ -11,7 +11,7 @@ echo 'Compiling API to single file'
 rm -r dist
 yarn run ncc build compiled/run.js -o dist
 echo 'API compiled to dist/index.js'
-echo '================================='
+echo '==================================='
 echo 'Cleaning up generated distributions'
 rm -r dist/frontend/src
 rm dist/frontend/webjs/*.map
