@@ -40,6 +40,7 @@ const addProp = (prefill?: string) => {
   const propsList = document.getElementById('queue-props-list')
   if (propsList === null) return
   const inputEl = document.createElement('input')
+  inputEl.autocomplete = 'off'
   inputEl.className = 'inputs'
   if (prefill !== undefined) inputEl.value = prefill
   propsList.appendChild(inputEl)
@@ -105,6 +106,7 @@ const newFlashcard = (card: any) => {
 
   const definitionEl = document.createElement('input')
   definitionEl.id = 'queue-definition'
+  definitionEl.autocomplete = 'off'
   flashcard.appendChild(definitionEl)
 
   // Return flashcard

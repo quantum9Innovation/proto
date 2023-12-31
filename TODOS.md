@@ -1,5 +1,9 @@
 # Todos
 
+## Scheduled
+
+- [x] Remove input suggestions with `autocomplete="off"`
+
 ## Long-term
 
 - [ ] Option to retest cards (in case of typo)
