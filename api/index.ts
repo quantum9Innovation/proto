@@ -7,8 +7,8 @@ import { type Config } from './config'
 import { type Router } from 'express'
 
 // Imports
-import untildify = require('untildify')
 import helmet from 'helmet'
+import untildify from 'untildify'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as http from 'http'
@@ -159,6 +159,5 @@ export {
   host, port,
   msg,
   ROOT as root,
-// deepcode ignore HttpToHttps: this is set by user config
   LOC as loc
 }
