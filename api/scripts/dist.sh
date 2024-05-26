@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 echo 'Building API from .'
-yarn run tsc -p tsconfig.json
+pnpm tsc -p tsconfig.json
 echo 'API built to compiled/'
 echo '======================'
 echo 'Rebuilding frontend from frontend/src/'
-yarn run tsc -p frontend/src/tsconfig.json
+pnpm tsc -p frontend/src/tsconfig.json
 echo 'Frontend built to frontend/webjs/'
 echo '================================='
 echo 'Compiling API to single file'
 rm -r dist
-yarn run ncc build compiled/run.js -o dist
+pnpm ncc build compiled/run.js -o dist
 echo 'API compiled to dist/index.js'
 echo '==================================='
 echo 'Cleaning up generated distributions'
@@ -24,7 +24,7 @@ printf "#!/bin/bash\n" >> dist/bootstrap.sh
 printf "cd ..\n" >> dist/bootstrap.sh
 printf "mkdir frontend\n" >> dist/bootstrap.sh
 printf "mv dist/frontend/index.html frontend/index.html\n" >> dist/bootstrap.sh
-printf "cd dist; yarn install\n" >> dist/bootstrap.sh
+printf "cd dist; pnpm install\n" >> dist/bootstrap.sh
 touch dist/start.sh
 printf "#!/bin/bash\n" >> dist/start.sh
 printf "export NODE_ENV=production\n" >> dist/start.sh
