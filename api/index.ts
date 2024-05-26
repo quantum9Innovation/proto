@@ -159,6 +159,5 @@ export {
   host, port,
   msg,
   ROOT as root,
-// deepcode ignore HttpToHttps: this is set by user config
   LOC as loc
 }
