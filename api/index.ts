@@ -45,15 +45,11 @@ const ROOT = untildify(CONFIG.root)
 const LOC = path.join(__dirname, '..')
 /* istanbul ignore next */
 const HTTPS = CONFIG.https ?? false
-let host = CONFIG.host
-let port = CONFIG.port
+const host = CONFIG.host ?? 'localhost'
+const port = CONFIG.port ?? 3000
 let httpsKey
 let httpsCert
 
-/* istanbul ignore next */
-if (host == null) host = 'localhost'
-/* istanbul ignore next */
-if (port == null) port = 3000
 /* istanbul ignore next */
 if (HTTPS !== false) {
   let { key, cert } = HTTPS
@@ -107,6 +103,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api', (_, res) => {
   res.send(INFO)
 })
+app.use(apiLimiter)
+app.use(csrf())
 
 // Custom middleware to check PIN
 /* istanbul ignore next */
@@ -161,5 +159,6 @@ export {
   host, port,
   msg,
   ROOT as root,
+// deepcode ignore HttpToHttps: this is set by user config
   LOC as loc
 }
