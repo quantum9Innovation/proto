@@ -1,4 +1,5 @@
 // Cards
+// file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type Definitions
 import { type AddHistory, type LangConfig, type NewCard } from './req'
@@ -68,7 +69,7 @@ card.post('/', (req, res) => {
     if (prop.name.includes('history')) return res.status(400).send('Invalid grammar property name.')
     /* istanbul ignore next */
     if (prop.type === 'Choice' && prop.choices === undefined) {
-      return res.status(400).send(`No choices specified for grammar property ${prop.name}.`)
+      return res.status(400).send({ error: `No choices specified for grammar property ${prop.name}.` })
     }
   }
 
@@ -168,7 +169,7 @@ card.post('/add', (req, res) => {
         }
       }
 
-      if (!match) return res.status(400).send(`Grammar property ${prop} is not defined.`)
+      if (!match) return res.status(400).send({ error: `Grammar property ${prop} is not defined.` })
       if (defaultType === true && value === null) {
         card.grammar.properties[prop] = defaultType
       }
@@ -276,7 +277,7 @@ card.get('/list', (req, res) => {
       fs.readdirSync(dir).forEach(file => {
         const abs = path.join(dir, file)
         /* istanbul ignore next */
-        if (fs.statSync(abs).isDirectory()) { traverse(abs) } else if (fs.statSync(abs).isFile()) return files.push(abs)
+        if (fs.statSync(abs).isDirectory()) { traverse(abs) } else if (fs.statSync(abs).isFile()) files.push(abs)
       })
     }
     traverse(pathname)
@@ -494,7 +495,7 @@ const rescore = (loc: string, lang: string) => {
     fs.readdirSync(dir).forEach(file => {
       const abs = path.join(dir, file)
       if (fs.statSync(abs).isDirectory()) traverse(abs)
-      else if (fs.statSync(abs).isFile()) return files.push(abs)
+      else if (fs.statSync(abs).isFile()) files.push(abs)
     })
   }
   traverse(pathname)

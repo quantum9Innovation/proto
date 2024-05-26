@@ -1,4 +1,5 @@
 // Initialize API
+// file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type definitions
 import { type Config, type Session } from './req'

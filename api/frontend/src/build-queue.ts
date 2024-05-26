@@ -411,8 +411,7 @@ const includesProperties = (card: any, config: any) => {
     const test: boolean = propConfig.test
     const method: string = propConfig.method
     if (test && method === 'inline') {
-      if (type !== 'boolean') reqMet = true
-      else if (prop !== false) reqMet = true
+      if (type !== 'boolean' || prop !== false) reqMet = true
     }
   }
   return reqMet

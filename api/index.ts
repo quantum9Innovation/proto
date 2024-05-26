@@ -14,9 +14,11 @@ import * as path from 'path'
 import * as http from 'http'
 import * as https from 'https'
 import * as crypto from 'crypto'
+import * as csrf from 'csurf'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
+import * as RateLimit from 'express-rate-limit'
 
 // Route imports
 import { init } from './routes/init'
@@ -34,6 +36,11 @@ const EXPRESS_VERSION: string = JSON.parse(
 
 // Create app
 const app = express()
+const apiLimiter = RateLimit.rateLimit({
+  windowMs: 1000 * 60 * 60,
+  max: 100,
+  headers: true
+})
 const ROOT = untildify(CONFIG.root)
 const LOC = path.join(__dirname, '..')
 /* istanbul ignore next */
@@ -91,6 +98,8 @@ const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
              + `Running Express ${EXPRESS_VERSION} `
              + `on Node ${process.version}<br>\n`
              + `Serving as text/html; charset=utf-8 with status code 200 over ${URL_PREFIX}`
+app.use(apiLimiter)
+app.use(csrf())
 app.use(helmet())
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -144,6 +153,7 @@ const options = {
   cert: httpsCert
 }
 /* istanbul ignore next */
+// deepcode ignore HttpToHttps: this is set by user config
 const server = HTTPS !== false ? https.createServer(options, app) : http.createServer(app)
 const msg = `Listening on ${URL_PREFIX}://${host}:${port}`
 export {

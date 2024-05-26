@@ -46,14 +46,16 @@ const addCardDetails = (card: any, details: Element, phrase: boolean) => {
   const tags: string[] | undefined = card.tags
   if (tags !== undefined) {
     const tagsEl = document.createElement('p')
-    tagsEl.innerHTML = '<strong>Tags</strong>: ' + tags.join(', ')
+    tagsEl.innerHTML += '<strong>Tags</strong>: '
+    tagsEl.innerText += tags.join(', ')
     details.appendChild(tagsEl)
   }
 
   const notes: string | undefined = card.notes
   if (notes !== undefined) {
     const notesEl = document.createElement('p')
-    notesEl.innerHTML = '<strong>Notes</strong>: ' + notes
+    notesEl.innerHTML += '<strong>Notes</strong>: '
+    notesEl.innerText += notes
     details.appendChild(notesEl)
   }
 
@@ -62,14 +64,16 @@ const addCardDetails = (card: any, details: Element, phrase: boolean) => {
     const pos: string | undefined = grammar.pos
     if (pos !== undefined) {
       const posEl = document.createElement('p')
-      posEl.innerHTML = '<strong>Part of speech</strong>: ' + pos
+      posEl.innerHTML += '<strong>Part of speech</strong>: '
+      posEl.innerText += pos
       details.appendChild(posEl)
     }
 
     const context: string | undefined = grammar.context
     if (context !== undefined) {
       const contextEl = document.createElement('p')
-      contextEl.innerHTML = '<strong>Context</strong>: ' + context
+      contextEl.innerHTML += '<strong>Context</strong>: '
+      contextEl.innerText += context
       details.appendChild(contextEl)
     }
 
@@ -79,8 +83,8 @@ const addCardDetails = (card: any, details: Element, phrase: boolean) => {
         if (prop.includes('history')) delete properties[prop]
       }
       const propertiesEl = document.createElement('p')
-      propertiesEl.innerHTML = '<strong>Grammar properties</strong>: '
-                               + JSON.stringify(properties, null, 2)
+      propertiesEl.innerHTML += '<strong>Grammar properties</strong>: '
+      propertiesEl.innerText += JSON.stringify(properties, null, 2)
       details.appendChild(propertiesEl)
     }
   }

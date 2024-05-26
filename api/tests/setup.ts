@@ -38,6 +38,9 @@ const endpoint = (
           .expect(options.status as number)
           .expect('Content-Type', options.contentType as string)
           .then(callback)
+          .catch((err: Error) => {
+            throw err
+          })
         break
       }
       case 'post': {
@@ -46,6 +49,9 @@ const endpoint = (
           .expect(options.status as number)
           .expect('Content-Type', options.contentType as string)
           .then(callback)
+          .catch((err: Error) => {
+            throw err
+          })
         break
       }
       case 'delete': {
@@ -54,6 +60,9 @@ const endpoint = (
           .expect(options.status as number)
           .expect('Content-Type', options.contentType as string)
           .then(callback)
+          .catch((err: Error) => {
+            throw err
+          })
         break
       }
     }
