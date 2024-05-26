@@ -1,4 +1,5 @@
 // Virtual File System (VFS)
+// file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type definitions
 import { type Document } from './req'

@@ -14,8 +14,8 @@ Since Proto's releases are currently not compiled for any operating system, you'
 Please note that Proto has not been tested with any non-Node.js runtime and may require significant manual configuration and additional dependency installations to work properly with other runtimes.
 The rest of this documentation will assume you are using the Node.js runtime.
 
-We also recommend installing [Yarn](https://yarnpkg.com), as the bootstrapping script uses it to install Proto's dependencies.
-Installation instructions for Yarn can be found [here](https://yarnpkg.com/getting-started/install).
+We also recommend installing [pnpm](https://pnpm.io), as the bootstrapping script uses it to install Proto's dependencies and it will save disk space when installing dependencies.
+Installation instructions for pnpm can be found [here](https://pnpm.io/installation).
 If you choose to use npm, which ships with Node.js, you will need to run the bootstrapping commands manually.
 
 ## Installation
@@ -57,7 +57,7 @@ You *do not* need to run this again if it completes successfully.
 ~/proto/dist: ./bootstrap.sh
 ```
 
-If you don't have npm, you will get an error saying that `yarn` is not found.
+If you don't have pnpm, you will get an error saying that `pnpm` is not found.
 After running `bootstrap.sh`, run `npm install` to finish installing project dependencies.
 Alternatively, you can manually run a modified version of the bootstrap script:
 
@@ -208,7 +208,7 @@ From this directory, run:
 
 You should extract the tarball to your current `dist` directory (the place you start the Proto Language Server from).
 This is safe as it will only replace the previously installed files and not additional ones (e.g. `config.json`), so you can continue to use the Proto Language Server as normal.
-However, before starting it again, you'll need to rerun the bootstrapper (or manually run the modified version mentioned in [Extraction](#extraction) if you don't have Yarn).
+However, before starting it again, you'll need to rerun the bootstrapper (or manually run the modified version mentioned in [Extraction](#extraction) if you don't have pnpm).
 
 ```sh
 ~/proto/dist: ./bootstrap.sh  # only necessary before first run
