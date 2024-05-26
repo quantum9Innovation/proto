@@ -20,7 +20,7 @@ const checkPrefix = (prefix: string, candidate: string) => {
   // .resolve() removes trailing slashes
   const absPrefix = path.resolve(prefix) + path.sep
   const absCandidate = path.resolve(candidate) + path.sep
-  return absCandidate.substring(0, absPrefix.length) === absPrefix
+  return absCandidate.startsWith(absPrefix)
 }
 const safeSuffix = (unsafeSuffix: string, basePath: string) => {
   /* See: https://security.stackexchange.com/a/123723 */
@@ -417,7 +417,8 @@ card.post('/history', (req, res) => {
   if (id.length >= 3) {
     if (id[2] === 'GRAMMAR') type = 'grammar'
     else if (id[2] === 'PHRASE') type = 'phrase'
-  } if (id.length >= 5) {
+  }
+  if (id.length >= 5) {
     if (id[2] === 'PHRASE' && id[4] === 'GRAMMAR') type = 'phrase-grammar'
   }
 

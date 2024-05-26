@@ -18,7 +18,7 @@ const checkPrefix = (prefix: string, candidate: string) => {
   // .resolve() removes trailing slashes
   const absPrefix = path.resolve(prefix) + path.sep
   const absCandidate = path.resolve(candidate) + path.sep
-  return absCandidate.substring(0, absPrefix.length) === absPrefix
+  return absCandidate.startsWith(absPrefix)
 }
 const safeSuffix = (unsafeSuffix: string, basePath: string) => {
   /* See: https://security.stackexchange.com/a/123723 */
