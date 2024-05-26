@@ -10,20 +10,20 @@ The [frontend](./frontend/) folder contains the code that is served to a browser
 Please note that Proto is currently in the **public alpha** stage of development and released code may be unstable and not work as expected.
 If you encounter any issues or need help, please either [open an issue](https://github.com/quantum9Innovation/proto/issues/new) or contact a project maintainer.
 
-If you have already cloned the repository, you can run `yarn dist` to generate all the required files in the `dist` directory.
+If you have already cloned the repository, you can run `pnpm dist` to generate all the required files in the `dist` directory.
 Instructions for a production deployment in another location should be printed to the terminal.
 
 Run the following commands to update your local Proto version:
 
 ```sh
 git pull
-yarn install
-yarn dist
+pnpm install
+pnpm dist
 ```
 
 **Important:**
 Do not use the Proto repository as a production environment.
-Stored files will be overwritten when you run `yarn test` or similar commands.
+Stored files will be overwritten when you run `pnpm test` or similar commands.
 Always extract production releases to a separate location used exclusively for its intended purpose (i.e. not development).
 
 **Warning:**
@@ -40,7 +40,7 @@ Follow the below steps regarding setup:
 > Create and edit config.json and then run:  
 > `$ ./start.sh`
 
-*These are the same steps that will be printed to the terminal when you run `yarn dist`.*
+*These are the same steps that will be printed to the terminal when you run `pnpm dist`.*
 
 :warning: **Make sure to backup your card storage directory often!**
 
@@ -57,14 +57,14 @@ Project builds are cached in a `compiled` folder, which contains the correspondi
 The backend is tested entirely using [Jest](https://jestjs.io) and [Supertest](https://github.com/ladjs/supertest), which run mock HTTP requests.
 Additionally, to check for style and QA issues, there is a custom [Eslint](https://eslint.org) template based off of [standard-ts](https://github.com/standard/ts-standard).
 
-- `yarn build`: Builds the project
-- `yarn test`: Tests code and reports coverage
-- `yarn lint`: Lints code and runs QA checks
-- `yarn dist`: Generate distribution release
+- `pnpm build`: Builds the project
+- `pnpm test`: Tests code and reports coverage
+- `pnpm lint`: Lints code and runs QA checks
+- `pnpm dist`: Generate distribution release
 
 ## Debugging
 
-Before debugging, check for any common issues with `yarn lint`.
+Before debugging, check for any common issues with `pnpm lint`.
 If that doesn't reveal anything meaningful, continue to these next steps.
 
 To debug tests, use the built-in Node.js debugger that is supported by Jest out-of-the-box.
@@ -74,10 +74,10 @@ Run the `jest` executable from the local `node_modules` directory with the follo
 node --inspect-brk ./node_modules/.bin/jest --runInBand
 ```
 
-This command is also aliased to `yarn debug`.
+This command is also aliased to `pnpm debug`.
 
 Then, you can connect an external debugger to this process to track down failing tests.
-`yarn build` will automatically compile source maps, so any debugger with support for those will allow you to view the TypeScript source when available.
+`pnpm build` will automatically compile source maps, so any debugger with support for those will allow you to view the TypeScript source when available.
 To connect via VSC, add the following to `launch.json`, under `"configurations"`:
 
 ```json
@@ -102,7 +102,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 ## Deployment
 
-All dependencies need to be installed with Yarn first, which can be done with `yarn install`.
+All dependencies need to be installed with pnpm first, which can be done with `pnpm install`.
 You'll also want the dev dependencies for any of the above steps.
 The server is deployed from [`run.ts`](./run.ts), which is the entry point for the API.
 Simply run `node .` to start it after building the project.
