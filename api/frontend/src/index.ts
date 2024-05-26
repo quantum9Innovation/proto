@@ -163,8 +163,11 @@ const register = async () => {
         return
       }
       Cookies.set('pin', PIN)
-      register()
-      vfs()
+      register().then(() => {
+        vfs()
+      }).catch((e) => {
+        console.error(e)
+      })
       return
     }
 
