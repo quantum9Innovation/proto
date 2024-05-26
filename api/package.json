@@ -62,6 +62,5 @@
       "@typescript-eslint/no-non-null-assertion": 0,
       "@typescript-eslint/no-dynamic-delete": 0
     }
-  },
-  "packageManager": "yarn@3.5.0"
+  }
 }
