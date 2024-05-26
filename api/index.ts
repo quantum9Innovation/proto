@@ -7,8 +7,8 @@ import { type Config } from './config'
 import { type Router } from 'express'
 
 // Imports
-import untildify = require('untildify')
 import helmet from 'helmet'
+import untildify from 'untildify'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as http from 'http'
