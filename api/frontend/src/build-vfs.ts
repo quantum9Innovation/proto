@@ -1,3 +1,5 @@
+// file deepcode ignore PT: path traversal attacks prevented by backend logic
+
 const deconstructVFS = () => {
   // Teardown VFS layout
   const title = document.getElementById('title')
