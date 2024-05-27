@@ -2,12 +2,12 @@
 // file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type Definitions
-import { type AddHistory, type LangConfig, type NewCard } from './req'
-import { type GrammarProp, type Card } from './elements'
+import { type AddHistory, type LangConfig, type NewCard } from './req.js'
+import { type GrammarProp, type Card } from './elements.js'
 
 // Imports
-import { app, root } from '../index'
-import { score } from './calc/repetition'
+import { app, root } from '../index.js'
+import { score } from './calc/repetition.js'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'

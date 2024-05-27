@@ -6,9 +6,9 @@
   */
   "compilerOptions": {
     "target": "es6",
-    "module": "CommonJS",
+    "module": "Node16",
     "baseUrl": ".",
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
     "sourceMap": true,
     "outDir": "compiled",
     "strict": true,

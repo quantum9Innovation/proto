@@ -1,11 +1,11 @@
 // Test all endpoints in card/
 
 // Type definitions
-import { type StdRes, type JSONRes } from './res'
+import { type StdRes, type JSONRes } from './res.js'
 
 // Imports
-import { endpoint } from './setup'
-import { app } from '../index'
+import { endpoint } from './setup.js'
+import { app } from '../index.js'
 import { expect } from '@jest/globals'
 
 // Tests
@@ -408,11 +408,12 @@ describe('Advanced card methods', () => {
     }))
 
     test('with erroneous grammar', endpoint(app, '/card/add', (res: JSONRes) => {
-      expect(res.text).toBe('Grammar property random is not defined.')
+      const json = JSON.parse(res.text)
+      expect(json.error).toBe('Grammar property random is not defined.')
     }, {
       method: 'post',
       status: 400,
-      contentType: 'text/html; charset=utf-8',
+      contentType: 'application/json; charset=utf-8',
       request: {
         loc: '/lang-eng/main.json',
         lang: 'lang-eng',

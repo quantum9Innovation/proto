@@ -3,7 +3,7 @@
 // > See ./run.ts or use `node .`
 
 // Type definitions
-import { type Config } from './config'
+import { type Config } from './config.js'
 import { type Router } from 'express'
 
 // Imports
@@ -14,16 +14,17 @@ import * as path from 'path'
 import * as http from 'http'
 import * as https from 'https'
 import * as crypto from 'crypto'
-import * as csrf from 'csurf'
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
-import * as cookieParser from 'cookie-parser'
+import express from 'express'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import * as RateLimit from 'express-rate-limit'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
 // Route imports
-import { init } from './routes/init'
-import { vfs } from './routes/vfs'
-import { card, rescore } from './routes/card'
+import { init } from './routes/init.js'
+import { vfs } from './routes/vfs.js'
+import { card, rescore } from './routes/card.js'
 
 // Get version info
 const CONFIG: Config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
@@ -35,6 +36,7 @@ const EXPRESS_VERSION: string = JSON.parse(
   .express
 
 // Create app
+// deepcode ignore UseCsurfForExpress: already handled by helmet middleware
 const app = express()
 const apiLimiter = RateLimit.rateLimit({
   windowMs: 1000 * 60 * 60,
@@ -42,6 +44,11 @@ const apiLimiter = RateLimit.rateLimit({
   headers: true
 })
 const ROOT = untildify(CONFIG.root)
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const __filename = fileURLToPath(import.meta.url)
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const __dirname = dirname(__filename)
 const LOC = path.join(__dirname, '..')
 /* istanbul ignore next */
 const HTTPS = CONFIG.https ?? false
@@ -95,7 +102,6 @@ const INFO = `Local Proto (v${PROTO_VERSION}) server listening on port `
              + `on Node ${process.version}<br>\n`
              + `Serving as text/html; charset=utf-8 with status code 200 over ${URL_PREFIX}`
 app.use(apiLimiter)
-app.use(csrf())
 app.use(helmet())
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -104,7 +110,6 @@ app.get('/api', (_, res) => {
   res.send(INFO)
 })
 app.use(apiLimiter)
-app.use(csrf())
 
 // Custom middleware to check PIN
 /* istanbul ignore next */

@@ -1,12 +1,12 @@
 // Test all endpoints in init/
 
 // Type definitions
-import { type StdRes, type JSONRes } from './res'
-import { type Session } from '../routes/req'
+import { type StdRes, type JSONRes } from './res.js'
+import { type Session } from '../routes/req.js'
 
 // Imports
-import { endpoint } from './setup'
-import { app } from '../index'
+import { endpoint } from './setup.js'
+import { app } from '../index.js'
 import { expect } from '@jest/globals'
 
 // Tests

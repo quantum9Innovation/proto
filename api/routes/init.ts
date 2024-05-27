@@ -2,11 +2,11 @@
 // file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type definitions
-import { type Config, type Session } from './req'
-import { type orderedList } from './utils'
+import { type Config, type Session } from './req.js'
+import { type orderedList } from './utils.js'
 
 // Imports
-import { app, root } from '../index'
+import { app, root } from '../index.js'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as express from 'express'
