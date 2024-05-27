@@ -1,11 +1,11 @@
 // Probe all top-level API endpoints
 
 // Type definitions
-import { type StdRes, type JSONRes } from './res'
+import { type StdRes, type JSONRes } from './res.js'
 
 // Imports
-import { endpoint } from './setup'
-import { app } from '../index'
+import { endpoint } from './setup.js'
+import { app } from '../index.js'
 import { expect, describe, test } from '@jest/globals'
 
 // Tests

@@ -1,11 +1,11 @@
 // Test all endpoints in vfs/
 
 // Type definitions
-import { type StdRes, type JSONRes, type FileStructure } from './res'
+import { type StdRes, type JSONRes, type FileStructure } from './res.js'
 
 // Imports
-import { endpoint } from './setup'
-import { app } from '../index'
+import { endpoint } from './setup.js'
+import { app } from '../index.js'
 import { expect } from '@jest/globals'
 
 // Tests

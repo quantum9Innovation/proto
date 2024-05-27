@@ -5,7 +5,7 @@ import { type Express } from 'express'
 
 // Imports
 import * as fs from 'fs'
-import * as supertest from 'supertest'
+import supertest from 'supertest'
 
 // Setup
 global.afterAll(() => {

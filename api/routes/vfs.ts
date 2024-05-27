@@ -2,10 +2,10 @@
 // file deepcode ignore NoRateLimitingForExpensiveWebOperation: already handled by middleware
 
 // Type definitions
-import { type Document } from './req'
+import { type Document } from './req.js'
 
 // Imports
-import { root } from '../index'
+import { root } from '../index.js'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'

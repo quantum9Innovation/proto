@@ -2,7 +2,7 @@
 // See docs/repetition.md for more info
 
 // Type definitions
-import { type History } from '../elements'
+import { type History } from '../elements.js'
 
 // Helper funcs
 const processResponses = (history: History) => {

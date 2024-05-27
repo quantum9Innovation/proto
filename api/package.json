@@ -2,14 +2,18 @@
   "name": "proto",
   "version": "0.7.0",
   "description": "Learn any language",
+  "exports": "./compiled/run.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node ./compiled/run.js",
     "restart": "scripts/build.sh; node ./compiled/run.js",
     "build": "scripts/build.sh",
-    "test": "jest --runInBand --coverage",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --coverage",
     "lint": "scripts/qa.sh",
-    "debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "retest": "scripts/build.sh; jest --runInBand --coverage",
+    "debug": "node --experimental-vm-modules --inspect-brk ./node_modules/.bin/jest --runInBand",
+    "retest": "scripts/build.sh; node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --coverage",
     "dist": "scripts/dist.sh"
   },
   "private": true,
@@ -19,7 +23,6 @@
   "dependencies": {
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
-    "csurf": "^1.11.0",
     "express": "^4.19.2",
     "express-rate-limit": "^7.2.0",
     "helmet": "^7.1.0",
@@ -68,5 +71,6 @@
       "@typescript-eslint/no-non-null-assertion": 0,
       "@typescript-eslint/no-dynamic-delete": 0
     }
-  }
+  },
+  "type": "module"
 }
