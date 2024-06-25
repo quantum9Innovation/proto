@@ -1,11 +1,5 @@
 # Todos
 
-## Scheduled
-
-- [x] Remove input suggestions with `autocomplete="off"`
-- [x] Option to retest cards (in case of typo)
-- [x] Fine-tune forgetting curve parameters
-
 ## Long-term
 
 - [ ] Accurate progress bar

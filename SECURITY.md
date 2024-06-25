@@ -7,8 +7,8 @@ There will likely be vulnerabilities we don't know about, so avoid using Proto i
 
 | Version | Bugfix | Security | Status |
 | --- | --- | --- | --- |
-| 0.7.0 | :x: | :white_check_mark: | Current |
-| 0.6.0 | :x: | :white_check_mark: | Previous |
+| 0.8.0 | :white_check_mark: | :white_check_mark: | Current |
+| 0.7.0 | :x: | :x: | Previous |
 | >=0.5.0 | :x: | :x: | EOL |
 
 Versions marked with an :x: will not receive security updates.
