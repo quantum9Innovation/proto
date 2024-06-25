@@ -346,3 +346,24 @@ input[type=checkbox] {
   filter: var(--scrim);
   font-weight: bold;
 }
+
+#override {
+  width: fit-content;
+  border-radius: var(--border-small);
+  padding: var(--padding-mid);
+  margin-left: var(--margin-large);
+  margin-top: -60px;
+  background-color: var(--background-color);
+}
+
+#override:hover {
+  border: 2px solid var(--document);
+  cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  #override {
+    border: 1px solid var(--submit);
+    margin-top: var(--margin-mid);
+  }
+}

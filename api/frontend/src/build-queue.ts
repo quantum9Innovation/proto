@@ -364,7 +364,7 @@ const makeQueueRibbon = (card: any, config: any) => {
   return ribbon
 }
 
-const makeQueueRevRibbon = () => {
+const makeQueueRevRibbon = (correct: boolean, card: string) => {
   const ribbon = document.createElement('div')
   ribbon.id = 'queue-ribbon'
   ribbon.className = 'row'
@@ -379,8 +379,14 @@ const makeQueueRevRibbon = () => {
   nextBtn.innerText = 'Next'
 
   // Add event listeners
-  closeBtn.addEventListener('click', e => { openVFS() })
-  nextBtn.addEventListener('click', e => { restartQueue() })
+  closeBtn.addEventListener('click', e => {
+    updateCardHistory(card, correct)
+    openVFS()
+  })
+  nextBtn.addEventListener('click', e => {
+    updateCardHistory(card, correct)
+    restartQueue()
+  })
   ribbon.appendChild(closeBtn)
   ribbon.appendChild(nextBtn)
   return ribbon
@@ -497,8 +503,17 @@ const buildQueueReview = (correct: boolean, card: string, received: string, stat
   const revCard = newReviewCard(correct, card, received, stats)
   content!.appendChild(revCard)
 
+  // Override grading
+  if (!correct) {
+    const override = document.createElement('div')
+    override.id = 'override'
+    override.innerText = 'Ignore'
+    override.onclick = () => { restartQueue() }
+    content!.appendChild(override)
+  }
+
   // Append navigation ribbon
-  const ribbon = makeQueueRevRibbon()
+  const ribbon = makeQueueRevRibbon(correct, card)
   content!.appendChild(ribbon)
 }
 
