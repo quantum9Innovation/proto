@@ -4,7 +4,7 @@
 
 - [x] Remove input suggestions with `autocomplete="off"`
 - [x] Option to retest cards (in case of typo)
-- [ ] Fine-tune forgetting curve parameters
+- [x] Fine-tune forgetting curve parameters
 
 ## Long-term
 

@@ -59,7 +59,7 @@ const score = (history: History) => {
   const sigma = (NCorrect + 1) / (NCorrect + 2)
 
   // Learning parameters
-  const m = 3 // rate of change of initial retention from learning
+  const m = 7 // rate of change of initial retention from learning
   const b = 1 // initial retention after first learning
 
   // Calculate estimated parameters
