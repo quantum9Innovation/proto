@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.0
+
+- Remove input suggestions with `autocomplete="off"`
+- Option to retest cards (in case of typo)
+- Fine-tune forgetting curve parameters
+
 ## v0.7.0
 
 - Randomize initial queue order
