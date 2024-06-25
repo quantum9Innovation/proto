@@ -3,7 +3,7 @@
 ## Scheduled
 
 - [x] Remove input suggestions with `autocomplete="off"`
-- [ ] Option to retest cards (in case of typo)
+- [x] Option to retest cards (in case of typo)
 - [ ] Fine-tune forgetting curve parameters
 
 ## Long-term

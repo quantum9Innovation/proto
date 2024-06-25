@@ -430,14 +430,12 @@ const getQueueSettings = async () => {
   skipIfCorrect = data.skipIfCorrect
 }
 
-const startReview = async (card: any, rec: any, correct: boolean) => {
-  // Start queue review
-
-  /*
-    Update card history
-    As of right now, all properties tested with the card are not updated.
-    Instead, these scores are merged into the overall card score.
-  */
+/*
+  Update card history
+  As of right now, all properties tested with the card are not updated.
+  Instead, these scores are merged into the overall card score.
+*/
+const updateCardHistory = async (card: any, correct: boolean) => {
   const res = await fetch('/api/card/history', {
     method: 'POST',
     headers: {
@@ -456,6 +454,10 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
     console.error(e)
     alert(e)
   }
+}
+
+const startReview = async (card: any, rec: any, correct: boolean) => {
+  // Start queue review
 
   // Update local variables
   if (correct) {
@@ -485,6 +487,7 @@ const startReview = async (card: any, rec: any, correct: boolean) => {
   // Go to next card, depending on settings
   /* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */
   if (correct && skipIfCorrect) {
+    await updateCardHistory(card, correct)
     refreshQueue()
     buildQueueCard(cards[0], configCache)
     progress = noCorrect / limit
@@ -631,5 +634,6 @@ window.exports = {
   vfs,
   setTheme,
   loadTheme,
-  toggleTheme
+  toggleTheme,
+  updateCardHistory
 }
