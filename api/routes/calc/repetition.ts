@@ -41,7 +41,7 @@ const score = (history: History) => {
   // Check if enough data exists for score calculation
   /* istanbul ignore next */
   const tests = history.tests
-  if (n === 0 || !tests[tests.length - 1][1]) {
+  if (n === 0 || tests[tests.length - 1][1] === false) {
     history.score = 0
     return
   }
@@ -50,8 +50,8 @@ const score = (history: History) => {
   let NCorrect = 0
   for (let i = n - 1; i >= 0; i--) {
     /* istanbul ignore next */
-    if (tests[i][1]) {
-      i === 0 ? NCorrect += 1 : NCorrect += deltaT[i - 1] / (deltaT[i - 1] + K)
+    if (tests[i][1] === true) {
+      NCorrect += (i === 0 ? 1 : deltaT[i - 1] / (deltaT[i - 1] + K))
     } else {
       break
     }
@@ -59,7 +59,7 @@ const score = (history: History) => {
   const sigma = (NCorrect + 1) / (NCorrect + 2)
 
   // Learning parameters
-  const m = 3 // rate of change of initial retention from learning
+  const m = 7 // rate of change of initial retention from learning
   const b = 1 // initial retention after first learning
 
   // Calculate estimated parameters
