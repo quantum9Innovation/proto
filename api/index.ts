@@ -109,7 +109,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api', (_, res) => {
   res.send(INFO)
 })
-app.use(apiLimiter)
 
 // Custom middleware to check PIN
 /* istanbul ignore next */
