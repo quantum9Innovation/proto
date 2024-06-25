@@ -81,7 +81,7 @@ $$ x_1 = mN + b $$
 
 However, this now begs the question of how to find $m$ and $b$.
 As a general rule, we can set $b$ to simply equal $1$, as this value is not so important (changing $k$ will have a much larger effect on the shape of the resulting curve than $b$).
-We can also similarly estimate $m$ to be some reasonable integer expressing how well each relearning event helps to improve retention ($m = 3$ is a good choice).
+We can also similarly estimate $m$ to be some reasonable integer expressing how well each relearning event helps to improve retention ($m = 7$ is a good choice[^4]).
 
 We are now almost done!
 The one problem that remains is that $N$ cannot simply equal the number of times a card has been studied, as a user could potentially study the same card many times but over the course of a few seconds, meaning each subsequent relearning had almost no benefit.
@@ -99,8 +99,8 @@ However, its important to note that there is no baseline accuracy measurement, a
 Instead, we will take a weighted average of past streak of correct responses (excluding the most recent incorrect response and any responses prior to that), which is the same as our calculation of $N$.
 
 Next, we need to turn this into a probability distribution.
-In other words, we can view each test as a "trial" in a binomial distribution[^4].
-Then, we can use the well-known Rule of Succession to calculate the probability of a future correct response given the previous correct responses (i.e. accuracy)[^5].
+In other words, we can view each test as a "trial" in a binomial distribution[^5].
+Then, we can use the well-known Rule of Succession to calculate the probability of a future correct response given the previous correct responses (i.e. accuracy)[^6].
 This looks like:
 
 $$ \sigma = \frac{N + 1}{N + 2} $$
@@ -108,5 +108,6 @@ $$ \sigma = \frac{N + 1}{N + 2} $$
 [^1]: "Spaced Repetition" *Wikipedia* <https://en.wikipedia.org/wiki/Spaced_repetition>
 [^2]: Smolen, et al. "The right time to learn: mechanisms and optimization of spaced learning" *Nature* <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5126970/>
 [^3]: "Forgetting curves" *Wikipedia* <https://en.wikipedia.org/wiki/Forgetting_curve>
-[^4]: "Binomial distribution" *Wikipedia* <https://en.wikipedia.org/wiki/Binomial_distribution>
-[^5]: "Rule of Succession" *Wikipedia* <https://en.wikipedia.org/wiki/Rule_of_succession>
+[^4]: Proto used to use $m=3$ instead
+[^5]: "Binomial distribution" *Wikipedia* <https://en.wikipedia.org/wiki/Binomial_distribution>
+[^6]: "Rule of Succession" *Wikipedia* <https://en.wikipedia.org/wiki/Rule_of_succession>
