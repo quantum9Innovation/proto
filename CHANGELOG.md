@@ -6,11 +6,15 @@
 - Option to retest cards (in case of typo)
 - Fine-tune forgetting curve parameters
 
+---
+
 ## v0.7.0
 
 - Randomize initial queue order
 - Add enter keybind in queue
 - Add option to skip review if correct
+
+---
 
 ## v0.6.0
 
