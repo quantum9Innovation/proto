@@ -39,8 +39,8 @@ const EXPRESS_VERSION: string = JSON.parse(
 // deepcode ignore UseCsurfForExpress: already handled by helmet middleware
 const app = express()
 const apiLimiter = RateLimit.rateLimit({
-  windowMs: 1000 * 60 * 60,
-  max: 100,
+  windowMs: 1000 * 60,
+  max: 1000,
   headers: true
 })
 const ROOT = untildify(CONFIG.root)
