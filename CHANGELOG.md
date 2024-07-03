@@ -6,6 +6,10 @@
 - Option to retest cards (in case of typo)
 - Fine-tune forgetting curve parameters
 
+### v0.8.1
+
+- Fix overly aggressive rate limiting issue introduced in this release
+
 ---
 
 ## v0.7.0
