@@ -24,7 +24,7 @@
     "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.6",
     "express": "^5.1.0",
-    "express-rate-limit": "^8.0.1",
+    "express-rate-limit": "^8.1.0",
     "helmet": "^8.1.0",
     "untildify": "^6.0.0"
   },
