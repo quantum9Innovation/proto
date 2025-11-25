@@ -21,7 +21,7 @@
   "author": "q9i <46249765+quantum9Innovation@users.noreply.github.com>",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.1",
     "cookie-parser": "^1.4.6",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
